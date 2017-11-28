@@ -47,8 +47,7 @@ public abstract class ClassRole{
         }
     }
 
-    public abstract void classInitialize();
-
+    public abstract void classSpecial();
     public String[] getChoices(){
         return this.choices;
     }

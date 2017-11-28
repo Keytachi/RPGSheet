@@ -36,7 +36,7 @@ public class dice {
         for (int d = 0; d < 3; d++){
             sum += diceArray[d];
         }
-        return sum/3;
+        return sum;
     }
 
 

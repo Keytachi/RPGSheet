@@ -10,7 +10,8 @@ public class Main {
 
     public static void main(String[] args) {
         Race player1 = new Human("Brandon", new Barbarian());
-        
+
+        System.out.println(player1.getRole());
         System.out.println(player1.getMaximum_Health());
     }
 }

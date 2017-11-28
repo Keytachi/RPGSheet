@@ -20,10 +20,8 @@ public class Mage extends ClassRole {
         return "Wizard";
     }
 
-    @Override
-    public void classInitialize(){
-        int health = 12;
-        int level = 1;
+
+    public void classSpecial(){
 
     }
 }

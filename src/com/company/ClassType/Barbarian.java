@@ -15,15 +15,12 @@ public class Barbarian extends ClassRole {
 
     }
 
-    /**@Override
+    @Override
     public String toString(){
        return "Barbarian";
-    }*/
+    }
 
     @Override
-    public void classInitialize(){
-        int health = 12;
-        int level = 1;
-
+    public void classSpecial(){
     }
 }
