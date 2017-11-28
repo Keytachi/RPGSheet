@@ -5,7 +5,7 @@ import com.company.RaceType.Race;
 
 public abstract class HeavyArmor extends Armor {
     public HeavyArmor(String name, int cost, int weight, int armor) {
-        super(name, cost, weight, Armor_Type.HEAVY, armor);
+        super(name, cost, weight, armor);
     }
 
     public void requirement(Race person){

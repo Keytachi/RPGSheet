@@ -6,7 +6,7 @@ import com.company.RaceType.Race;
 public abstract class LightArmor extends Armor {
 
     public LightArmor(String name, int cost, int weight, int armor) {
-        super(name, cost, weight, Armor_Type.LIGHT, armor);
+        super(name, cost, weight, armor);
     }
 
     @Override

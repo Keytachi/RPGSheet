@@ -14,12 +14,10 @@ public class Barbarian extends ClassRole {
     public void attack(Race player){
 
     }
-
     @Override
     public String toString(){
        return "Barbarian";
     }
-
     @Override
     public void classSpecial(){
     }

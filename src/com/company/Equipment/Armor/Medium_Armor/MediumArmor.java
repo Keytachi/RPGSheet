@@ -5,7 +5,7 @@ import com.company.RaceType.Race;
 
 public abstract class MediumArmor extends Armor {
     public MediumArmor(String name, int cost, int weight, int armor) {
-        super(name, cost, weight, Armor_Type.MEDIUM, armor);
+        super(name, cost, weight, armor);
     }
 
     @Override

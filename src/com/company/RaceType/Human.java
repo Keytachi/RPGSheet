@@ -20,6 +20,5 @@ public class Human extends Race{
         this.setIntelligence(this.intelligence+1);
         this.setWisdom(this.wisdom+1);
         this.setCharisma(this.charisma+1);
-        this.walking_Speed = 30;
     }
 }

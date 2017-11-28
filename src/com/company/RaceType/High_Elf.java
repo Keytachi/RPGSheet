@@ -12,6 +12,5 @@ public class High_Elf extends Elf {
     @Override
     public void specialty(){
         this.setIntelligence(this.getIntelligence()+1);
-        this.walking_Speed = 30;
     }
 }
