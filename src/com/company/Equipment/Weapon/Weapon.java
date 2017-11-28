@@ -27,4 +27,7 @@ public abstract class Weapon extends Equipment {
     public dice getDamage_Die() {
         return damage_Die;
     }
+
+    //TODO: Rethink weapon system by using categories of Simple Melee, Simple Ranged Weapons,
+    //TODO: Martial Melee Weapons,Martial Ranged Weapons, and Amunitions.
 }

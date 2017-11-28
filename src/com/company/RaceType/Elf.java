@@ -10,6 +10,7 @@ public class Elf extends Race {
 
     @Override
     public void specialty(){
-
+        this.setDexterity(this.getDexterity()+2);
+        this.walking_Speed = 30;
     }
 }

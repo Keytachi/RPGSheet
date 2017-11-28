@@ -11,4 +11,9 @@ public class Club extends Weapon {
     public Club(){
         super(2,1,"Club",Damage_Type.BLUDGEONING,new dice(4));
     }
+
+    @Override
+    public String toString(){
+        return "Club";
+    }
 }

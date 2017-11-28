@@ -11,4 +11,9 @@ public class Javelin extends Weapon {
     public Javelin(){
         super(2, 5, "Javelin", Damage_Type.PIERCING, new dice(6));
     }
+
+    @Override
+    public String toString(){
+        return "Javelin";
+    }
 }

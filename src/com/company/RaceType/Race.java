@@ -23,8 +23,30 @@ public abstract class Race extends Entity {
 
     protected int walking_Speed;
 
+    //TODO: Implement limitation of what race can use of certain items.
+    protected enum EquipableWeapon{
+        LONGSWORD,
+        SHORTSWORD,
+
+        LONGBOW,
+        SHORTBOW,
+        CROSSBOW,
+
+        JAVELIN,
+        TRIDENT,
+        LANCE,
+
+        BATTLEAXE,
+        HANDAXE,
+        THROWING_HAMMER,
+        WARHAMMER,
+
+
+    }
+
+    //TODO: Implement inventory items with gear system.
     public Race(int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, String name,
-                ClassRole role, int current_Health, int maximum_Health) {
+                ClassRole role) {
         super(strength, dexterity, constitution, intelligence, wisdom, charisma);
         this.name = name;
         this.role = role;
@@ -65,7 +87,7 @@ public abstract class Race extends Entity {
         return role;
     }
 
-    public int setModifier(int modifier){
+    private int setModifier(int modifier){
         return ((modifier-10)/2);
     }
 
@@ -83,11 +105,11 @@ public abstract class Race extends Entity {
     public void setHealth(){
         if (this.role instanceof Barbarian){
             this.maximum_Health = 12 + this.cons_Modifier;
-            this.current_Health = 12 + this.cons_Modifier;
+            this.current_Health = this.maximum_Health;
         }
         else if (this.role instanceof Mage){
             this.maximum_Health = 8 + this.cons_Modifier;
-            this.current_Health = 8 + this.cons_Modifier;
+            this.current_Health = this.maximum_Health;
         }
     }
 
