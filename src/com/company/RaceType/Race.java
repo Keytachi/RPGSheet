@@ -160,4 +160,12 @@ public abstract class Race extends Entity {
     public void setChar_Modifier(int char_Modifier) {
         this.char_Modifier = char_Modifier;
     }
+
+    public int get_WalkingSpeed(){
+        return this.walking_Speed;
+    }
+
+    public void set_WalkingSpeed(int walking_Speed){
+        this.walking_Speed = walking_Speed;
+    }
 }

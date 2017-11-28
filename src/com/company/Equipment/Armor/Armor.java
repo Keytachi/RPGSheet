@@ -1,13 +1,14 @@
 package com.company.Equipment.Armor;
 
 import com.company.Equipment.Equipment;
+import com.company.RaceType.Race;
 
 public abstract class Armor extends Equipment {
 
     protected  enum Armor_Type{
         LIGHT,
         MEDIUM,
-        HEAVEY,
+        HEAVY,
         SHIELD
     }
 
@@ -24,7 +25,11 @@ public abstract class Armor extends Equipment {
         return type;
     }
 
-    public int getArmor() {
-        return armor;
+    public int get_Armor(){
+        return this.armor;
+    }
+
+    public int getArmorAmount(Race person){
+        return get_Armor();
     }
 }
