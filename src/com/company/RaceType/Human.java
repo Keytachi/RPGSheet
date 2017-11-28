@@ -4,15 +4,22 @@ import com.company.ClassType.ClassRole;
 
 public class Human extends Race{
 
-    private static final int MULTIPLIER = 1;
-    private static final int INCREMENT_STATS = 2;
 
     public Human(String name, ClassRole role){
-        super(name, MULTIPLIER, INCREMENT_STATS, role);
+        super(name, role);
+        specialty();
+        setModify();
+        setHealth();
     }
 
     @Override
     public void specialty(){
-
+        this.setStrength(this.strength+1);
+        this.setDexterity(this.dexterity+1);
+        this.setConstitution(this.constitution+1);
+        this.setIntelligence(this.intelligence+1);
+        this.setWisdom(this.wisdom+1);
+        this.setCharisma(this.charisma+1);
+        this.walking_Speed = 30;
     }
 }

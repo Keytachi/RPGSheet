@@ -9,9 +9,8 @@ import com.company.RaceType.Race;
 public class Main {
 
     public static void main(String[] args) {
-        Race player1 = new Elf("Brandon",new Barbarian());
-        Race player2 = new Human("John", new Barbarian());
-
-        IO.execute(player1);
+        Race player1 = new Human("Brandon", new Barbarian());
+        
+        System.out.println(player1.getMaximum_Health());
     }
 }

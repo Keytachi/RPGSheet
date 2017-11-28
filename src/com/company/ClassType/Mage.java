@@ -1,20 +1,29 @@
 package com.company.ClassType;
 
 import com.company.RaceType.Race;
+import com.company.Util.dice;
 
 public class Mage extends ClassRole {
-    private static final int INCREMENT_STATS = 4;
-    private static final int MULTIPLIER = 2;
+
 
     public Mage(){
-        this(INCREMENT_STATS,MULTIPLIER);
-    }
-    public Mage(int increment, int multiplier){
-        super(increment,multiplier);
+        super(100, 100, new dice(6));
     }
 
     @Override
     public void attack(Race player){
-        player.setCurrent_Health(player.getCurrent_Health() - this.strength*2);
+
+    }
+
+    @Override
+    public String toString(){
+        return "Wizard";
+    }
+
+    @Override
+    public void classInitialize(){
+        int health = 12;
+        int level = 1;
+
     }
 }

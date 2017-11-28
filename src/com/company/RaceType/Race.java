@@ -1,7 +1,10 @@
 package com.company.RaceType;
 
+import com.company.ClassType.Barbarian;
 import com.company.ClassType.ClassRole;
+import com.company.ClassType.Mage;
 import com.company.Entity;
+import com.company.Util.dice;
 
 public abstract class Race extends Entity {
 
@@ -11,21 +14,28 @@ public abstract class Race extends Entity {
     private int current_Health;
     private int maximum_Health;
 
+    protected int str_Modifier;
+    protected int dex_Modifier;
+    protected int cons_Modifier;
+    protected int int_Modifier;
+    protected int wis_Modifier;
+    protected int char_Modifier;
 
-    public Race(String name, int increment_stats, int multiplier, ClassRole role){
+    protected int walking_Speed;
+
+    public Race(int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, String name,
+                ClassRole role, int current_Health, int maximum_Health) {
+        super(strength, dexterity, constitution, intelligence, wisdom, charisma);
         this.name = name;
         this.role = role;
+    }
 
-        this.agility = combine_Stats(randomize_Stats(increment_stats,multiplier),this.role.getAgility());
-        this.intellect = combine_Stats(randomize_Stats(increment_stats,multiplier),this.role.getIntellect());
-        this.strength = combine_Stats(randomize_Stats(increment_stats,multiplier),this.role.getStrength());
-        this.stamina = combine_Stats(randomize_Stats(increment_stats,multiplier),this.role.getStamina());
-
-        this.maximum_Health = this.stamina * 10;
-        this.current_Health = this.maximum_Health;
-
-        this.role.setMaximum_resource(this.intellect*5);
-
+    public Race(String name, ClassRole role){
+        super(dice.rollStats(6,4),dice.rollStats(6,4),
+                dice.rollStats(6,4),dice.rollStats(6,4),
+                dice.rollStats(6,4), dice.rollStats(6,4));
+        this.name = name;
+        this.role = role;
     }
 
     public String getName() {
@@ -55,13 +65,77 @@ public abstract class Race extends Entity {
         return role;
     }
 
-    private int combine_Stats(int source1, int source2){
-        return source1 + source2;
-    }
-
-    private int remove_Stats(int source1, int source2){
-        return source1 - source2;
+    public int setModifier(int modifier){
+        return ((modifier-10)/2);
     }
 
     public abstract void specialty();
+
+    public void setModify(){
+        this.str_Modifier = setModifier(this.strength);
+        this.dex_Modifier = setModifier(this.dexterity);
+        this.cons_Modifier = setModifier(this.constitution);
+        this.int_Modifier = setModifier(this.intelligence);
+        this.wis_Modifier = setModifier(this.wis_Modifier);
+        this.char_Modifier = setModifier(this.char_Modifier);
+    }
+
+    public void setHealth(){
+        if (this.role instanceof Barbarian){
+            this.maximum_Health = 12 + this.cons_Modifier;
+            this.current_Health = 12 + this.cons_Modifier;
+        }
+        else if (this.role instanceof Mage){
+            this.maximum_Health = 8 + this.cons_Modifier;
+            this.current_Health = 8 + this.cons_Modifier;
+        }
+    }
+
+    public int getStr_Modifier() {
+        return str_Modifier;
+    }
+
+    public void setStr_Modifier(int str_Modifier) {
+        this.str_Modifier = str_Modifier;
+    }
+
+    public int getDex_Modifier() {
+        return dex_Modifier;
+    }
+
+    public void setDex_Modifier(int dex_Modifier) {
+        this.dex_Modifier = dex_Modifier;
+    }
+
+    public int getCons_Modifier() {
+        return cons_Modifier;
+    }
+
+    public void setCons_Modifier(int cons_Modifier) {
+        this.cons_Modifier = cons_Modifier;
+    }
+
+    public int getInt_Modifier() {
+        return int_Modifier;
+    }
+
+    public void setInt_Modifier(int int_Modifier) {
+        this.int_Modifier = int_Modifier;
+    }
+
+    public int getWis_Modifier() {
+        return wis_Modifier;
+    }
+
+    public void setWis_Modifier(int wis_Modifier) {
+        this.wis_Modifier = wis_Modifier;
+    }
+
+    public int getChar_Modifier() {
+        return char_Modifier;
+    }
+
+    public void setChar_Modifier(int char_Modifier) {
+        this.char_Modifier = char_Modifier;
+    }
 }

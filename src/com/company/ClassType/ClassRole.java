@@ -2,10 +2,11 @@ package com.company.ClassType;
 
 import com.company.Entity;
 import com.company.RaceType.Race;
+import com.company.Util.dice;
 
 import java.util.ArrayList;
 
-public abstract class ClassRole extends Entity {
+public abstract class ClassRole{
 
     //TODO: Edit this when creating the spell class.
     private ArrayList<Object> spellList = new ArrayList<>();
@@ -16,14 +17,12 @@ public abstract class ClassRole extends Entity {
 
     protected int maximum_resource;
     protected int current_resource;
+    protected dice hitDie;
 
-    public ClassRole(int increment_stats, int multiplier){
-        String[] choices = new String[] {"Attack", "Spells", "Items", "Run"};
-        this.agility = randomize_Stats(increment_stats,multiplier);
-        this.intellect = randomize_Stats(increment_stats,multiplier);
-        this.strength = randomize_Stats(increment_stats,multiplier);
-        this.stamina = randomize_Stats(increment_stats,multiplier);
-        this.choices = choices;
+    public ClassRole(int maximum_resource, int current_resource, dice hitDie){
+        this.maximum_resource = maximum_resource;
+        this.current_resource = current_resource;
+        this.hitDie = hitDie;
     }
 
     //TODO: Edit this implementation in other subclasses to use weapons * strength.
@@ -47,6 +46,8 @@ public abstract class ClassRole extends Entity {
             this.current_resource = this.maximum_resource;
         }
     }
+
+    public abstract void classInitialize();
 
     public String[] getChoices(){
         return this.choices;
