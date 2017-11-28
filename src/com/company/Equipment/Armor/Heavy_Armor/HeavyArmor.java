@@ -8,6 +8,7 @@ public abstract class HeavyArmor extends Armor {
         super(name, cost, weight, armor);
     }
 
+    @Override
     public void requirement(Race person){
         if(person.getStrength() < 15) person.set_WalkingSpeed(person.get_WalkingSpeed()-10);
     }

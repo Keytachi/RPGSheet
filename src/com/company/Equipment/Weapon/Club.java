@@ -12,8 +12,4 @@ public class Club extends Weapon {
         this(2,1,"Club");
     }
 
-    @Override
-    public String toString(){
-        return "Club";
-    }
 }

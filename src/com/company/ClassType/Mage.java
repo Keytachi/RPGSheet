@@ -21,7 +21,9 @@ public class Mage extends ClassRole {
     }
 
 
-    public void classSpecial(){
+    @Override
+    public void classSpecial(Race person){
+
 
     }
 }

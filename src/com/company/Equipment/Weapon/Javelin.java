@@ -11,9 +11,4 @@ public class Javelin extends Weapon {
     public Javelin(){
         this(2, 5, "Javelin");
     }
-
-    @Override
-    public String toString(){
-        return "Javelin";
-    }
 }

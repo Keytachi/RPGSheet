@@ -5,8 +5,12 @@ import com.company.ClassType.ClassRole;
 import com.company.ClassType.Mage;
 import com.company.Entity;
 import com.company.Equipment.Armor.Armor;
-import com.company.Equipment.Armor.Light_Armor.LightArmor;
+import com.company.Equipment.Naked;
+import com.company.Equipment.Weapon.Weapon;
 import com.company.Util.dice;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Race extends Entity {
 
@@ -25,38 +29,39 @@ public abstract class Race extends Entity {
 
     protected int walking_Speed;
 
-    protected Armor armor;
+    //TODO: Work on this armor part again.
+    /**
+     *  Idea: Hashmap<String, Armor>
+     *  String = Body
+     *  Armor = Any instanceof Armor.
+     *
+     *  Issue: Is it worth using hasmap for 1 item?
+     */
     protected int armor_Amount;
 
-    //TODO: Implement limitation of what race can use of certain items.
-    protected enum EquipableWeapon{
-        LONGSWORD,
-        SHORTSWORD,
+    Map<String,Armor> armor = new HashMap<String, Armor>();
 
-        LONGBOW,
-        SHORTBOW,
-        CROSSBOW,
-
-        JAVELIN,
-        TRIDENT,
-        LANCE,
-
-        BATTLEAXE,
-        HANDAXE,
-        THROWING_HAMMER,
-        WARHAMMER,
+    String[] hands = new String[2];
 
 
-    }
 
-    //TODO: Implement inventory items with gear system.
+
+    //TODO: Work on this weapon part again.
+    /**
+        Idea: Hashmap<String, Weapon> or a Map<String,Weapon>
+        String = "Left Hand", "Right Hand"
+        Weapon = Any instanceof Weapon. Should include shield.
+
+        Issue: Shield is an instanceof an armor class
+    */
+    Map<String, Weapon> weaponHands = new HashMap<String, Weapon >();
+
     public Race(int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, String name,
                 ClassRole role, Armor armor) {
         super(strength, dexterity, constitution, intelligence, wisdom, charisma);
         this.name = name;
         this.role = role;
-        this.armor = armor;
-        this.armor_Amount = addArmorAmount();
+        this.armor.put("Body", armor);
     }
 
     public Race(String name, ClassRole role){
@@ -66,6 +71,17 @@ public abstract class Race extends Entity {
         this.name = name;
         this.role = role;
         this.walking_Speed = 30;
+        this.armor.put("Body",new Naked());
+    }
+
+    public Race(String name, ClassRole role, Armor armor){
+        super(dice.rollStats(6,4),dice.rollStats(6,4),
+                dice.rollStats(6,4),dice.rollStats(6,4),
+                dice.rollStats(6,4), dice.rollStats(6,4));
+        this.name = name;
+        this.role = role;
+        this.walking_Speed = 30;
+        this.armor.put("Body",armor);
     }
 
     public String getName() {
@@ -127,9 +143,6 @@ public abstract class Race extends Entity {
         this.armor_Amount = armor_Amount;
     }
 
-    public int addArmorAmount(){
-        return this.armor.getArmorAmount(this);
-    }
 
     public int getStr_Modifier() {
         return str_Modifier;
@@ -178,12 +191,5 @@ public abstract class Race extends Entity {
     }
     public void set_WalkingSpeed(int walking_Speed){
         this.walking_Speed = walking_Speed;
-    }
-
-    public Armor getArmor() {
-        return armor;
-    }
-    public void setArmor(Armor armor) {
-        this.armor = armor;
     }
 }

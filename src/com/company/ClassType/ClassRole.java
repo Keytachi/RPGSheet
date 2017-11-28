@@ -47,7 +47,7 @@ public abstract class ClassRole{
         }
     }
 
-    public abstract void classSpecial();
+    public abstract void classSpecial(Race person);
     public String[] getChoices(){
         return this.choices;
     }

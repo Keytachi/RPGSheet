@@ -15,8 +15,11 @@ public abstract class Armor extends Equipment {
     public int get_Armor(){
         return this.armor;
     }
-
     public int getArmorAmount(Race person){
         return get_Armor();
+    }
+
+    public void requirement(Race person){
+
     }
 }
