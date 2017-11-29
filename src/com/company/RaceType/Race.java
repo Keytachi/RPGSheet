@@ -1,24 +1,10 @@
 package com.company.RaceType;
-
-import com.company.ClassType.Barbarian;
-import com.company.ClassType.ClassRole;
-import com.company.ClassType.Mage;
 import com.company.Entity;
-import com.company.Equipment.Armor.Armor;
-import com.company.Equipment.Naked;
-import com.company.Equipment.Weapon.Weapon;
 import com.company.Util.dice;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public abstract class Race extends Entity {
 
     private String name;
-    private ClassRole role;
-
-    private int current_Health;
-    private int maximum_Health;
 
     protected int str_Modifier;
     protected int dex_Modifier;
@@ -29,85 +15,23 @@ public abstract class Race extends Entity {
 
     protected int walking_Speed;
 
-    //TODO: Work on this armor part again.
-    /**
-     *  Idea: Hashmap<String, Armor>
-     *  String = Body
-     *  Armor = Any instanceof Armor.
-     *
-     *  Issue: Is it worth using hasmap for 1 item?
-     */
-    protected int armor_Amount;
-
-    Map<String,Armor> armor = new HashMap<String, Armor>();
-
-    String[] hands = new String[2];
 
 
-
-
-    //TODO: Work on this weapon part again.
-    /**
-        Idea: Hashmap<String, Weapon> or a Map<String,Weapon>
-        String = "Left Hand", "Right Hand"
-        Weapon = Any instanceof Weapon. Should include shield.
-
-        Issue: Shield is an instanceof an armor class
-    */
-    Map<String, Weapon> weaponHands = new HashMap<String, Weapon >();
-
-    public Race(int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, String name,
-                ClassRole role, Armor armor) {
+    public Race(int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, String name) {
         super(strength, dexterity, constitution, intelligence, wisdom, charisma);
         this.name = name;
-        this.role = role;
-        this.armor.put("Body", armor);
     }
 
-    public Race(String name, ClassRole role){
+    public Race(String name){
         super(dice.rollStats(6,4),dice.rollStats(6,4),
                 dice.rollStats(6,4),dice.rollStats(6,4),
                 dice.rollStats(6,4), dice.rollStats(6,4));
         this.name = name;
-        this.role = role;
         this.walking_Speed = 30;
-        this.armor.put("Body",new Naked());
-    }
-
-    public Race(String name, ClassRole role, Armor armor){
-        super(dice.rollStats(6,4),dice.rollStats(6,4),
-                dice.rollStats(6,4),dice.rollStats(6,4),
-                dice.rollStats(6,4), dice.rollStats(6,4));
-        this.name = name;
-        this.role = role;
-        this.walking_Speed = 30;
-        this.armor.put("Body",armor);
     }
 
     public String getName() {
         return name;
-    }
-
-    public int getCurrent_Health() {
-        return current_Health;
-    }
-
-    public void setCurrent_Health(int current_Health) {
-        this.current_Health = current_Health;
-        if(this.current_Health > this.maximum_Health){
-            this.current_Health = this.maximum_Health;
-        }
-    }
-
-    public int getMaximum_Health() {
-        return maximum_Health;
-    }
-    public void setMaximum_Health(int maximum_Health) {
-        this.maximum_Health = maximum_Health;
-    }
-
-    public ClassRole getRole() {
-        return role;
     }
 
     private int setModifier(int modifier){
@@ -124,25 +48,6 @@ public abstract class Race extends Entity {
         this.wis_Modifier = setModifier(this.wis_Modifier);
         this.char_Modifier = setModifier(this.char_Modifier);
     }
-
-    public void setHealth(){
-        if (this.role instanceof Barbarian){
-            this.maximum_Health = 12 + this.cons_Modifier;
-            this.current_Health = this.maximum_Health;
-        }
-        else if (this.role instanceof Mage){
-            this.maximum_Health = 8 + this.cons_Modifier;
-            this.current_Health = this.maximum_Health;
-        }
-    }
-
-    public int get_ArmorAmount(){
-        return this.armor_Amount;
-    }
-    public void set_ArmorAmount(int armor_Amount){
-        this.armor_Amount = armor_Amount;
-    }
-
 
     public int getStr_Modifier() {
         return str_Modifier;

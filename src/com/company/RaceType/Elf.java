@@ -4,8 +4,10 @@ import com.company.ClassType.ClassRole;
 
 public class Elf extends Race {
 
-    public Elf(String name, ClassRole role){
-        super(name, role);
+    public Elf(String name){
+        super(name);
+        specialty();
+        setModify();
     }
 
     @Override

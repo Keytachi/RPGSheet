@@ -1,15 +1,12 @@
 package com.company.RaceType;
 
-import com.company.ClassType.ClassRole;
-
 public class Human extends Race{
 
 
-    public Human(String name, ClassRole role){
-        super(name, role);
+    public Human(String name){
+        super(name);
         specialty();
         setModify();
-        setHealth();
     }
 
     @Override
