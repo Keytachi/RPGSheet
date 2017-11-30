@@ -3,6 +3,7 @@ package com.company.IO;
 import com.company.RaceType.Race;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class IO {
@@ -25,6 +26,7 @@ public class IO {
             return get_Input(options);
         }
     }
+
     public static void print_Options(String[] options){
         for (int i = 0; i < options.length; i++){
             System.out.println((i+1) + "." + options[i]);
@@ -36,11 +38,5 @@ public class IO {
         System.out.println(s);
         System.out.println("===================================");
 
-    }
-
-    public static void execute(Race player){
-        print_Header(player.getName());
-        print_Options(player.getRole().getChoices());
-        get_Input(player.getRole().getChoices());
     }
 }

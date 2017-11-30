@@ -1,14 +1,17 @@
 package com.company.ClassType;
 
+import com.company.Equipment.Armor.Armor;
 import com.company.PlayerCharacter;
 import com.company.RaceType.Race;
 import com.company.Util.dice;
+
+import java.util.Map;
 
 public class Mage extends ClassRole {
 
 
     public Mage(){
-        super(100, 100, new dice(6));
+        super(new dice(6));
     }
 
     @Override
@@ -18,16 +21,11 @@ public class Mage extends ClassRole {
 
     @Override
     public String toString(){
-        return "Wizard";
-    }
-
-
-    @Override
-    public void classSpecial(PlayerCharacter person){
+        return "Mage";
     }
 
     @Override
-    public int armor_Proficiency(PlayerCharacter person){
+    public int get_ArmorProficiency(Map gearEquipment, PlayerCharacter.GearSlot gearSlot){
         return 0;
     }
 }
