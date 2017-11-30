@@ -6,12 +6,9 @@ import com.company.Equipment.Armor.Shield;
 import com.company.Equipment.Weapon.MartialWeapons.MartialWeapons;
 import com.company.Equipment.Weapon.SmipleWeapons.SimpleWeapon;
 import com.company.PlayerCharacter;
-import com.company.RaceType.Race;
 import com.company.Util.Util;
 import com.company.Util.dice;
-import sun.java2d.pipe.SpanShapeRenderer;
 
-import java.util.Arrays;
 import java.util.Map;
 
 public class Barbarian extends ClassRole {
@@ -55,10 +52,6 @@ public class Barbarian extends ClassRole {
                 return this.proficiency;
             }
 
-            //TODO: Understand how to use this contains for subclass.
-            /**if(Arrays.asList(armorProficiencyList).contains((Class)gearEquipment.get(gearSlot))){
-             return this.proficiency;
-             }*/
 
             for (int slot = 0; slot < gearLocation.length; slot++) {
                 if (Util.gearisInstance(gearEquipment.get(gearLocation[slot]), Shield.class)) {
