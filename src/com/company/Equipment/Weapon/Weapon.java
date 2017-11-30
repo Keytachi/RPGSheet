@@ -36,4 +36,8 @@ public abstract class Weapon extends Equipment {
     public int get_Armor(){
         return this.armor;
     }
+
+    public int attack(){
+        return this.damage_Die.roll();
+    }
 }

@@ -6,6 +6,6 @@ public class Splint extends HeavyArmor {
     }
 
     public Splint(){
-        this("Splint", 200, 60, 17);
+        this("Splint", 200, 60, 7);
     }
 }

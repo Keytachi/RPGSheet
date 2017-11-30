@@ -1,5 +1,6 @@
 package com.company.ClassType;
 
+import com.company.PlayerCharacter;
 import com.company.RaceType.Race;
 import com.company.Util.dice;
 
@@ -22,8 +23,11 @@ public class Mage extends ClassRole {
 
 
     @Override
-    public void classSpecial(Race person){
+    public void classSpecial(PlayerCharacter person){
+    }
 
-
+    @Override
+    public int armor_Proficiency(PlayerCharacter person){
+        return 0;
     }
 }

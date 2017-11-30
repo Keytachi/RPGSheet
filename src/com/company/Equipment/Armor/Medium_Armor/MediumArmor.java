@@ -1,6 +1,7 @@
 package com.company.Equipment.Armor.Medium_Armor;
 
 import com.company.Equipment.Armor.Armor;
+import com.company.PlayerCharacter;
 import com.company.RaceType.Race;
 
 public abstract class MediumArmor extends Armor {
@@ -9,8 +10,8 @@ public abstract class MediumArmor extends Armor {
     }
 
     @Override
-    public int getArmorAmount(Race person){
-        if(person.getDex_Modifier() > 2) return get_Armor()+2;
-        return get_Armor()+person.getDex_Modifier();
+    public int get_Armor(PlayerCharacter person){
+        if(person.getRace().getDex_Modifier() > 2) return armor +2;
+        return armor +person.getRace().getDex_Modifier();
     }
 }

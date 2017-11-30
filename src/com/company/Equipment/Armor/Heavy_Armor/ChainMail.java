@@ -1,5 +1,6 @@
 package com.company.Equipment.Armor.Heavy_Armor;
 
+import com.company.PlayerCharacter;
 import com.company.RaceType.Race;
 
 public class ChainMail extends HeavyArmor {
@@ -8,12 +9,12 @@ public class ChainMail extends HeavyArmor {
     }
 
     public ChainMail(){
-        this("Chain Mail", 75, 55, 14);
+        this("Chain Mail", 75, 55, 4);
     }
 
     //Strength requirement for this armor is 13 instead of the 15.
     @Override
-    public void requirement(Race person){
-        if(person.getStrength() < 13) person.set_WalkingSpeed(person.get_WalkingSpeed()-10);
+    public void requirement(PlayerCharacter person){
+        if(person.getRace().getStrength() < 13) person.getRace().set_WalkingSpeed(person.getRace().get_WalkingSpeed()-10);
     }
 }

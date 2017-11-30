@@ -1,4 +1,4 @@
-package com.company.Equipment;
+package com.company.Equipment.Armor;
 
 import com.company.Equipment.Armor.Armor;
 

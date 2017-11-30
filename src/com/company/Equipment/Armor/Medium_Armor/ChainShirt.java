@@ -6,6 +6,6 @@ public class ChainShirt extends MediumArmor {
     }
 
     public ChainShirt(){
-        this("Chain Armor", 50, 20, 13);
+        this("Chain Armor", 50, 20, 3);
     }
 }

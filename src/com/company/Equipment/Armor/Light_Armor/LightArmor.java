@@ -1,6 +1,7 @@
 package com.company.Equipment.Armor.Light_Armor;
 
 import com.company.Equipment.Armor.Armor;
+import com.company.PlayerCharacter;
 import com.company.RaceType.Race;
 
 public abstract class LightArmor extends Armor {
@@ -10,7 +11,7 @@ public abstract class LightArmor extends Armor {
     }
 
     @Override
-    public int getArmorAmount(Race person){
-        return get_Armor()+person.getDex_Modifier();
+    public int get_Armor(PlayerCharacter person){
+        return person.getRace().getDex_Modifier() + armor;
     }
 }

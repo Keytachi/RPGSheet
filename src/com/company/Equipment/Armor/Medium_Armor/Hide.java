@@ -7,6 +7,6 @@ public class Hide extends MediumArmor {
     }
 
     public Hide(){
-        this("Hide Armor", 10, 12, 12);
+        this("Hide Armor", 10, 12, 2);
     }
 }

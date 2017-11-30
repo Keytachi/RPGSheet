@@ -1,6 +1,6 @@
 package com.company.ClassType;
 
-import com.company.Entity;
+import com.company.PlayerCharacter;
 import com.company.RaceType.Race;
 import com.company.Util.dice;
 
@@ -47,7 +47,8 @@ public abstract class ClassRole{
         }
     }
 
-    public abstract void classSpecial(Race person);
+    public abstract void classSpecial(PlayerCharacter person);
+    public abstract int armor_Proficiency(PlayerCharacter person);
     public String[] getChoices(){
         return this.choices;
     }

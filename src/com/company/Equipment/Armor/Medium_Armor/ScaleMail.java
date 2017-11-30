@@ -6,6 +6,6 @@ public class ScaleMail extends MediumArmor {
     }
 
     public ScaleMail(){
-        this("Scale Mail", 50, 45, 14);
+        this("Scale Mail", 50, 45, 4);
     }
 }

@@ -7,6 +7,6 @@ public class StuddedLeather extends LightArmor {
     }
 
     public StuddedLeather(){
-        this("Studded Leather", 45, 13, 12);
+        this("Studded Leather", 45, 13, 2);
     }
 }

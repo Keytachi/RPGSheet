@@ -5,7 +5,8 @@ import com.company.Util.dice;
 public class Javelin extends Weapon {
 
     public Javelin(int weight, int cost, String name) {
-        super(weight, cost, name, Damage_Type.PIERCING, new dice(6));
+        super(weight, cost, name, Damage_Type.PIERCING,
+                new dice(6));
     }
 
     public Javelin(){

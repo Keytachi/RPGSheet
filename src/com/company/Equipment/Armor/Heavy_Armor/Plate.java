@@ -7,6 +7,6 @@ public class Plate extends HeavyArmor {
     }
 
     public Plate(){
-        this("Plate Armor", 1500,65,18);
+        this("Plate Armor", 1500,65,8);
     }
 }

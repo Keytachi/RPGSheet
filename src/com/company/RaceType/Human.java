@@ -1,6 +1,6 @@
 package com.company.RaceType;
 
-public class Human extends Race{
+public class Human extends Race {
 
 
     public Human(String name){

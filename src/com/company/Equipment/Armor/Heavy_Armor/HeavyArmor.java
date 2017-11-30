@@ -1,6 +1,7 @@
 package com.company.Equipment.Armor.Heavy_Armor;
 
 import com.company.Equipment.Armor.Armor;
+import com.company.PlayerCharacter;
 import com.company.RaceType.Race;
 
 public abstract class HeavyArmor extends Armor {
@@ -9,7 +10,11 @@ public abstract class HeavyArmor extends Armor {
     }
 
     @Override
-    public void requirement(Race person){
-        if(person.getStrength() < 15) person.set_WalkingSpeed(person.get_WalkingSpeed()-10);
+    public void requirement(PlayerCharacter person){
+        if(person.getRace().getStrength() < 15) person.getRace().set_WalkingSpeed(person.getRace().get_WalkingSpeed()-10);
+    }
+    @Override
+    public int get_Armor(PlayerCharacter person){
+        return armor;
     }
 }

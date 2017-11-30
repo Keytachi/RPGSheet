@@ -7,6 +7,6 @@ public class HalfPlate extends MediumArmor {
     }
 
     public HalfPlate(){
-        this("Half Plate", 750, 40, 15);
+        this("Half Plate", 750, 40, 5);
     }
 }

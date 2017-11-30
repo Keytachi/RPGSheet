@@ -7,6 +7,6 @@ public class Padded extends LightArmor {
     }
 
     public Padded(){
-        this("Padded Armor", 5, 8,11);
+        this("Padded Armor", 5, 8,1);
     }
 }

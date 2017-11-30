@@ -1,16 +1,13 @@
 package com.company;
 
-import com.company.ClassType.Barbarian;
-import com.company.ClassType.ClassRole;
-import com.company.ClassType.Mage;
+import com.company.ClassType.*;
 import com.company.Equipment.Armor.Armor;
 import com.company.Equipment.Armor.Heavy_Armor.HeavyArmor;
 import com.company.Equipment.Armor.Light_Armor.LightArmor;
 import com.company.Equipment.Armor.Medium_Armor.MediumArmor;
-import com.company.Equipment.Equipment;
-import com.company.Equipment.Naked;
-import com.company.Equipment.Weapon.Shield;
-import com.company.Equipment.Weapon.Weapon;
+import com.company.Equipment.*;
+import com.company.Equipment.Armor.Naked;
+import com.company.Equipment.Weapon.*;
 import com.company.RaceType.Race;
 
 import java.util.HashMap;
@@ -23,43 +20,26 @@ public class PlayerCharacter {
 
     private int current_Health;
     private int maximum_Health;
-    private int armor_Amount;
 
-    private enum GearSlot{
+    private static final int BASE_ARMOR = 10;
+
+    public enum GearSlot{
         ARMOR,
         LHAND,
         RHAND
     }
-    //TODO: Work on this armor part again.
-    /**
-     *  Idea: Hashmap<String, Armor>
-     *  String = Body
-     *  Armor = Any instanceof Armor.
-     *
-     *  Issue: Is it worth using hasmap for 1 item?
-     */
-    Map<GearSlot, Armor> armorEquipment = new HashMap<>();
 
-    //TODO: Work on this weapon part again.
-    /**
-     Idea: Hashmap<String, Weapon> or a Map<String,Weapon>
-     String = "Left Hand", "Right Hand"
-     Weapon = Any instanceof Weapon. Should include shield.
-
-     Issue: Shield is an instanceof an armor class
-     */
-    Map<GearSlot,Weapon> weaponEquipment = new HashMap<>();
+    private Map<GearSlot, Armor> armorEquipment = new HashMap<>();
+    private Map<GearSlot,Weapon> weaponEquipment = new HashMap<>();
 
     public PlayerCharacter(Race race, ClassRole role){
         this.race = race;
         this.role = role;
         setHealth();
 
-        this.armorEquipment.put(GearSlot.ARMOR,null);
-        this.weaponEquipment.put(GearSlot.LHAND,null);
-        this.weaponEquipment.put(GearSlot.RHAND,null);
-        setArmor_Amount();
-
+        this.armorEquipment.put(GearSlot.ARMOR,new Naked());
+        this.weaponEquipment.put(GearSlot.LHAND,new Unarm());
+        this.weaponEquipment.put(GearSlot.RHAND,new Unarm());
     }
 
     public void setHealth(){
@@ -92,14 +72,22 @@ public class PlayerCharacter {
         this.maximum_Health = maximum_Health;
     }
 
+    public Map<GearSlot, Armor> getArmorEquipment() {
+        return armorEquipment;
+    }
+
+    public Map<GearSlot, Weapon> getWeaponEquipment() {
+        return weaponEquipment;
+    }
+
     public void unEquipGear(Map characterGear, GearSlot gearSlot){
+        if(gearSlot == GearSlot.ARMOR){
 
-        /**
-         * Compare if Gearslot = Armor then remove all armor value from the armor_amount value.
-         * If Weapon then just remove it as there is no stats in a weapon.
-         */
-
-        characterGear.put(gearSlot,null);
+            characterGear.put(gearSlot,new Naked());
+        }
+        else if (gearSlot == GearSlot.LHAND || gearSlot == GearSlot.RHAND){
+            characterGear.put(gearSlot,new Unarm());
+        }
     }
 
     public void equipGear(Map characterGear, GearSlot gearSlot, Equipment gear) {
@@ -111,7 +99,7 @@ public class PlayerCharacter {
         }
         else if (gear instanceof Weapon || gear instanceof Shield) {
             if (gearSlot == GearSlot.LHAND || gearSlot == GearSlot.RHAND) {
-                if (characterGear.get(gearSlot) != null) {
+                if (characterGear.get(gearSlot) instanceof Naked == false) {
                     unEquipGear(characterGear,gearSlot);
                 }
                 characterGear.put(gearSlot,gear);
@@ -119,18 +107,25 @@ public class PlayerCharacter {
         }
     }
 
-    public void setArmor_Amount(){
-        if(armorEquipment.get(GearSlot.ARMOR) == null){
-            equipGear(armorEquipment,GearSlot.ARMOR,new Naked());
-        }
+    public Race getRace() {
+        return race;
+    }
+
+    public ClassRole getRole() {
+        return role;
+    }
+
+    public int setArmor_Amount(){
         if(this.weaponEquipment.get(GearSlot.RHAND) instanceof Shield){
-            this.armor_Amount = this.armorEquipment.get(GearSlot.ARMOR).get_Armor() +
+            return BASE_ARMOR+ this.armorEquipment.get(GearSlot.ARMOR).get_Armor(this) +
                     this.weaponEquipment.get(GearSlot.RHAND).get_Armor();
+
         }else if (this.weaponEquipment.get(GearSlot.LHAND) instanceof Shield){
-            this.armor_Amount = this.armorEquipment.get(GearSlot.ARMOR).get_Armor() +
+            return BASE_ARMOR+ this.armorEquipment.get(GearSlot.ARMOR).get_Armor(this) + +
                     this.weaponEquipment.get(GearSlot.RHAND).get_Armor();
+
         }else{
-            this.armor_Amount = this.armorEquipment.get(GearSlot.ARMOR).get_Armor();
+            return BASE_ARMOR+ this.armorEquipment.get(GearSlot.ARMOR).get_Armor(this);
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.company.Equipment.Armor;
 
 import com.company.Equipment.Equipment;
+import com.company.PlayerCharacter;
 import com.company.RaceType.Race;
 
 public abstract class Armor extends Equipment {
@@ -13,13 +14,12 @@ public abstract class Armor extends Equipment {
     }
 
     public int get_Armor(){
-        return this.armor;
+        return armor;
     }
-    public int getArmorAmount(Race person){
-        return get_Armor();
+    public int get_Armor(PlayerCharacter person){
+        return person.getRace().getDex_Modifier();
     }
 
-    public void requirement(Race person){
-
+    public void requirement(PlayerCharacter person){
     }
 }

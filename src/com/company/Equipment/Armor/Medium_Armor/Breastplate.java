@@ -7,6 +7,6 @@ public class Breastplate extends MediumArmor {
     }
 
     public Breastplate(){
-        this("Breast Plate", 400, 20, 14);
+        this("Breast Plate", 400, 20, 4);
     }
 }

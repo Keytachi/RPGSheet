@@ -1,5 +1,7 @@
 package com.company.ClassType;
-import com.company.Equipment.Naked;
+import com.company.Equipment.Armor.Armor;
+import com.company.Equipment.Armor.Naked;
+import com.company.PlayerCharacter;
 import com.company.RaceType.Race;
 import com.company.Util.dice;
 
@@ -20,11 +22,19 @@ public class Barbarian extends ClassRole {
        return "Barbarian";
     }
     @Override
-    public void classSpecial(Race person){
-        //unArmored_Defense(person);
+    public void classSpecial(com.company.PlayerCharacter person){
+        unArmored_Defense(person);
     }
 
-    /**public void unArmored_Defense(Race person){
-        if(person.getArmor() instanceof Naked)person.set_ArmorAmount(10);
-    }*/
+    public int unArmored_Defense(PlayerCharacter person) {
+        if(person.getArmorEquipment().get(PlayerCharacter.GearSlot.ARMOR) instanceof Naked){
+            return person.setArmor_Amount() + person.getRace().getCons_Modifier();
+        }
+        return 0;
+    }
+
+    @Override
+    public int armor_Proficiency(PlayerCharacter person){
+        return 0;
+    }
 }
