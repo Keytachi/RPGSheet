@@ -7,8 +7,11 @@ import com.company.Equipment.Armor.Light_Armor.LightArmor;
 import com.company.Equipment.Armor.Medium_Armor.MediumArmor;
 import com.company.Equipment.*;
 import com.company.Equipment.Armor.Naked;
+import com.company.Equipment.Armor.Shield;
 import com.company.Equipment.Weapon.*;
+import com.company.Equipment.Weapon.SmipleWeapons.UnarmWeapon.Unarm;
 import com.company.RaceType.Race;
+import com.company.Util.Util;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,14 +35,16 @@ public class PlayerCharacter {
     private Map<GearSlot, Armor> armorEquipment = new HashMap<>();
     private Map<GearSlot,Weapon> weaponEquipment = new HashMap<>();
 
+    private Map<GearSlot,Equipment> gearEquipment = new HashMap<>();
+
     public PlayerCharacter(Race race, ClassRole role){
         this.race = race;
         this.role = role;
         setHealth();
 
-        this.armorEquipment.put(GearSlot.ARMOR,new Naked());
-        this.weaponEquipment.put(GearSlot.LHAND,new Unarm());
-        this.weaponEquipment.put(GearSlot.RHAND,new Unarm());
+        this.gearEquipment.put(GearSlot.ARMOR,new Naked());
+        this.gearEquipment.put(GearSlot.LHAND,new Unarm());
+        this.gearEquipment.put(GearSlot.RHAND,new Unarm());
     }
 
     public void setHealth(){
@@ -72,37 +77,33 @@ public class PlayerCharacter {
         this.maximum_Health = maximum_Health;
     }
 
-    public Map<GearSlot, Armor> getArmorEquipment() {
-        return armorEquipment;
+    public Map<GearSlot, Equipment> getGearEquipment() {
+        return gearEquipment;
     }
 
-    public Map<GearSlot, Weapon> getWeaponEquipment() {
-        return weaponEquipment;
-    }
-
-    public void unEquipGear(Map characterGear, GearSlot gearSlot){
+    public void unEquipGear(GearSlot gearSlot){
         if(gearSlot == GearSlot.ARMOR){
-
-            characterGear.put(gearSlot,new Naked());
+            gearEquipment.put(gearSlot,new Naked());
         }
         else if (gearSlot == GearSlot.LHAND || gearSlot == GearSlot.RHAND){
-            characterGear.put(gearSlot,new Unarm());
+            gearEquipment.put(gearSlot,new Unarm());
         }
     }
 
-    public void equipGear(Map characterGear, GearSlot gearSlot, Equipment gear) {
+    public void equipGear(GearSlot gearSlot, Equipment gear) {
 
-        if (gear instanceof HeavyArmor || gear instanceof MediumArmor || gear instanceof LightArmor) {
+        if (Util.gearisInstance(gear, HeavyArmor.class) ||Util.gearisInstance(gear, MediumArmor.class)
+                || Util.gearisInstance(gear, LightArmor.class)) {
             if (gearSlot == GearSlot.ARMOR) {
-                characterGear.put(gearSlot, gear);
+                gearEquipment.put(gearSlot, gear);
             }
         }
-        else if (gear instanceof Weapon || gear instanceof Shield) {
+        else if (Util.gearisInstance(gear, Weapon.class) || Util.gearisInstance(gear,Shield.class)){
             if (gearSlot == GearSlot.LHAND || gearSlot == GearSlot.RHAND) {
-                if (characterGear.get(gearSlot) instanceof Naked == false) {
-                    unEquipGear(characterGear,gearSlot);
+                if (gearEquipment.get(gearSlot) instanceof Naked == false) {
+                    unEquipGear(gearSlot);
                 }
-                characterGear.put(gearSlot,gear);
+                gearEquipment.put(gearSlot,gear);
             }
         }
     }
@@ -115,17 +116,20 @@ public class PlayerCharacter {
         return role;
     }
 
-    public int setArmor_Amount(){
-        if(this.weaponEquipment.get(GearSlot.RHAND) instanceof Shield){
-            return BASE_ARMOR+ this.armorEquipment.get(GearSlot.ARMOR).get_Armor(this) +
-                    this.weaponEquipment.get(GearSlot.RHAND).get_Armor();
+    public int getArmor_Amount(){
 
-        }else if (this.weaponEquipment.get(GearSlot.LHAND) instanceof Shield){
-            return BASE_ARMOR+ this.armorEquipment.get(GearSlot.ARMOR).get_Armor(this) + +
-                    this.weaponEquipment.get(GearSlot.RHAND).get_Armor();
+        Armor armor = (Armor)gearEquipment.get(GearSlot.ARMOR);
+        Armor rShield = (Armor)gearEquipment.get(GearSlot.RHAND);
+        Armor lShield = (Armor)gearEquipment.get(GearSlot.LHAND);
+
+        if(Util.gearisInstance(this.gearEquipment.get(GearSlot.RHAND), Shield.class)){
+            return BASE_ARMOR+ armor.get_Armor(this) + rShield.get_Armor();
+
+        }else if (Util.gearisInstance(this.gearEquipment.get(GearSlot.LHAND), Shield.class)){
+            return BASE_ARMOR+ armor.get_Armor(this) + lShield.get_Armor();
 
         }else{
-            return BASE_ARMOR+ this.armorEquipment.get(GearSlot.ARMOR).get_Armor(this);
+            return BASE_ARMOR+ armor.get_Armor(this);
         }
     }
 }

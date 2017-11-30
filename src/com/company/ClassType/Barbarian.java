@@ -1,45 +1,40 @@
 package com.company.ClassType;
-import com.company.Equipment.Armor.Armor;
 import com.company.Equipment.Armor.Light_Armor.LightArmor;
 import com.company.Equipment.Armor.Medium_Armor.MediumArmor;
 import com.company.Equipment.Armor.Naked;
-import com.company.Equipment.Weapon.Club;
-import com.company.Equipment.Weapon.Shield;
-import com.company.Equipment.Weapon.Weapon;
+import com.company.Equipment.Armor.Shield;
+import com.company.Equipment.Weapon.MartialWeapons.MartialWeapons;
+import com.company.Equipment.Weapon.SmipleWeapons.SimpleWeapon;
 import com.company.PlayerCharacter;
 import com.company.RaceType.Race;
 import com.company.Util.Util;
 import com.company.Util.dice;
+import sun.java2d.pipe.SpanShapeRenderer;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public class Barbarian extends ClassRole {
 
     private int rage;
-    private Class<Armor> armorProficiency[] = new Class[]{
-            LightArmor.class,
-            MediumArmor.class
-    };
-
-    private Enum<PlayerCharacter.GearSlot> weaponslots[] = new Enum[]{
-            PlayerCharacter.GearSlot.RHAND,
-            PlayerCharacter.GearSlot.LHAND
-    };
-
-    private Class<Weapon> weaponProficiency[] = new Class[]{
-            Shield.class,
-            Club.class
-    };
 
     public Barbarian(){
         super(new dice(12));
         this.rage = setRage();
+
+        this.armorProficiencyList = new Class[]{
+          LightArmor.class,
+          MediumArmor.class,
+          Shield.class
+        };
+
+        //TODO: Create an abstract of Simple and Martial Weapons.
+        this.weaponProficiencyList = new Class[]{
+                SimpleWeapon.class,
+                MartialWeapons.class
+        };
     }
 
-    @Override
-    public void attack(Race player){
-
-    }
     @Override
     public String toString(){
        return "Barbarian";
@@ -47,30 +42,33 @@ public class Barbarian extends ClassRole {
 
 
     public int unArmored_Defense(PlayerCharacter person) {
-        if(person.getArmorEquipment().get(PlayerCharacter.GearSlot.ARMOR) instanceof Naked){
-            return person.setArmor_Amount() + person.getRace().getCons_Modifier();
+        if(Util.gearisInstance(person.getGearEquipment().get(PlayerCharacter.GearSlot.ARMOR), Naked.class)){
+            return person.getArmor_Amount() + person.getRace().getCons_Modifier();
         }
         return 0;
     }
 
     @Override
-    public int get_ArmorProficiency(Map gearEquipment, PlayerCharacter.GearSlot gearSlot){
-        for(int i = 0; i < armorProficiency.length; i++)
-        {
-            for(int j = 0; j < weaponslots.length; i++){
-                if(Util.gearNameMatch(gearEquipment.get(gearSlot),armorProficiency[i])
-                        || Util.gearNameMatch(gearEquipment.get(weaponslots[j]),Shield.class)){
+    public int get_ArmorProficiency(Map gearEquipment, PlayerCharacter.GearSlot gearSlot) {
+        for (int armor_Type = 0; armor_Type < armorProficiencyList.length; armor_Type++) {
+            if (Util.gearisInstance(gearEquipment.get(gearSlot), armorProficiencyList[armor_Type])) {
+                return this.proficiency;
+            }
+
+            //TODO: Understand how to use this contains for subclass.
+            /**if(Arrays.asList(armorProficiencyList).contains((Class)gearEquipment.get(gearSlot))){
+             return this.proficiency;
+             }*/
+
+            for (int slot = 0; slot < gearLocation.length; slot++) {
+                if (Util.gearisInstance(gearEquipment.get(gearLocation[slot]), Shield.class)) {
                     return this.proficiency;
                 }
             }
-
         }
         return 0;
     }
 
-    /**@Override
-    public int weapon_Proficiency(PlayerCharacter person){
-    }**/
 
     public int setRage() {
         if (level >= 1 && level <= 2){

@@ -15,11 +15,6 @@ public class Mage extends ClassRole {
     }
 
     @Override
-    public void attack(Race player){
-
-    }
-
-    @Override
     public String toString(){
         return "Mage";
     }

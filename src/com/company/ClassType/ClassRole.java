@@ -1,27 +1,24 @@
 package com.company.ClassType;
 
 import com.company.Equipment.Armor.Armor;
-import com.company.Equipment.Armor.Light_Armor.LightArmor;
-import com.company.Equipment.Armor.Medium_Armor.MediumArmor;
 import com.company.Equipment.Equipment;
-import com.company.Equipment.Weapon.Club;
-import com.company.Equipment.Weapon.Shield;
 import com.company.Equipment.Weapon.Weapon;
 import com.company.PlayerCharacter;
 import com.company.RaceType.Race;
+import com.company.Util.Util;
 import com.company.Util.dice;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 public abstract class ClassRole{
 
-    protected Class<Armor> equipmentProficiency[] = new Class[]{};
-
-    protected Enum<PlayerCharacter.GearSlot> gearSlot[] = new Enum[]{
+    protected Class<Armor> armorProficiencyList[];
+    protected Class<Weapon> weaponProficiencyList[];
+    protected Enum<PlayerCharacter.GearSlot> gearLocation[] = new Enum[]{
             PlayerCharacter.GearSlot.ARMOR,
-            PlayerCharacter.GearSlot.RHAND,
-            PlayerCharacter.GearSlot.LHAND
+            PlayerCharacter.GearSlot.LHAND,
+            PlayerCharacter.GearSlot.RHAND
     };
 
     protected String[] choices = new String[]{};
@@ -37,19 +34,23 @@ public abstract class ClassRole{
         this.proficiency = set_Proficiency();
     }
 
-    //TODO: Edit this implementation in other subclasses to use weapons * strength.
-    public abstract void attack(Race target);
+    public int get_ArmorProficiency(Map gearEquipment, PlayerCharacter.GearSlot gearSlot) {
+        if (Arrays.asList(armorProficiencyList).contains(gearEquipment.get(gearSlot))) {
+            return this.proficiency;
+        }
+        return 0;
+    }
 
-    public abstract int get_ArmorProficiency(Map gearEquipment, PlayerCharacter.GearSlot gearSlot);
-    /**public int weapon_Proficiency(Map gearEquipment, PlayerCharacter.GearSlot gearSlot){
-
-        for(int i = 0; i < weapons.length; i++){
-            if(gearEquipment.get(gearSlot) instanceof weapons[i]){
-                return proficiency;
+    public int get_ChancetoHitBonus(Map gearEquipment){
+        for(int i = 0; i < gearLocation.length; i++) {
+            for(int weapon_Type = 0; weapon_Type < weaponProficiencyList.length; weapon_Type++){
+                if(Util.gearisInstance(gearEquipment.get(gearLocation[i]),weaponProficiencyList[weapon_Type])){
+                    return this.proficiency;
+                }
             }
         }
         return 0;
-    }*/
+    }
 
     public int set_Proficiency(){
         if(level >= 1 || level <= 4){

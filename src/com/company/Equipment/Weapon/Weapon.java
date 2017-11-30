@@ -5,7 +5,7 @@ import com.company.Util.dice;
 
 public abstract class Weapon extends Equipment {
 
-    protected enum Damage_Type{
+    public enum Damage_Type{
         BLUDGEONING,
         PIERCING,
         SLASHING,
@@ -14,7 +14,6 @@ public abstract class Weapon extends Equipment {
 
     private dice damage_Die;
     private Damage_Type type;
-    protected int armor = 0;
 
     public Weapon(int weight, int cost, String name, Damage_Type type,dice damage_Die) {
         super(name,cost,weight);
@@ -32,10 +31,6 @@ public abstract class Weapon extends Equipment {
 
     //TODO: Rethink weapon system by using categories of Simple Melee, Simple Ranged Weapons,
     //TODO: Martial Melee Weapons,Martial Ranged Weapons, and Amunitions.
-
-    public int get_Armor(){
-        return this.armor;
-    }
 
     public int attack(){
         return this.damage_Die.roll();
