@@ -1,7 +1,9 @@
 package com.company.Equipment.Weapon;
 
 import com.company.Equipment.Equipment;
+import com.company.Item;
 import com.company.Util.dice;
+
 
 public abstract class Weapon extends Equipment {
 
@@ -9,14 +11,13 @@ public abstract class Weapon extends Equipment {
         BLUDGEONING,
         PIERCING,
         SLASHING,
-        DEFENSE
     }
 
     private dice damage_Die;
     private Damage_Type type;
 
     public Weapon(int weight, int cost, String name, Damage_Type type,dice damage_Die) {
-        super(name,cost,weight);
+        super(weight,cost,name);
         this.type = type;
         this.damage_Die = damage_Die;
     }

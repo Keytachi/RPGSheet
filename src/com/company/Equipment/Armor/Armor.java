@@ -9,7 +9,7 @@ public abstract class Armor extends Equipment {
     protected int armor;
 
     public Armor(String name, int cost, int weight, int armor) {
-        super(name, cost, weight);
+        super(weight, cost, name);
         this.armor = armor;
     }
 
@@ -20,6 +20,6 @@ public abstract class Armor extends Equipment {
         return person.getRace().getDex_Modifier();
     }
 
-    public void requirement(PlayerCharacter person){
+    public void get_Requirement(PlayerCharacter person){
     }
 }

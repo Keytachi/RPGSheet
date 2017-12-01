@@ -13,9 +13,9 @@ public class RingMail extends HeavyArmor{
     }
 
 
-    //No requirement for this heavy armor type so overriding it to not weight down the user.
+    //No get_Requirement for this heavy armor type so overriding it to not weight down the user.
     @Override
-    public void requirement(PlayerCharacter person){
+    public void get_Requirement(PlayerCharacter person){
 
     }
 }

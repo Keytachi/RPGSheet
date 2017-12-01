@@ -24,6 +24,8 @@ public class PlayerCharacter {
     private int current_Health;
     private int maximum_Health;
 
+    private Bag inventoryBag;
+
     private static final int BASE_ARMOR = 10;
 
     public enum GearSlot{
@@ -32,14 +34,12 @@ public class PlayerCharacter {
         RHAND
     }
 
-    private Map<GearSlot, Armor> armorEquipment = new HashMap<>();
-    private Map<GearSlot,Weapon> weaponEquipment = new HashMap<>();
-
     private Map<GearSlot,Equipment> gearEquipment = new HashMap<>();
 
-    public PlayerCharacter(Race race, ClassRole role){
+    public PlayerCharacter(Race race, ClassRole role, Bag inventoryBag){
         this.race = race;
         this.role = role;
+        this.inventoryBag = inventoryBag;
         setHealth();
 
         this.gearEquipment.put(GearSlot.ARMOR,new Naked());
@@ -56,6 +56,10 @@ public class PlayerCharacter {
             this.maximum_Health = 8 + this.race.getCons_Modifier();
             this.current_Health = this.maximum_Health;
         }
+    }
+
+    public int getMax_BagWeight(){
+        return race.getStrength() * 15;
     }
 
 
@@ -96,6 +100,8 @@ public class PlayerCharacter {
                 || Util.gearisInstance(gear, LightArmor.class)) {
             if (gearSlot == GearSlot.ARMOR) {
                 gearEquipment.put(gearSlot, gear);
+                Armor test = (Armor)gearEquipment.get(gearSlot);
+                test.get_Requirement(this);
             }
         }
         else if (Util.gearisInstance(gear, Weapon.class) || Util.gearisInstance(gear,Shield.class)){
@@ -116,20 +122,37 @@ public class PlayerCharacter {
         return role;
     }
 
+    public Bag getInventoryBag(){
+        return inventoryBag;
+    }
     public int getArmor_Amount(){
 
         Armor armor = (Armor)gearEquipment.get(GearSlot.ARMOR);
-        Armor rShield = (Armor)gearEquipment.get(GearSlot.RHAND);
-        Armor lShield = (Armor)gearEquipment.get(GearSlot.LHAND);
+        try {
+            Armor rShield = (Armor) gearEquipment.get(GearSlot.RHAND);
+            Armor lShield = (Armor) gearEquipment.get(GearSlot.LHAND);
 
-        if(Util.gearisInstance(this.gearEquipment.get(GearSlot.RHAND), Shield.class)){
-            return BASE_ARMOR+ armor.get_Armor(this) + rShield.get_Armor();
+            if (Util.gearisInstance(this.gearEquipment.get(GearSlot.RHAND), Shield.class)) {
+                return BASE_ARMOR + armor.get_Armor(this) + rShield.get_Armor();
 
-        }else if (Util.gearisInstance(this.gearEquipment.get(GearSlot.LHAND), Shield.class)){
-            return BASE_ARMOR+ armor.get_Armor(this) + lShield.get_Armor();
-
-        }else{
-            return BASE_ARMOR+ armor.get_Armor(this);
+            } else if (Util.gearisInstance(this.gearEquipment.get(GearSlot.LHAND), Shield.class)) {
+                return BASE_ARMOR + armor.get_Armor(this) + lShield.get_Armor();
+            }
+        }catch(ClassCastException e) {
         }
+        return BASE_ARMOR + armor.get_Armor(this);
+    }
+
+
+    public void displayCharacterInformation(){
+        System.out.printf("Name: %s\n", race.getName());
+        System.out.printf("Class: %s\n", role.toString());
+        System.out.printf("Strength: %s\n", race.getStrength());
+        System.out.printf("Wisdom: %s\n", race.getWisdom());
+        System.out.printf("Charisma: %s\n", race.getCharisma());
+        System.out.printf("Constitution: %s\n",race.getConstitution());
+        System.out.printf("Dexterity: %s\n",race.getDexterity());
+        System.out.printf("Intelligence: %s\n",race.getIntelligence());
+        System.out.printf("Walking Speed: %s\n", race.get_WalkingSpeed());
     }
 }

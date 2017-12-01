@@ -1,5 +1,6 @@
 package com.company.Equipment.Armor;
 
+import com.company.Equipment.Weapon.SmipleWeapons.OneHandedMelee.Club;
 import com.company.Equipment.Weapon.Weapon;
 
 public class Shield extends Armor {

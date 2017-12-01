@@ -1,26 +1,10 @@
 package com.company.Equipment;
 
-public abstract class Equipment {
+import com.company.Item;
 
-    private int weight;
-    private int cost;
-    private String name;
+public abstract class Equipment extends Item {
 
-    public Equipment(String name, int cost, int weight) {
-        this.weight = weight;
-        this.cost = cost;
-        this.name = name;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public int getCost() {
-        return cost;
-    }
-
-    public String getName() {
-        return name;
+    public Equipment(int weight, int cost, String name) {
+        super(weight, cost, name);
     }
 }

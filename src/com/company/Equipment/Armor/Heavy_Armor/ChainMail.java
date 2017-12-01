@@ -12,9 +12,9 @@ public class ChainMail extends HeavyArmor {
         this("Chain Mail", 75, 55, 4);
     }
 
-    //Strength requirement for this armor is 13 instead of the 15.
+    //Strength get_Requirement for this armor is 13 instead of the 15.
     @Override
-    public void requirement(PlayerCharacter person){
+    public void get_Requirement(PlayerCharacter person){
         if(person.getRace().getStrength() < 13) person.getRace().set_WalkingSpeed(person.getRace().get_WalkingSpeed()-10);
     }
 }

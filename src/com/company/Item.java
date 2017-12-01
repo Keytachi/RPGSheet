@@ -2,19 +2,25 @@ package com.company;
 
 public abstract class Item {
 
-    private Boolean stackable;
-    private int max_Stack;
+    private int weight;
+    private int cost;
+    private String name;
 
-    public Item(Boolean stackable, int max_Stack) {
-        this.stackable = stackable;
-        this.max_Stack = max_Stack;
+    public Item(int weight, int cost, String name) {
+        this.weight = weight;
+        this.cost = cost;
+        this.name = name;
     }
 
-    public Boolean getStackable() {
-        return stackable;
+    public int getWeight() {
+        return weight;
     }
 
-    public int getMax_Stack() {
-        return max_Stack;
+    public int getCost() {
+        return cost;
+    }
+
+    public String getName() {
+        return name;
     }
 }
