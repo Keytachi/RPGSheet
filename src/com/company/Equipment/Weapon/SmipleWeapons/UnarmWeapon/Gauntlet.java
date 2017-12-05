@@ -3,7 +3,7 @@ package com.company.Equipment.Weapon.SmipleWeapons.UnarmWeapon;
 import com.company.Equipment.Weapon.SmipleWeapons.SimpleWeapon;
 import com.company.Util.dice;
 
-public class Gauntlet extends SimpleWeapon{
+public class Gauntlet extends SimpleUnarm{
 
     public Gauntlet(int weight, int cost, String name, dice dice) {
         super(weight, cost, name, Damage_Type.BLUDGEONING, dice);

@@ -48,6 +48,12 @@ public abstract class ClassRole{
         return 0;
     }
 
+    //TODO: Create a function that when per level, will increase the health pool of the character.
+
+    /**TODO: Rethink about this usage.
+     *  Either use this as is or use a Map<Integer,Integer> and compare the key to the level to get the
+     *  proficiency.
+     */
     public int set_Proficiency(){
         if(level >= 1 || level <= 4){
             return 2;

@@ -25,6 +25,7 @@ public class PlayerCharacter {
 
     private int current_Health;
     private int maximum_Health;
+    private int armor_Amount;
 
     private static final int BASE_ARMOR = 10;
 
@@ -40,7 +41,7 @@ public class PlayerCharacter {
         this.race = race;
         this.role = role;
         this.inventoryBag = inventoryBag;
-        setHealth();
+        updatePlayer();
 
     }
 
@@ -63,6 +64,10 @@ public class PlayerCharacter {
     }
 
 
+    /**
+     * Work on this when creating more classes.
+     * THIS IS ONLY INTENDED FOR INSTANTIATING THE CHARACTER!
+     */
     public void setHealth(){
         if (role instanceof Barbarian){
             setMaximum_Health(12 + race.getCons_Modifier());
@@ -98,20 +103,54 @@ public class PlayerCharacter {
     }
 
     public int getArmor_Amount(){
-        for(Enum weapon_Slot : EnumContainer.weapon_Slot){
-            if(Util.gearisInstance(gearEquipment.get(weapon_Slot),Shield.class)){
-                return BASE_ARMOR+ ((Armor)gearEquipment.get(EnumContainer.GearSlot.ARMOR)).get_Armor(this) +
-                        ((Armor)gearEquipment.get(weapon_Slot)).get_Armor(this) ;
+        return armor_Amount;
+    }
+
+    private void setArmor_Amount(){
+        for(Enum weaponSlot : EnumContainer.weapon_Slot){
+            if(Util.gearisInstance(gearEquipment.get(weaponSlot),Shield.class)){
+                armor_Amount = BASE_ARMOR +
+                        ((Armor)gearEquipment.get(EnumContainer.GearSlot.ARMOR)).get_Armor(this) +
+                        ((Armor)gearEquipment.get(weaponSlot)).get_Armor(this) ;
             }
         }
-        return BASE_ARMOR+ ((Armor)gearEquipment.get(EnumContainer.GearSlot.ARMOR)).get_Armor(this) +
-                    ((Armor)gearEquipment.get(EnumContainer.GearSlot.RHAND)).get_Armor(this) ;
+        armor_Amount = BASE_ARMOR +
+                ((Armor)gearEquipment.get(EnumContainer.GearSlot.ARMOR)).get_Armor(this);
     }
 
 
+    /**TODO: Below statement.
+     * Rework this function.
+     * Idea: Check if the gear is an Armor or Weapon.
+     * If Armor:
+     *          Check to see if it is a shield.
+     *          If it is a shield:
+     *              Equip the shield onto the Weapon_Slot.
+     *          If it is not a shield:
+     *              Equip the armor onto the Body.
+     *
+     * If Weapon:
+     *          Check to see if it is a 2 Hand Weapon (Simple or Martial):
+     *          If it is not a 2 Hand Weapon:
+     *              Check to see if there is a slot empty.
+     *              If there are no slot empty:
+     *                  Unequip the selected Weapon_Slot.
+     *                  Equip the gear to the Weapon_Slot.
+     *              else:
+     *                  Equip the gear to the Weapon_Slot.
+     *          else:
+     *              Check to see if both slot are empty.
+     *              If they are both empty:
+     *                  Equip the 2 Hand Weapon to both Weapon_Slot (Clone?)
+     *              else:
+     *                  Unequip any weapon from Weapon_Slots.
+     *                  Equip the 2 Hand Weapon to both Weapon_Slot (Clone?)
+     *
+     * Update Character to see if the armor has been set differently.
+     */
     public void equipGear(EnumContainer.GearSlot gearSlot, Equipment gear) {
 
-        if (Util.gearisInstance(gear, Armor.class) && !Util.gearisInstance(gear,Naked.class))
+        if (Util.gearisInstance(gear, Armor.class))
         {
             if (gearSlot == EnumContainer.GearSlot.ARMOR) {
                 gearEquipment.put(gearSlot, gear);
@@ -134,5 +173,10 @@ public class PlayerCharacter {
         else if (gearSlot == EnumContainer.GearSlot.LHAND || gearSlot == EnumContainer.GearSlot.RHAND){
             gearEquipment.put(gearSlot,new Unarm());
         }
+    }
+
+    public void updatePlayer(){
+        setHealth();
+        setArmor_Amount();
     }
 }
