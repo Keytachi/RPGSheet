@@ -39,25 +39,22 @@ public class Barbarian extends ClassRole {
     }
 
 
-    public int unArmored_Defense(PlayerCharacter person) {
+    public void unArmored_Defense(PlayerCharacter person) {
         if(Util.gearisInstance(person.getGearEquipment().get(EnumContainer.GearSlot.ARMOR), Naked.class)){
-            return person.getArmor_Amount() + person.getRace().getCons_Modifier();
+            person.setArmor_Amount(person.getArmor_Amount() + person.getRace().getCons_Modifier());
         }
-        return 0;
     }
 
     @Override
     public int get_ArmorProficiency(Map gearEquipment, EnumContainer.GearSlot gearSlot) {
-        for(Class armor_Type : armorProficiencyList) {
+        for (Class armor_Type : armorProficiencyList) {
             if (Util.gearisInstance(gearEquipment.get(gearSlot), armor_Type)) {
                 return this.proficiency;
             }
-
-
-            for(Enum<EnumContainer.GearSlot> weaponSlot : EnumContainer.weapon_Slot) {
-                if (Util.gearisInstance(gearEquipment.get(weaponSlot), Shield.class)) {
-                    return this.proficiency;
-                }
+        }
+        for (Enum<EnumContainer.GearSlot> weaponSlot : EnumContainer.weapon_Slot) {
+            if (Util.gearisInstance(gearEquipment.get(weaponSlot), Shield.class)) {
+                return this.proficiency;
             }
         }
         return 0;

@@ -8,16 +8,16 @@ import com.company.Util.dice;
 
 import java.util.Map;
 
-public class Mage extends ClassRole {
+public class Wizard extends ClassRole {
 
 
-    public Mage(){
+    public Wizard(){
         super(new dice(6));
     }
 
     @Override
     public String toString(){
-        return "Mage";
+        return "Wizard";
     }
 
     @Override

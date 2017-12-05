@@ -16,13 +16,15 @@ public class Main {
         PlayerCharacter brandon = new PlayerCharacter(new Human("Brandon"), new Barbarian(),
                 new Bag("Traveler's Bag", 30));
 
+        brandon.displayGear();
         brandon.getInventoryBag().displayItemsinBag();
-
+        System.out.println("Armor Amount: " + brandon.getArmor_Amount());
 
         brandon.equipGear(EnumContainer.GearSlot.ARMOR,new Plate());
-        brandon.equipGear(EnumContainer.GearSlot.RHAND,new Shield());
 
-
+        brandon.equipGear(EnumContainer.GearSlot.RHAND, new LongSpear());
+        System.out.println("Armor Amount: " + brandon.getArmor_Amount());
+        brandon.displayGear();
 
         System.out.println(brandon.getRole().get_ArmorProficiency(brandon.getGearEquipment(),
                 EnumContainer.GearSlot.ARMOR));

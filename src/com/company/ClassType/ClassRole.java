@@ -18,7 +18,6 @@ public abstract class ClassRole{
     protected Class<Weapon> weaponProficiencyList[];
 
     protected String[] choices = new String[]{};
-    protected Equipment[] equipmentList = new Equipment[]{};
 
     protected dice hitDie;
     protected int proficiency;
@@ -31,8 +30,10 @@ public abstract class ClassRole{
     }
 
     public int get_ArmorProficiency(Map gearEquipment, EnumContainer.GearSlot gearSlot) {
-        if (Arrays.asList(armorProficiencyList).contains(gearEquipment.get(gearSlot))) {
-            return this.proficiency;
+        for(Class armor_Type: armorProficiencyList) {
+            if(Util.gearisInstance(gearEquipment.get(gearSlot),armor_Type)){
+                return this.proficiency;
+            }
         }
         return 0;
     }
