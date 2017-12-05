@@ -5,6 +5,7 @@ import com.company.Equipment.Equipment;
 import com.company.Equipment.Weapon.Weapon;
 import com.company.PlayerCharacter;
 import com.company.RaceType.Race;
+import com.company.Util.EnumContainer;
 import com.company.Util.Util;
 import com.company.Util.dice;
 
@@ -15,11 +16,6 @@ public abstract class ClassRole{
 
     protected Class<Armor> armorProficiencyList[];
     protected Class<Weapon> weaponProficiencyList[];
-    protected Enum<PlayerCharacter.GearSlot> gearLocation[] = new Enum[]{
-            PlayerCharacter.GearSlot.ARMOR,
-            PlayerCharacter.GearSlot.LHAND,
-            PlayerCharacter.GearSlot.RHAND
-    };
 
     protected String[] choices = new String[]{};
     protected Equipment[] equipmentList = new Equipment[]{};
@@ -34,7 +30,7 @@ public abstract class ClassRole{
         this.proficiency = set_Proficiency();
     }
 
-    public int get_ArmorProficiency(Map gearEquipment, PlayerCharacter.GearSlot gearSlot) {
+    public int get_ArmorProficiency(Map gearEquipment, EnumContainer.GearSlot gearSlot) {
         if (Arrays.asList(armorProficiencyList).contains(gearEquipment.get(gearSlot))) {
             return this.proficiency;
         }
@@ -42,9 +38,9 @@ public abstract class ClassRole{
     }
 
     public int get_ChancetoHitBonus(Map gearEquipment){
-        for(int i = 0; i < gearLocation.length; i++) {
-            for(int weapon_Type = 0; weapon_Type < weaponProficiencyList.length; weapon_Type++){
-                if(Util.gearisInstance(gearEquipment.get(gearLocation[i]),weaponProficiencyList[weapon_Type])){
+        for(Enum<EnumContainer.GearSlot> gear_Slot : EnumContainer.weapon_Slot) {
+            for(Class weapon_Type : weaponProficiencyList){
+                if(Util.gearisInstance(gearEquipment.get(gear_Slot),weapon_Type)){
                     return this.proficiency;
                 }
             }

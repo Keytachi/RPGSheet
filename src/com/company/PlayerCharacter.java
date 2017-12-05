@@ -11,6 +11,7 @@ import com.company.Equipment.Armor.Shield;
 import com.company.Equipment.Weapon.*;
 import com.company.Equipment.Weapon.SmipleWeapons.UnarmWeapon.Unarm;
 import com.company.RaceType.Race;
+import com.company.Util.EnumContainer;
 import com.company.Util.Util;
 
 import java.util.HashMap;
@@ -20,21 +21,20 @@ public class PlayerCharacter {
 
     private Race race;
     private ClassRole role;
+    private Bag inventoryBag;
 
     private int current_Health;
     private int maximum_Health;
 
-    private Bag inventoryBag;
-
     private static final int BASE_ARMOR = 10;
 
-    public enum GearSlot{
-        ARMOR,
-        LHAND,
-        RHAND
-    }
 
-    private Map<GearSlot,Equipment> gearEquipment = new HashMap<>();
+    private Map<EnumContainer.GearSlot,Equipment> gearEquipment = new HashMap<EnumContainer.GearSlot,Equipment>(){
+        {
+            put(EnumContainer.GearSlot.ARMOR, new Naked());
+            put(EnumContainer.GearSlot.LHAND, new Unarm());
+            put(EnumContainer.GearSlot.RHAND, new Unarm());
+        }};
 
     public PlayerCharacter(Race race, ClassRole role, Bag inventoryBag){
         this.race = race;
@@ -42,29 +42,36 @@ public class PlayerCharacter {
         this.inventoryBag = inventoryBag;
         setHealth();
 
-        this.gearEquipment.put(GearSlot.ARMOR,new Naked());
-        this.gearEquipment.put(GearSlot.LHAND,new Unarm());
-        this.gearEquipment.put(GearSlot.RHAND,new Unarm());
     }
+
+
+
+    //Composition of other classes that are being built in this class.
+    public Race getRace() {
+        return race;
+    }
+    public ClassRole getRole() {
+        return role;
+    }
+
+    public Bag getInventoryBag(){
+        return inventoryBag;
+    }
+
+    public Map<EnumContainer.GearSlot, Equipment> getGearEquipment() {
+        return gearEquipment;
+    }
+
 
     public void setHealth(){
-        if (this.role instanceof Barbarian){
-            this.maximum_Health = 12 + this.race.getCons_Modifier();
-            this.current_Health = this.maximum_Health;
+        if (role instanceof Barbarian){
+            setMaximum_Health(12 + race.getCons_Modifier());
+            setCurrent_Health(maximum_Health);
         }
-        else if (this.role instanceof Mage){
-            this.maximum_Health = 8 + this.race.getCons_Modifier();
-            this.current_Health = this.maximum_Health;
+        else if (role instanceof Mage){
+            setMaximum_Health(8 + race.getCons_Modifier());
+            setCurrent_Health(maximum_Health);
         }
-    }
-
-    public int getMax_BagWeight(){
-        return race.getStrength() * 15;
-    }
-
-
-    public int getCurrent_Health() {
-        return current_Health;
     }
 
     public void setCurrent_Health(int current_Health) {
@@ -74,39 +81,45 @@ public class PlayerCharacter {
         }
     }
 
-    public int getMaximum_Health() {
-        return maximum_Health;
-    }
     public void setMaximum_Health(int maximum_Health) {
         this.maximum_Health = maximum_Health;
     }
 
-    public Map<GearSlot, Equipment> getGearEquipment() {
-        return gearEquipment;
+    public int getCurrent_Health() {
+        return current_Health;
     }
 
-    public void unEquipGear(GearSlot gearSlot){
-        if(gearSlot == GearSlot.ARMOR){
-            gearEquipment.put(gearSlot,new Naked());
-        }
-        else if (gearSlot == GearSlot.LHAND || gearSlot == GearSlot.RHAND){
-            gearEquipment.put(gearSlot,new Unarm());
-        }
+    public int getMaximum_Health() {
+        return maximum_Health;
     }
 
-    public void equipGear(GearSlot gearSlot, Equipment gear) {
+    public int getMax_BagWeight(){
+        return race.getStrength() * 15;
+    }
 
-        if (Util.gearisInstance(gear, HeavyArmor.class) ||Util.gearisInstance(gear, MediumArmor.class)
-                || Util.gearisInstance(gear, LightArmor.class)) {
-            if (gearSlot == GearSlot.ARMOR) {
+    public int getArmor_Amount(){
+        for(Enum weapon_Slot : EnumContainer.weapon_Slot){
+            if(Util.gearisInstance(gearEquipment.get(weapon_Slot),Shield.class)){
+                return BASE_ARMOR+ ((Armor)gearEquipment.get(EnumContainer.GearSlot.ARMOR)).get_Armor(this) +
+                        ((Armor)gearEquipment.get(weapon_Slot)).get_Armor(this) ;
+            }
+        }
+        return BASE_ARMOR+ ((Armor)gearEquipment.get(EnumContainer.GearSlot.ARMOR)).get_Armor(this) +
+                    ((Armor)gearEquipment.get(EnumContainer.GearSlot.RHAND)).get_Armor(this) ;
+    }
+
+
+    public void equipGear(EnumContainer.GearSlot gearSlot, Equipment gear) {
+
+        if (Util.gearisInstance(gear, Armor.class) && !Util.gearisInstance(gear,Naked.class))
+        {
+            if (gearSlot == EnumContainer.GearSlot.ARMOR) {
                 gearEquipment.put(gearSlot, gear);
-                Armor test = (Armor)gearEquipment.get(gearSlot);
-                test.get_Requirement(this);
             }
         }
         else if (Util.gearisInstance(gear, Weapon.class) || Util.gearisInstance(gear,Shield.class)){
-            if (gearSlot == GearSlot.LHAND || gearSlot == GearSlot.RHAND) {
-                if (gearEquipment.get(gearSlot) instanceof Naked == false) {
+            if (gearSlot == EnumContainer.GearSlot.LHAND || gearSlot == EnumContainer.GearSlot.RHAND) {
+                if (gearEquipment.get(gearSlot) instanceof Unarm == false) {
                     unEquipGear(gearSlot);
                 }
                 gearEquipment.put(gearSlot,gear);
@@ -114,45 +127,12 @@ public class PlayerCharacter {
         }
     }
 
-    public Race getRace() {
-        return race;
-    }
-
-    public ClassRole getRole() {
-        return role;
-    }
-
-    public Bag getInventoryBag(){
-        return inventoryBag;
-    }
-    public int getArmor_Amount(){
-
-        Armor armor = (Armor)gearEquipment.get(GearSlot.ARMOR);
-        try {
-            Armor rShield = (Armor) gearEquipment.get(GearSlot.RHAND);
-            Armor lShield = (Armor) gearEquipment.get(GearSlot.LHAND);
-
-            if (Util.gearisInstance(this.gearEquipment.get(GearSlot.RHAND), Shield.class)) {
-                return BASE_ARMOR + armor.get_Armor(this) + rShield.get_Armor();
-
-            } else if (Util.gearisInstance(this.gearEquipment.get(GearSlot.LHAND), Shield.class)) {
-                return BASE_ARMOR + armor.get_Armor(this) + lShield.get_Armor();
-            }
-        }catch(ClassCastException e) {
+    public void unEquipGear(EnumContainer.GearSlot gearSlot){
+        if(gearSlot == EnumContainer.GearSlot.ARMOR){
+            gearEquipment.put(gearSlot,new Naked());
         }
-        return BASE_ARMOR + armor.get_Armor(this);
-    }
-
-
-    public void displayCharacterInformation(){
-        System.out.printf("Name: %s\n", race.getName());
-        System.out.printf("Class: %s\n", role.toString());
-        System.out.printf("Strength: %s\n", race.getStrength());
-        System.out.printf("Wisdom: %s\n", race.getWisdom());
-        System.out.printf("Charisma: %s\n", race.getCharisma());
-        System.out.printf("Constitution: %s\n",race.getConstitution());
-        System.out.printf("Dexterity: %s\n",race.getDexterity());
-        System.out.printf("Intelligence: %s\n",race.getIntelligence());
-        System.out.printf("Walking Speed: %s\n", race.get_WalkingSpeed());
+        else if (gearSlot == EnumContainer.GearSlot.LHAND || gearSlot == EnumContainer.GearSlot.RHAND){
+            gearEquipment.put(gearSlot,new Unarm());
+        }
     }
 }

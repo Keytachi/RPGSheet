@@ -6,6 +6,7 @@ import com.company.Equipment.Armor.Shield;
 import com.company.Equipment.Weapon.MartialWeapons.MartialWeapons;
 import com.company.Equipment.Weapon.SmipleWeapons.SimpleWeapon;
 import com.company.PlayerCharacter;
+import com.company.Util.EnumContainer;
 import com.company.Util.Util;
 import com.company.Util.dice;
 
@@ -39,22 +40,22 @@ public class Barbarian extends ClassRole {
 
 
     public int unArmored_Defense(PlayerCharacter person) {
-        if(Util.gearisInstance(person.getGearEquipment().get(PlayerCharacter.GearSlot.ARMOR), Naked.class)){
+        if(Util.gearisInstance(person.getGearEquipment().get(EnumContainer.GearSlot.ARMOR), Naked.class)){
             return person.getArmor_Amount() + person.getRace().getCons_Modifier();
         }
         return 0;
     }
 
     @Override
-    public int get_ArmorProficiency(Map gearEquipment, PlayerCharacter.GearSlot gearSlot) {
-        for (int armor_Type = 0; armor_Type < armorProficiencyList.length; armor_Type++) {
-            if (Util.gearisInstance(gearEquipment.get(gearSlot), armorProficiencyList[armor_Type])) {
+    public int get_ArmorProficiency(Map gearEquipment, EnumContainer.GearSlot gearSlot) {
+        for(Class armor_Type : armorProficiencyList) {
+            if (Util.gearisInstance(gearEquipment.get(gearSlot), armor_Type)) {
                 return this.proficiency;
             }
 
 
-            for (int slot = 0; slot < gearLocation.length; slot++) {
-                if (Util.gearisInstance(gearEquipment.get(gearLocation[slot]), Shield.class)) {
+            for(Enum<EnumContainer.GearSlot> weaponSlot : EnumContainer.weapon_Slot) {
+                if (Util.gearisInstance(gearEquipment.get(weaponSlot), Shield.class)) {
                     return this.proficiency;
                 }
             }
