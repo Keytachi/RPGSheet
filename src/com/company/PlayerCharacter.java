@@ -10,6 +10,7 @@ import com.company.Equipment.Weapon.SmipleWeapons.TwoHandedMelee.SimpleTwoHand;
 import com.company.Equipment.Weapon.SmipleWeapons.UnarmWeapon.Unarm;
 import com.company.RaceType.Race;
 import com.company.Util.EnumContainer;
+import com.company.Util.EnumContainer.GearSlot;
 import com.company.Util.Util;
 
 import java.util.HashMap;
@@ -110,12 +111,13 @@ public class PlayerCharacter {
         for(Enum weaponSlot : EnumContainer.weapon_Slot){
             if(Util.gearisInstance(gearEquipment.get(weaponSlot),Shield.class)){
                 this.armor_Amount = BASE_ARMOR +
-                        ((Armor)gearEquipment.get(EnumContainer.GearSlot.ARMOR)).get_Armor(this) +
+                        ((Armor)gearEquipment.get(GearSlot.ARMOR)).get_Armor(this) +
                         ((Armor)gearEquipment.get(weaponSlot)).get_Armor() ;
+                break;
             }
             else{
                 this.armor_Amount = BASE_ARMOR +
-                        ((Armor)gearEquipment.get(EnumContainer.GearSlot.ARMOR)).get_Armor(this);
+                        ((Armor)gearEquipment.get(GearSlot.ARMOR)).get_Armor(this);
             }
         }
     }
@@ -154,64 +156,102 @@ public class PlayerCharacter {
      *
      * Update Character to see if the armor has been set differently.
      */
-    public void equipGear(EnumContainer.GearSlot gearSlot, Equipment gear) {
+    public void equipGear(GearSlot gearSlot, Equipment gear) {
 
         if(Util.gearisInstance(gear,Armor.class)){
             if(Util.gearisInstance(gear,Shield.class)){
-                if(!Util.gearisInstance(gearEquipment.get(gearSlot),Unarm.class)){
-                    unEquipGear(gearSlot);
-                    gearEquipment.put(gearSlot,gear);
-                }
-                else{
-                    gearEquipment.put(gearSlot,gear);
-                }
-            }
-            else if(!Util.gearisInstance(gearEquipment.get(gearSlot),Naked.class)){
-                unEquipGear(gearSlot);
-                gearEquipment.put(gearSlot,gear);
+                equipShield(gearSlot,(Shield)gear);
             }
             else{
-                gearEquipment.put(gearSlot,gear);
+                eqiupArmor(gearSlot,(Armor)gear);
             }
         }
         else if (Util.gearisInstance(gear,Weapon.class)){
             if(!Util.gearisInstance(gear, SimpleTwoHand.class)){
-                if(Util.gearisInstance(gearEquipment.get(gearSlot),Unarm.class)) {
-                    unEquipGear(gearSlot);
-                    gearEquipment.put(gearSlot, gear);
-                }
-                else{
-                    gearEquipment.put(gearSlot,gear);
-                }
+                equipOneHander(gearSlot, (Weapon)gear);
             }else{
-                for(Enum<EnumContainer.GearSlot> weaponSlot : EnumContainer.weapon_Slot){
-                    if(!Util.gearisInstance(gearEquipment.get(weaponSlot),Unarm.class)){
-                        unEquipGear((EnumContainer.GearSlot)weaponSlot);
-                        gearEquipment.put((EnumContainer.GearSlot)weaponSlot,gear);
-                    }
-                    else{
-                        gearEquipment.put((EnumContainer.GearSlot)weaponSlot,gear);
-                    }
-                }
+                equipTwoHander((Weapon)gear);
             }
         }
         updatePlayer();
     }
 
+    private void equipShield(GearSlot gearSlot, Shield gear){
+        if(gearEquipment.get(gearSlot) instanceof Unarm == false) {
+            if (checkTwoHandEquip()) {
+                unequipTwoHand();
+                gearEquipment.put(gearSlot, gear);
+            } else {
+                unEquipGear(gearSlot);
+                gearEquipment.put(gearSlot, gear);
+            }
+        }
+        else{
+            gearEquipment.put(gearSlot,gear);
+        }
+    }
+
+    private void eqiupArmor(GearSlot gearSlot, Armor gear){
+        if(gearEquipment.get(gearSlot) instanceof Naked == false){
+            unEquipGear(gearSlot);
+            gearEquipment.put(gearSlot,gear);
+        }
+        else{
+            gearEquipment.put(gearSlot,gear);
+        }
+    }
+
+    private void equipTwoHander(Weapon gear){
+        for(Enum<GearSlot> weaponSlot : EnumContainer.weapon_Slot){
+            if(gearEquipment.get(weaponSlot) instanceof Unarm == false){
+                unEquipGear((EnumContainer.GearSlot)weaponSlot);
+                gearEquipment.put((EnumContainer.GearSlot)weaponSlot,gear);
+            }
+            else{
+                gearEquipment.put((EnumContainer.GearSlot)weaponSlot,gear);
+            }
+        }
+    }
+
+    private void equipOneHander(GearSlot gearSlot, Weapon gear){
+        if(gearEquipment.get(gearSlot) instanceof Unarm == false) {
+            if(checkTwoHandEquip()){
+                unequipTwoHand();
+                gearEquipment.put(gearSlot,gear);
+            }else {
+                unEquipGear(gearSlot);
+                gearEquipment.put(gearSlot, gear);
+            }
+        }
+        else{
+            gearEquipment.put(gearSlot,gear);
+        }
+    }
+
+    private Boolean checkTwoHandEquip(){
+        return gearEquipment.get(GearSlot.LHAND) == gearEquipment.get(GearSlot.RHAND);
+    }
+
+    private void unequipTwoHand() {
+        for (Enum<GearSlot> weaponSlot : EnumContainer.weapon_Slot) {
+            unEquipGear((EnumContainer.GearSlot) weaponSlot);
+        }
+    }
+
     public void displayGear(){
         Set<EnumContainer.GearSlot> slots = gearEquipment.keySet();
 
-        for(EnumContainer.GearSlot equipment_Slot: slots){
+        for(GearSlot equipment_Slot: slots){
             System.out.println(equipment_Slot + " : " + gearEquipment.get(equipment_Slot));
         }
     }
 
-    public void unEquipGear(EnumContainer.GearSlot gearSlot){
+    public void unEquipGear(GearSlot gearSlot){
         getInventoryBag().storeItem(this,gearEquipment.get(gearSlot));
-        if(gearSlot == EnumContainer.GearSlot.ARMOR){
+        if(gearSlot == GearSlot.ARMOR){
             gearEquipment.put(gearSlot,new Naked());
         }
-        else if (gearSlot == EnumContainer.GearSlot.LHAND || gearSlot == EnumContainer.GearSlot.RHAND){
+        else if (gearSlot == GearSlot.LHAND || gearSlot == GearSlot.RHAND){
             gearEquipment.put(gearSlot,new Unarm());
         }
     }
