@@ -125,37 +125,7 @@ public class PlayerCharacter {
     public void setArmor_Amount(int armor_Amount){
         this.armor_Amount = armor_Amount;
     }
-
-
-    /**TODO: Below statement.
-     * Rework this function.
-     * Idea: Check if the gear is an Armor or Weapon.
-     * If Armor:
-     *          Check to see if it is a shield.
-     *          If it is a shield:
-     *              Equip the shield onto the Weapon_Slot.
-     *          If it is not a shield:
-     *              Equip the armor onto the Body.
-     *
-     * If Weapon:
-     *          Check to see if it is a 2 Hand Weapon (Simple or Martial):
-     *          If it is not a 2 Hand Weapon:
-     *              Check to see if there is a slot empty.
-     *              If there are no slot empty:
-     *                  Unequip the selected Weapon_Slot.
-     *                  Equip the gear to the Weapon_Slot.
-     *              else:
-     *                  Equip the gear to the Weapon_Slot.
-     *          else:
-     *              Check to see if both slot are empty.
-     *              If they are both empty:
-     *                  Equip the 2 Hand Weapon to both Weapon_Slot (Clone?)
-     *              else:
-     *                  Unequip any weapon from Weapon_Slots.
-     *                  Equip the 2 Hand Weapon to both Weapon_Slot (Clone?)
-     *
-     * Update Character to see if the armor has been set differently.
-     */
+    
     public void equipGear(GearSlot gearSlot, Equipment gear) {
 
         if(Util.gearisInstance(gear,Armor.class)){
