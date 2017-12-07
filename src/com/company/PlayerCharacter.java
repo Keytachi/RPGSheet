@@ -123,15 +123,6 @@ public class PlayerCharacter {
         updatePlayer();
     }
 
-    public void displayGear(){
-        Set<EnumContainer.GearSlot> slots = this.gear_Equipment.getGearEquipment().keySet();
-
-        for(GearSlot equipment_Slot: slots){
-            System.out.println(equipment_Slot + " : " + gear_Equipment.getGearEquipment().get(equipment_Slot));
-        }
-    }
-
-
     public void updatePlayer(){
         setArmor_Amount();
         if(role instanceof Barbarian){
