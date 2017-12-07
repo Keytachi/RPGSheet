@@ -11,11 +11,12 @@ import com.company.Util.dice;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Set;
 
 public abstract class ClassRole{
 
-    protected Class<Armor> armorProficiencyList[];
-    protected Class<Weapon> weaponProficiencyList[];
+    protected Set<Class> armorProficiencyList;
+    protected Set<Class> weaponProficiencyList;
 
     protected String[] choices = new String[]{};
 

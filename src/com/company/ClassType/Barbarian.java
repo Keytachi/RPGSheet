@@ -10,27 +10,22 @@ import com.company.Util.EnumContainer;
 import com.company.Util.Util;
 import com.company.Util.dice;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Map;
 
 public class Barbarian extends ClassRole {
 
     private int rage;
 
-    public Barbarian(){
+    public Barbarian() {
         super(new dice(12));
         this.rage = setRage();
 
-        this.armorProficiencyList = new Class[]{
-          LightArmor.class,
-          MediumArmor.class,
-          Shield.class
-        };
+        this.armorProficiencyList = new HashSet<>(Arrays.asList(MediumArmor.class,LightArmor.class,Shield.class));
 
         //TODO: Create an abstract of Simple and Martial Weapons.
-        this.weaponProficiencyList = new Class[]{
-                SimpleWeapon.class,
-                MartialWeapons.class
-        };
+        this.weaponProficiencyList = new HashSet<>(Arrays.asList(SimpleWeapon.class,MartialWeapons.class));
     }
 
     @Override
@@ -40,7 +35,8 @@ public class Barbarian extends ClassRole {
 
 
     public void unArmored_Defense(PlayerCharacter person) {
-        if(Util.gearisInstance(person.getGearEquipment().get(EnumContainer.GearSlot.ARMOR), Naked.class)){
+        if(Util.gearisInstance(person.getGear_Equipment().getGearEquipment().get(EnumContainer.GearSlot.ARMOR),
+                Naked.class)){
             person.setArmor_Amount(person.getArmor_Amount() + person.getRace().getCons_Modifier());
         }
     }
