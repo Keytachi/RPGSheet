@@ -123,8 +123,6 @@ public class PlayerCharacter {
         updatePlayer();
     }
 
-
-
     public void displayGear(){
         Set<EnumContainer.GearSlot> slots = this.gear_Equipment.getGearEquipment().keySet();
 
