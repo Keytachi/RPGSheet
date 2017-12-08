@@ -17,6 +17,19 @@ public class Acolyte extends Personality {
         }};
     }
 
+    public Acolyte(int personalityRoll, int idealRoll, int bondRoll, int flawRoll){
+        setPersonality();
+        setIdeal();
+        setBond();
+        setFlaw();
+        this.traits = new HashMap<String,String>(){{
+            traits.put("Personality", getTrait(personalityTraits,personalityRoll));
+            traits.put("Ideal", getTrait(idealTraits,idealRoll));
+            traits.put("Bond", getTrait(bondTraits,bondRoll));
+            traits.put("Flaw", getTrait(flawTraits,flawRoll));
+        }};
+    }
+
     private void setPersonality(){
         this.personalityTraits = new HashMap<Integer,String>(){
             {

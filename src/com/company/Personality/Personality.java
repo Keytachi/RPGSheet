@@ -2,10 +2,8 @@ package com.company.Personality;
 
 import com.company.Util.dice;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
+
 
 public abstract class Personality {
 
@@ -20,5 +18,14 @@ public abstract class Personality {
     protected String getTrait(Map<Integer,String> trait){
         dice diceRoller = new dice(trait.size());
         return trait.get(diceRoller.roll());
+    }
+
+    protected String getTrait(Map<Integer, String> trait, int roll) {
+        try {
+            return trait.get(roll);
+        }catch(IndexOutOfBoundsException e){
+            System.out.println("Please enter a number that is in between 1 - " +  trait.size());
+        }
+        return "None";
     }
 }
