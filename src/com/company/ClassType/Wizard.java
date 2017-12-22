@@ -1,8 +1,5 @@
 package com.company.ClassType;
 
-import com.company.Equipment.Armor.Armor;
-import com.company.PlayerCharacter;
-import com.company.RaceType.Race;
 import com.company.Util.EnumContainer;
 import com.company.Util.dice;
 

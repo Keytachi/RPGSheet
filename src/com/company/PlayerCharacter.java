@@ -1,18 +1,15 @@
 package com.company;
 
 import com.company.ClassType.*;
-import com.company.Equipment.Armor.Armor;
-import com.company.Equipment.*;
-import com.company.Equipment.Armor.Naked;
-import com.company.Equipment.Armor.Shield;
-import com.company.Equipment.Weapon.SmipleWeapons.UnarmWeapon.Unarm;
+import com.company.Items.Equipment.Armor.Armor;
+import com.company.Items.Equipment.*;
+import com.company.Items.Equipment.Armor.Shield;
+import com.company.Items.Equipment.Weapon.Weapon;
 import com.company.RaceType.Race;
 import com.company.Util.EnumContainer;
 import com.company.Util.EnumContainer.GearSlot;
 import com.company.Util.Util;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 public class PlayerCharacter {
@@ -100,35 +97,16 @@ public class PlayerCharacter {
     }
 
     private void setArmor_Amount(){
-        for(Enum weaponSlot : EnumContainer.weapon_Slot){
-            if(Util.gearisInstance(gear_Equipment.getGearEquipment().get(weaponSlot),Shield.class)){
-                this.armor_Amount = BASE_ARMOR +
-                        ((Armor) gear_Equipment.getGearEquipment().get(GearSlot.ARMOR)).get_Armor(this) +
-                        ((Armor) gear_Equipment.getGearEquipment().get(weaponSlot)).get_Armor() ;
-                break;
-            }
-            else{
-                this.armor_Amount = BASE_ARMOR +
-                        ((Armor) gear_Equipment.getGearEquipment().get(GearSlot.ARMOR)).get_Armor(this);
-            }
-        }
+
     }
 
     public void setArmor_Amount(int armor_Amount){
         this.armor_Amount = armor_Amount;
     }
 
-    public void equip(Equipment gear, GearSlot slot){
-        this.gear_Equipment.equip(this,gear,slot);
-        updatePlayer();
-    }
 
     public void displayGear(){
-        Set<EnumContainer.GearSlot> slots = this.gear_Equipment.getGearEquipment().keySet();
 
-        for(GearSlot equipment_Slot: slots){
-            System.out.println(equipment_Slot + " : " + gear_Equipment.getGearEquipment().get(equipment_Slot));
-        }
     }
 
 
@@ -136,6 +114,16 @@ public class PlayerCharacter {
         setArmor_Amount();
         if(role instanceof Barbarian){
             ((Barbarian)role).unArmored_Defense(this);
+        }
+    }
+
+    public void equip(Abstract_Equipment equipment){
+        //gear_Equipment.equip(equipment);
+        if(equipment instanceof Weapon){
+            gear_Equipment.equip((Weapon)equipment);
+        }
+        else if(equipment instanceof Armor){
+            gear_Equipment.equip((Armor)equipment);
         }
     }
 }

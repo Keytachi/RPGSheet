@@ -1,7 +1,5 @@
 package com.company.Util;
 
-import com.company.Equipment.Weapon.Weapon;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;

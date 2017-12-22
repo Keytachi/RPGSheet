@@ -1,10 +1,8 @@
 package com.company.ClassType;
-import com.company.Equipment.Armor.Light_Armor.LightArmor;
-import com.company.Equipment.Armor.Medium_Armor.MediumArmor;
-import com.company.Equipment.Armor.Naked;
-import com.company.Equipment.Armor.Shield;
-import com.company.Equipment.Weapon.MartialWeapons.MartialWeapons;
-import com.company.Equipment.Weapon.SmipleWeapons.SimpleWeapon;
+import com.company.Items.Equipment.Armor.Light_Armor.LightArmor;
+import com.company.Items.Equipment.Armor.Medium_Armor.MediumArmor;
+import com.company.Items.Equipment.Armor.Naked;
+import com.company.Items.Equipment.Armor.Shield;
 import com.company.PlayerCharacter;
 import com.company.Util.EnumContainer;
 import com.company.Util.Util;
@@ -24,8 +22,6 @@ public class Barbarian extends ClassRole {
 
         this.armorProficiencyList = new HashSet<>(Arrays.asList(MediumArmor.class,LightArmor.class,Shield.class));
 
-        //TODO: Create an abstract of Simple and Martial Weapons.
-        this.weaponProficiencyList = new HashSet<>(Arrays.asList(SimpleWeapon.class,MartialWeapons.class));
     }
 
     @Override
@@ -35,7 +31,7 @@ public class Barbarian extends ClassRole {
 
 
     public void unArmored_Defense(PlayerCharacter person) {
-        if(Util.gearisInstance(person.getGear_Equipment().getGearEquipment().get(EnumContainer.GearSlot.ARMOR),
+        if(Util.gearisInstance(person.getGear_Equipment().getArmorEquipment().get(EnumContainer.GearSlot.ARMOR),
                 Naked.class)){
             person.setArmor_Amount(person.getArmor_Amount() + person.getRace().getCons_Modifier());
         }

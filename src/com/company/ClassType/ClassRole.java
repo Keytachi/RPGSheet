@@ -1,15 +1,9 @@
 package com.company.ClassType;
 
-import com.company.Equipment.Armor.Armor;
-import com.company.Equipment.Equipment;
-import com.company.Equipment.Weapon.Weapon;
-import com.company.PlayerCharacter;
-import com.company.RaceType.Race;
 import com.company.Util.EnumContainer;
 import com.company.Util.Util;
 import com.company.Util.dice;
 
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 

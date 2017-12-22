@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.Items.Equipment.Item;
+
 import java.util.ArrayList;
 
 public class Bag {
