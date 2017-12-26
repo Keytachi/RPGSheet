@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.Items.Equipment.Item;
 
+import java.security.cert.Extension;
 import java.util.ArrayList;
 
 public class Bag {
@@ -37,7 +38,7 @@ public class Bag {
         }
     }
 
-    private void setMaxBagWeight(int maxBagWeight){
+    public void setMaxBagWeight(int maxBagWeight){
         this.maxBagWeight = maxBagWeight;
     }
 
@@ -46,13 +47,8 @@ public class Bag {
     }
 
 
-    public void storeItem(PlayerCharacter person, Item item){
-        setMaxBagWeight(person.getMax_BagWeight() * 15);
-        if(item.getWeight() + getWeight_ofBag() > maxBagWeight || inventoryBag.size() > maxBagSpace){
-            System.out.printf("%s could not store %s in their bag\n", person.getRace().getName(), item.getName());
-        }else{
-            inventoryBag.add(item);
-        }
+    public void storeItem(Item item){
+                inventoryBag.add(item);
     }
 
     public int getWeight_ofBag(){

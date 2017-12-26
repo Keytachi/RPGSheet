@@ -2,6 +2,8 @@ package com.company.RaceType;
 import com.company.Entity;
 import com.company.Util.dice;
 
+import java.util.ArrayList;
+
 public abstract class Race extends Entity {
 
     private String name;
@@ -16,8 +18,8 @@ public abstract class Race extends Entity {
     protected int walking_Speed;
 
 
-
-    public Race(int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, String name) {
+    public Race(int strength, int dexterity, int constitution, int intelligence, int wisdom,
+                int charisma, String name) {
         super(strength, dexterity, constitution, intelligence, wisdom, charisma);
         this.name = name;
     }
@@ -29,6 +31,8 @@ public abstract class Race extends Entity {
         this.name = name;
         this.walking_Speed = 30;
     }
+
+
 
     public String getName() {
         return name;

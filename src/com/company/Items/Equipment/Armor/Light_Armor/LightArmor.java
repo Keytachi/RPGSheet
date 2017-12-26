@@ -1,8 +1,7 @@
 package com.company.Items.Equipment.Armor.Light_Armor;
 
 import com.company.Items.Equipment.Armor.Abstract_Armor;
-import com.company.Items.Equipment.Armor.Armor;
-import com.company.PlayerCharacter;
+import com.company.Character.PlayerCharacter;
 
 public abstract class LightArmor extends Abstract_Armor {
 

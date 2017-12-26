@@ -3,7 +3,7 @@ import com.company.Items.Equipment.Armor.Light_Armor.LightArmor;
 import com.company.Items.Equipment.Armor.Medium_Armor.MediumArmor;
 import com.company.Items.Equipment.Armor.Naked;
 import com.company.Items.Equipment.Armor.Shield;
-import com.company.PlayerCharacter;
+import com.company.Character.PlayerCharacter;
 import com.company.Util.EnumContainer;
 import com.company.Util.Util;
 import com.company.Util.dice;
@@ -33,7 +33,6 @@ public class Barbarian extends ClassRole {
     public void unArmored_Defense(PlayerCharacter person) {
         if(Util.gearisInstance(person.getGear_Equipment().getArmorEquipment().get(EnumContainer.GearSlot.ARMOR),
                 Naked.class)){
-            person.setArmor_Amount(person.getArmor_Amount() + person.getRace().getCons_Modifier());
         }
     }
 

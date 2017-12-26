@@ -1,7 +1,17 @@
 package com.company.Items.Equipment.Weapon;
 
 import com.company.Items.Equipment.Item;
+import com.company.Character.PlayerCharacter;
+import com.company.Util.EnumContainer;
 import com.company.Util.dice;
+
+import com.company.Items.Equipment.Weapon.Weapon_Enum.Hand_Req;
+import com.company.Items.Equipment.Weapon.Weapon_Enum.Attack_Type;
+import com.company.Items.Equipment.Weapon.Weapon_Enum.Weapon_Type;
+import com.company.Items.Equipment.Weapon.Weapon_Enum.Properties;
+import com.company.Items.Equipment.Weapon.Weapon_Enum.Weapon_Category;
+
+import java.util.List;
 
 /**
  * Created by ble on 12/22/2017.
@@ -10,19 +20,16 @@ import com.company.Util.dice;
 public abstract class Abstract_Weapon extends Item implements Weapon {
 
     protected int damage;
-    protected int cost;
-    protected int weight;
     protected boolean equipped;
+    protected List<Properties> specialty;
     protected Attack_Type attackType;
-    protected Weapon_Categories weaponCategories;
+    protected Weapon_Category weaponCategories;
     protected Weapon_Type weaponType;
     protected Hand_Req handReq;
 
 
     public Abstract_Weapon(int weight, int cost, int damage, String name) {
-        super(name);
-        this.weight = weight;
-        this.cost = cost;
+        super(name,weight,cost, false, true);
         this.damage = damage;
         this.equipped = false;
     }
@@ -36,9 +43,28 @@ public abstract class Abstract_Weapon extends Item implements Weapon {
         return damage;
     }
 
-    @Override
+    public int attack(PlayerCharacter host){
+
+        for(Properties special : specialty)
+        switch(special){
+            case FINESSES:
+                return dice.roll(damage) + host.getRace().getDex_Modifier();
+            case LIGHT:
+                for(EnumContainer.GearSlot hand : EnumContainer.weapon_Slot) {
+                    if ((host.getGear_Equipment().getWeaponEquipment().get(hand).getProperties().equals(Properties.LIGHT))){
+                        host.getGear_Equipment().getWeaponEquipment().get(hand).attack();
+                    }
+                }
+                break;
+            case VERSATILE:
+                return dice.roll(Properties.VERSATILE.modify);
+
+        }
+        return attack();
+    }
+
     public int attack(){
-        return dice.roll(getDamage());
+        return dice.roll(damage);
     }
 
     @Override
@@ -52,7 +78,7 @@ public abstract class Abstract_Weapon extends Item implements Weapon {
     }
 
     @Override
-    public Weapon_Categories getCategories() {
+    public Weapon_Category getCategories() {
         return weaponCategories;
     }
 
@@ -67,12 +93,7 @@ public abstract class Abstract_Weapon extends Item implements Weapon {
     }
 
     @Override
-    public boolean isEquipped(){
-        return this.equipped;
-    }
-
-    @Override
-    public void setEquipped(boolean equipped){
-        this.equipped = equipped;
+    public List<Properties> getProperties() {
+        return specialty;
     }
 }

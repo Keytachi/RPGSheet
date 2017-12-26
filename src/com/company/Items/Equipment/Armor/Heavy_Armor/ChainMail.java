@@ -1,6 +1,6 @@
 package com.company.Items.Equipment.Armor.Heavy_Armor;
 
-import com.company.PlayerCharacter;
+import com.company.Character.PlayerCharacter;
 
 public class ChainMail extends HeavyArmor {
     public ChainMail(String name, int cost, int weight, int armor) {

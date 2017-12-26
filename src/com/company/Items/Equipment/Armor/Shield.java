@@ -1,16 +1,20 @@
 package com.company.Items.Equipment.Armor;
 
-import com.company.Items.Equipment.Weapon.Attack_Type;
-import com.company.Items.Equipment.Weapon.Hand_Req;
 import com.company.Items.Equipment.Weapon.Weapon;
-import com.company.Items.Equipment.Weapon.Weapon_Categories;
-import com.company.Items.Equipment.Weapon.Weapon_Type;
+import com.company.Items.Equipment.Weapon.Weapon_Enum;
+import com.company.Items.Equipment.Weapon.Weapon_Enum.Hand_Req;
+import com.company.Items.Equipment.Weapon.Weapon_Enum.Attack_Type;
+import com.company.Items.Equipment.Weapon.Weapon_Enum.Weapon_Type;
+import com.company.Items.Equipment.Weapon.Weapon_Enum.Weapon_Category;
+import com.company.Items.Equipment.Weapon.Weapon_Enum.Properties;
+
+import java.util.List;
 
 public class Shield extends Abstract_Armor implements Weapon {
 
+    private List<Properties> specialty;
     public Shield(String name, int cost, int weight, int armor) {
         super(armor, cost, weight, name);
-
     }
 
     public Shield(){
@@ -23,12 +27,11 @@ public class Shield extends Abstract_Armor implements Weapon {
     }
 
     @Override
-    public Weapon_Categories getCategories() {
-        return Weapon_Categories.MARTIAL;
+    public Weapon_Category getCategories() {
+        return Weapon_Category.MARTIAL;
     }
-
     @Override
-    public Attack_Type getAttackType() {
+    public Weapon_Enum.Attack_Type getAttackType() {
         return Attack_Type.BLUDGEONING;
     }
 
@@ -41,4 +44,10 @@ public class Shield extends Abstract_Armor implements Weapon {
     public Hand_Req getHandReq() {
         return Hand_Req.ONEHAND;
     }
+
+    @Override
+    public List<Weapon_Enum.Properties> getProperties(){
+        return specialty;
+    }
+
 }

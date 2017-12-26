@@ -12,7 +12,6 @@ public abstract class ClassRole{
     protected Set<Class> armorProficiencyList;
     protected Set<Class> weaponProficiencyList;
 
-    protected String[] choices = new String[]{};
 
     protected dice hitDie;
     protected int proficiency;

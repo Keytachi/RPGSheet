@@ -1,5 +1,7 @@
 package com.company.RaceType;
 
+
+
 public class Human extends Race {
 
 

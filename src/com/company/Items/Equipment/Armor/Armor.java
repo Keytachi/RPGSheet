@@ -1,7 +1,7 @@
 package com.company.Items.Equipment.Armor;
 
 import com.company.Items.Equipment.Abstract_Equipment;
-import com.company.PlayerCharacter;
+import com.company.Character.PlayerCharacter;
 
 public interface Armor extends Abstract_Equipment {
 
