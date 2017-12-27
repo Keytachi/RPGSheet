@@ -1,6 +1,7 @@
 package com.company.Character;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ble on 12/26/2017.
@@ -8,14 +9,16 @@ import java.util.ArrayList;
 
 public class Health {
 
-    private ArrayList<Integer> tempHealth;
+    private List<Integer> tempHealth;
 
     private int current_Health;
     private int maximum_Health;
+    private int final_Maximum_Health;
 
     public Health(int maximum_Health){
         this.maximum_Health = maximum_Health;
         this.current_Health = this.maximum_Health;
+        tempHealth = new ArrayList<>();
     }
 
     public void addAdditiveHealth(int health){
@@ -23,7 +26,7 @@ public class Health {
     }
 
     public void removeAdditiveHealth(int health){
-        tempHealth.remove(health);
+        tempHealth.remove(new Integer(tempHealth.remove(health)));
     }
 
     public int getCurrent_Health() {
@@ -32,8 +35,8 @@ public class Health {
 
     public void setCurrent_Health(int current_Health) {
         this.current_Health += current_Health;
-        if(this.current_Health > this.maximum_Health){
-            this.current_Health = this.maximum_Health;
+        if(this.current_Health > this.final_Maximum_Health){
+            this.current_Health = this.final_Maximum_Health;
         }
     }
 
@@ -46,7 +49,8 @@ public class Health {
     }
 
     public int calculateMaximum_Health(){
-        tempHealth.forEach(x -> this.maximum_Health += x.intValue());
-        return maximum_Health;
+        this.final_Maximum_Health = maximum_Health;
+        tempHealth.forEach(x -> this.final_Maximum_Health += x.intValue());
+        return final_Maximum_Health;
     }
 }
