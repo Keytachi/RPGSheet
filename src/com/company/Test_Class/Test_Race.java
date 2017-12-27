@@ -1,5 +1,7 @@
 package com.company.Test_Class;
 
+import com.company.RaceType.Stats.BaseStats;
+import com.company.RaceType.Stats.ModifierStats;
 import com.company.Util.dice;
 
 import java.util.ArrayList;
@@ -9,9 +11,11 @@ import java.util.List;
  * Created by ble on 12/26/2017.
  */
 
-public abstract class Test_Race {
+public class Test_Race {
+
     protected List<BaseStats> baseStats = new ArrayList<>();
     protected List<ModifierStats> modifyStats = new ArrayList<>();
+
 
 
     protected String[] attributeList =  {"Strength", "Dexterity", "Constitution", "Intelligence",
@@ -33,6 +37,7 @@ public abstract class Test_Race {
                 dice.rollStats(6,4), dice.rollStats(6,4),
                 dice.rollStats(6,4),dice.rollStats(6,4));
     }
+
 
     public List<BaseStats> getBaseStats() {
         return baseStats;

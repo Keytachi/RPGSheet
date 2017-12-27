@@ -1,5 +1,6 @@
 package com.company.Test_Class;
 
+import com.company.RaceType.Stats.BonusStats;
 import com.company.Util.dice;
 
 /**
@@ -21,7 +22,7 @@ public class Test_Human extends Test_Race {
 
     public void specialty(){
         for(int i = 0; i < attributeList.length; i++){
-            baseStats.get(i).additiveBonus.add(new BonusStats(1));
+            baseStats.get(i).tempStats.add(new BonusStats(1));
             baseStats.get(i).calculateFinalStats();
             modifyStats.get(i).calculateFinalModifier(baseStats.get(i));
         }

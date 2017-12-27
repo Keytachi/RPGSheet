@@ -1,104 +1,84 @@
 package com.company.RaceType;
-import com.company.Entity;
+
+import com.company.RaceType.Stats.AttributeEnum.Attribute;
+import com.company.RaceType.Stats.AttributeEnum.AttributeModify;
+import com.company.RaceType.Stats.BaseStats;
+import com.company.RaceType.Stats.ModifierStats;
 import com.company.Util.dice;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
-public abstract class Race extends Entity {
+public abstract class Race {
 
-    private String name;
 
-    protected int str_Modifier;
-    protected int dex_Modifier;
-    protected int cons_Modifier;
-    protected int int_Modifier;
-    protected int wis_Modifier;
-    protected int char_Modifier;
-
+    HashMap<Attribute,BaseStats> attributeMap;
+    HashMap<AttributeModify,ModifierStats> modifyMap;
     protected int walking_Speed;
 
 
-    public Race(int strength, int dexterity, int constitution, int intelligence, int wisdom,
-                int charisma, String name) {
-        super(strength, dexterity, constitution, intelligence, wisdom, charisma);
-        this.name = name;
+    public Race(int str, int dex, int con, int inte, int wis, int chari){
+        this.attributeMap = new HashMap<Attribute,BaseStats>(){
+            {
+                put(Attribute.Strength, new BaseStats(str));
+                put(Attribute.Dexterity, new BaseStats(dex));
+                put(Attribute.Constitution, new BaseStats(con));
+                put(Attribute.Intelligence, new BaseStats(inte));
+                put(Attribute.Wisdom, new BaseStats(wis));
+                put(Attribute.Charisma, new BaseStats(chari));
+            }
+        };
+
+        this.modifyMap = new HashMap<AttributeModify,ModifierStats>(){
+            {
+                put(AttributeModify.Str_Modifier, new ModifierStats(attributeMap.get(Attribute.Strength)));
+                put(AttributeModify.Dex_Modifier, new ModifierStats(attributeMap.get(Attribute.Dexterity)));
+                put(AttributeModify.Con_Modifier, new ModifierStats(attributeMap.get(Attribute.Constitution)));
+                put(AttributeModify.Int_Modifier, new ModifierStats(attributeMap.get(Attribute.Intelligence)));
+                put(AttributeModify.Wis_Modifier, new ModifierStats(attributeMap.get(Attribute.Wisdom)));
+                put(AttributeModify.Cha_Modifier, new ModifierStats(attributeMap.get(Attribute.Charisma)));
+            }
+        };
     }
 
-    public Race(String name){
-        super(dice.rollStats(6,4),dice.rollStats(6,4),
-                dice.rollStats(6,4),dice.rollStats(6,4),
-                dice.rollStats(6,4), dice.rollStats(6,4));
-        this.name = name;
-        this.walking_Speed = 30;
+    public HashMap<Attribute, BaseStats> getAttributeMap() {
+        return attributeMap;
+    }
+
+    public HashMap<AttributeModify, ModifierStats> getModifyMap() {
+        return modifyMap;
+    }
+
+    /**
+     * Use this for only when looking for the specific stats.
+     */
+    public BaseStats getBaseStats(Attribute attribute){
+        return this.attributeMap.get(attribute);
+    }
+    public ModifierStats getModifierStats(AttributeModify modifier){
+        return this.modifyMap.get(modifier);
     }
 
 
-
-    public String getName() {
-        return name;
+    public void displayStats(){
+        System.out.println("+++++++++++++++++++++++++++++++");
+        System.out.println("Character Stats");
+        System.out.println("+++++++++++++++++++++++++++++++");
+        for(Attribute attribute : attributeMap.keySet()){
+            System.out.println(attribute + " : " + attributeMap.get(attribute).getFinalStats());
+        }
+        for(AttributeModify modify : modifyMap.keySet()){
+            System.out.println(modify + " : " + modifyMap.get(modify).getFinalModifier());
+        }
+        System.out.println(" ");
     }
 
-    private int setModifier(int modifier){
-        return ((modifier-10)/2);
+    public int getWalking_Speed() {
+        return walking_Speed;
+    }
+
+    public void setWalking_Speed(int walking_Speed) {
+        this.walking_Speed = walking_Speed;
     }
 
     public abstract void specialty();
-
-    public void setModify(){
-        this.str_Modifier = setModifier(this.strength);
-        this.dex_Modifier = setModifier(this.dexterity);
-        this.cons_Modifier = setModifier(this.constitution);
-        this.int_Modifier = setModifier(this.intelligence);
-        this.wis_Modifier = setModifier(this.wis_Modifier);
-        this.char_Modifier = setModifier(this.char_Modifier);
-    }
-
-    public int getStr_Modifier() {
-        return str_Modifier;
-    }
-    public void setStr_Modifier(int str_Modifier) {
-        this.str_Modifier = str_Modifier;
-    }
-
-    public int getDex_Modifier() {
-        return dex_Modifier;
-    }
-    public void setDex_Modifier(int dex_Modifier) {
-        this.dex_Modifier = dex_Modifier;
-    }
-
-    public int getCons_Modifier() {
-        return cons_Modifier;
-    }
-    public void setCons_Modifier(int cons_Modifier) {
-        this.cons_Modifier = cons_Modifier;
-    }
-
-    public int getInt_Modifier() {
-        return int_Modifier;
-    }
-    public void setInt_Modifier(int int_Modifier) {
-        this.int_Modifier = int_Modifier;
-    }
-
-    public int getWis_Modifier() {
-        return wis_Modifier;
-    }
-    public void setWis_Modifier(int wis_Modifier) {
-        this.wis_Modifier = wis_Modifier;
-    }
-
-    public int getChar_Modifier() {
-        return char_Modifier;
-    }
-    public void setChar_Modifier(int char_Modifier) {
-        this.char_Modifier = char_Modifier;
-    }
-
-    public int get_WalkingSpeed(){
-        return this.walking_Speed;
-    }
-    public void set_WalkingSpeed(int walking_Speed){
-        this.walking_Speed = walking_Speed;
-    }
 }

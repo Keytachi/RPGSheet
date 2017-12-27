@@ -1,9 +1,6 @@
 package com.company.IO;
 
-import com.company.RaceType.Race;
-
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 public class IO {

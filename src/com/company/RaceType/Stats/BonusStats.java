@@ -1,4 +1,4 @@
-package com.company.Test_Class;
+package com.company.RaceType.Stats;
 
 /**
  * Created by ble on 12/26/2017.

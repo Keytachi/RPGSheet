@@ -1,42 +1,32 @@
 package com.company;
 
 
+import com.company.Character.PlayerCharacter;
 import com.company.ClassType.Barbarian;
 import com.company.Items.Equipment.Armor.Heavy_Armor.ChainMail;
 import com.company.Items.Equipment.Armor.Shield;
-import com.company.Items.Equipment.Weapon.Simple.SimpleTwoHand.GreatClub;
 import com.company.RaceType.Human;
-import com.company.Test_Class.Test_Elf;
-import com.company.Test_Class.Test_HighElf;
-import com.company.Test_Class.Test_Human;
-import com.company.Test_Class.Test_Race;
 
 public class Main {
 
     public static void main(String[] args) {
-        /**PlayerCharacter brandon = new PlayerCharacter(new Human("Brandon"),
+        PlayerCharacter brandon = new PlayerCharacter("Brandon",new Human(),
                 new Barbarian(),new Bag("Bag",32));
-        ChainMail testHeavy = new ChainMail();
-        Shield testShield = new Shield();
 
-        brandon.equip(testHeavy);
-        brandon.equip(testShield);
-        System.out.println("");
-        brandon.getInventoryBag().displayItemsinBag();
+        brandon.get_Race().displayStats();
+        System.out.println(brandon.get_Armor().getFinal_Armor());
 
-        brandon.displayGear();
-        GreatClub test2HClub = new GreatClub();
+        brandon.equip(new ChainMail());
+        brandon.equip(new Shield());
+        System.out.println(brandon.get_Armor().getFinal_Armor());
 
-        brandon.equip(test2HClub);
-        brandon.displayGear();
-        System.out.println("");
-        brandon.getInventoryBag().displayItemsinBag();
-        **/
-
-        //Test_Race tester = new Test_Human();
+        /**Race tester = new Race(17,18,16,19,16,19);
         Test_Race tester2 = new Test_HighElf(17,18,16,19,16,19);
         //tester.displayStats();
         tester2.displayStats();
+
+        tester.displayStats();
+        **/
     }
 
 }

@@ -1,4 +1,4 @@
-package com.company.Test_Class;
+package com.company.RaceType.Stats;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class BaseStats {
 
-    public ArrayList<BonusStats> additiveBonus;
+    public ArrayList<BonusStats> tempStats;
 
     private int baseStats;
     private String name;
@@ -18,7 +18,13 @@ public class BaseStats {
     public BaseStats(int baseStats, String name) {
         this.baseStats = baseStats;
         this.name = name;
-        this.additiveBonus = new ArrayList<>();
+        this.tempStats = new ArrayList<>();
+        calculateFinalStats();
+    }
+
+    public BaseStats(int baseStats){
+        this.baseStats = baseStats;
+        this.tempStats = new ArrayList<>();
         calculateFinalStats();
     }
 
@@ -43,16 +49,18 @@ public class BaseStats {
     }
 
     public void addAdditiveBonus(BonusStats bonusStats){
-        additiveBonus.add(bonusStats);
+        tempStats.add(bonusStats);
     }
 
     public void removeAdditiveBonus(BonusStats bonusStats){
-        additiveBonus.remove(bonusStats);
+        tempStats.remove(bonusStats);
     }
 
     public int calculateFinalStats(){
         this.finalStats = baseStats;
-        this.additiveBonus.forEach(x -> this.finalStats += x.getBonusStats());
+        this.tempStats.forEach(x -> this.finalStats += x.getBonusStats());
         return this.finalStats;
     }
 }
+
+

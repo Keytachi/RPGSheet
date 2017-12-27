@@ -1,23 +1,28 @@
 package com.company.RaceType;
 
 
+import com.company.RaceType.Stats.AttributeEnum.Attribute;
+import com.company.Util.dice;
 
 public class Human extends Race {
 
 
-    public Human(String name){
-        super(name);
+    public Human(int str, int dex, int con, int inte, int wis, int chari){
+        super(str,dex,con,inte,wis,chari);
         specialty();
-        setModify();
+    }
+
+    public Human(){
+        this(dice.rollStats(6,4), dice.rollStats(6,4),
+                dice.rollStats(6,4), dice.rollStats(6,4),
+                dice.rollStats(6,4),dice.rollStats(6,4));
     }
 
     @Override
     public void specialty(){
-        this.setStrength(this.strength+1);
-        this.setDexterity(this.dexterity+1);
-        this.setConstitution(this.constitution+1);
-        this.setIntelligence(this.intelligence+1);
-        this.setWisdom(this.wisdom+1);
-        this.setCharisma(this.charisma+1);
+        for(Attribute attribute : attributeMap.keySet()){
+            attributeMap.get(attribute).setBaseStats(1);
+            attributeMap.get(attribute).calculateFinalStats();
+        }
     }
 }

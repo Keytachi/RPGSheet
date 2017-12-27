@@ -82,10 +82,10 @@ public class EquipmentSystem {
     public void remove_Gear(Map equipmentSlot, GearSlot location, PlayerCharacter character){
         if(equipmentSlot.get(location) instanceof Armor) {
             if (!(equipmentSlot.get(location) instanceof Naked)) {
-                character.getInventoryBag().storeItem((Item) equipmentSlot.get(location));
+                character.get_InventoryBag().storeItem((Item) equipmentSlot.get(location));
             }
         }else if(!(equipmentSlot.get(location) instanceof Unarm)){
-            character.getInventoryBag().storeItem((Item) equipmentSlot.get(location));
+            character.get_InventoryBag().storeItem((Item) equipmentSlot.get(location));
         }
     }
 }

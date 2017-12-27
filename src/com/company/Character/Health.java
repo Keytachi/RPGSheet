@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Health {
 
-    private ArrayList<Integer> additiveHealth;
+    private ArrayList<Integer> tempHealth;
 
     private int current_Health;
     private int maximum_Health;
@@ -19,11 +19,11 @@ public class Health {
     }
 
     public void addAdditiveHealth(int health){
-        additiveHealth.add(health);
+        tempHealth.add(health);
     }
 
     public void removeAdditiveHealth(int health){
-        additiveHealth.remove(health);
+        tempHealth.remove(health);
     }
 
     public int getCurrent_Health() {
@@ -46,7 +46,7 @@ public class Health {
     }
 
     public int calculateMaximum_Health(){
-        additiveHealth.forEach(x -> this.maximum_Health += x.intValue());
+        tempHealth.forEach(x -> this.maximum_Health += x.intValue());
         return maximum_Health;
     }
 }

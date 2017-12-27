@@ -5,6 +5,8 @@ import com.company.Character.PlayerCharacter;
 import com.company.Util.EnumContainer;
 import com.company.Util.dice;
 
+import com.company.RaceType.Stats.AttributeEnum.AttributeModify;
+
 import com.company.Items.Equipment.Weapon.Weapon_Enum.Hand_Req;
 import com.company.Items.Equipment.Weapon.Weapon_Enum.Attack_Type;
 import com.company.Items.Equipment.Weapon.Weapon_Enum.Weapon_Type;
@@ -48,7 +50,7 @@ public abstract class Abstract_Weapon extends Item implements Weapon {
         for(Properties special : specialty)
         switch(special){
             case FINESSES:
-                return dice.roll(damage) + host.getRace().getDex_Modifier();
+                return dice.roll(damage) + host.get_Race().getModifierStats(AttributeModify.Dex_Modifier).getFinalModifier();
             case LIGHT:
                 for(EnumContainer.GearSlot hand : EnumContainer.weapon_Slot) {
                     if ((host.getGear_Equipment().getWeaponEquipment().get(hand).getProperties().equals(Properties.LIGHT))){

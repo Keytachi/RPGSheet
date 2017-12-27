@@ -1,4 +1,4 @@
-package com.company.Test_Class;
+package com.company.RaceType.Stats;
 
 /**
  * Created by ble on 12/26/2017.
@@ -11,6 +11,10 @@ public class ModifierStats {
 
     public ModifierStats(String name, BaseStats baseStats) {
         this.name = name;
+        calculateFinalModifier(baseStats);
+    }
+
+    public ModifierStats(BaseStats baseStats){
         calculateFinalModifier(baseStats);
     }
 
