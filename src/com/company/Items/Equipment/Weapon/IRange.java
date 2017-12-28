@@ -1,12 +1,13 @@
 package com.company.Items.Equipment.Weapon;
 
 import com.company.Character.PlayerCharacter;
+import com.company.Items.Equipment.Weapon.Weapon_EnumContainer.Amunition_Type;
 
 /**
  * Created by ble on 12/26/2017.
  */
 
-public interface Range_Weapon {
+public interface IRange {
 
 
     int get_Distance();

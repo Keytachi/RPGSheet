@@ -1,15 +1,15 @@
 package com.company.Items.Equipment.Weapon.Simple.SimpleTwoHand;
 
-import com.company.Items.Equipment.Weapon.Simple.Abstract_SimpleWeapon;
-import com.company.Items.Equipment.Weapon.Weapon_Enum.Hand_Req;
-import com.company.Items.Equipment.Weapon.Weapon_Enum.Attack_Type;
-import com.company.Items.Equipment.Weapon.Weapon_Enum.Weapon_Type;
-import com.company.Items.Equipment.Weapon.Weapon_Enum.Properties;
+import com.company.Items.Equipment.Weapon.Simple.ASimpleWeapon;
+import com.company.Items.Equipment.Weapon.Weapon_EnumContainer.Hand_Req;
+import com.company.Items.Equipment.Weapon.Weapon_EnumContainer.Attack_Type;
+import com.company.Items.Equipment.Weapon.Weapon_EnumContainer.Weapon_Type;
+
 /**
  * Created by ble on 12/26/2017.
  */
 
-public class GreatClub extends Abstract_SimpleWeapon {
+public class GreatClub extends ASimpleWeapon {
 
     public GreatClub(int weight, int cost, int damage, String name) {
         super(weight, cost, damage, name);

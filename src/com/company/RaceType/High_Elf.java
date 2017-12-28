@@ -1,6 +1,7 @@
 package com.company.RaceType;
 
 import com.company.ClassType.ClassRole;
+import com.company.RaceType.Elf;
 import com.company.RaceType.Stats.AttributeEnum;
 import com.company.Util.dice;
 

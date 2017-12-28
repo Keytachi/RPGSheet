@@ -4,11 +4,10 @@ import com.company.Bag;
 import com.company.ClassType.*;
 import com.company.Items.Equipment.Armor.Armor;
 import com.company.Items.Equipment.*;
-import com.company.Items.Equipment.Weapon.Weapon;
+import com.company.Items.Equipment.Weapon.IWeapon;
 import com.company.RaceType.Race;
-import com.company.Util.EnumContainer;
-import com.company.Util.EnumContainer.GearSlot;
 import com.company.RaceType.Stats.AttributeEnum.Attribute;
+import com.company.Util.EnumContainer;
 
 public class PlayerCharacter {
 
@@ -73,17 +72,6 @@ public class PlayerCharacter {
     }
 
 
-
-    public void displayGear(){
-        System.out.println("Currently equip on " + this.name);
-        for(GearSlot hand : EnumContainer.weapon_Slot){
-            System.out.println(hand + " : " + gear_Equipment.getWeaponEquipment().get(hand));
-        }
-        System.out.println(GearSlot.ARMOR + " : " +
-                gear_Equipment.getArmorEquipment().get(GearSlot.ARMOR));
-
-    }
-
     public void updatePlayer(){
         inventoryBag.setMaxBagWeight(getMax_BagWeight() * 15);
         updateArmor();
@@ -96,13 +84,24 @@ public class PlayerCharacter {
         armor.updateArmor(this);
     }
 
-    public void equip(Abstract_Equipment equipment){
-        if(equipment instanceof Weapon){
-            gear_Equipment.equip((Weapon)equipment, this);
+    public void equip(IWeapon equipment, EnumContainer.GearSlot slot){
+            try {
+                gear_Equipment.equip( equipment, slot, this);
+            }catch(NotCorrectSlotException e){
+                System.out.println(e.getEquipment() + " can not be equipped on " + e.getSlot());
+            }
+    }
+    public void equip(IEquipment equipment){
+        if(equipment instanceof IWeapon){
+            gear_Equipment.equip((IWeapon)equipment, this);
         }
         else if(equipment instanceof Armor){
             gear_Equipment.equip((Armor)equipment, this);
         }
         updatePlayer();
+    }
+
+    public String getName(){
+        return this.name;
     }
 }

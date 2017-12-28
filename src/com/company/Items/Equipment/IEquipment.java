@@ -1,6 +1,6 @@
 package com.company.Items.Equipment;
 
-public interface Abstract_Equipment {
+public interface IEquipment {
 
     int getCost();
     int getWeight();

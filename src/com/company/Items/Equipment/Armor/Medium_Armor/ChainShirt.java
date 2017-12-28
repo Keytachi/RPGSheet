@@ -1,6 +1,6 @@
 package com.company.Items.Equipment.Armor.Medium_Armor;
 
-public class ChainShirt extends MediumArmor {
+public class ChainShirt extends AMedium {
     public ChainShirt(String name, int cost, int weight, int armor) {
         super(name, cost, weight, armor);
     }

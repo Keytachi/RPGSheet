@@ -1,11 +1,12 @@
 package com.company.ClassType;
-import com.company.Items.Equipment.Armor.Light_Armor.LightArmor;
-import com.company.Items.Equipment.Armor.Medium_Armor.MediumArmor;
+import com.company.Items.Equipment.Armor.Light_Armor.ALight;
+import com.company.Items.Equipment.Armor.Medium_Armor.AMedium;
 import com.company.Items.Equipment.Armor.Naked;
 import com.company.Items.Equipment.Armor.Shield;
 import com.company.Character.PlayerCharacter;
+import com.company.Items.Equipment.Weapon.Martial.AMartialWeapon;
+import com.company.Items.Equipment.Weapon.Simple.ASimpleWeapon;
 import com.company.RaceType.Stats.AttributeEnum.AttributeModify;
-import com.company.RaceType.Stats.BonusStats;
 import com.company.Util.EnumContainer;
 import com.company.Util.Util;
 import com.company.Util.dice;
@@ -22,7 +23,8 @@ public class Barbarian extends ClassRole {
         super(new dice(12));
         this.rage = setRage();
 
-        this.armorProficiencyList = new HashSet<>(Arrays.asList(MediumArmor.class,LightArmor.class,Shield.class));
+        this.armorProficiencyList = new HashSet<>(Arrays.asList(AMedium.class,ALight.class,Shield.class));
+        this.weaponProficiencyList = new HashSet<>(Arrays.asList(AMartialWeapon.class, ASimpleWeapon.class));
 
     }
 

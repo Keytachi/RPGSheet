@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class Bag {
 
     private String name;
-    private int maxBagSpace;
     private int maxBagWeight;
 
 
@@ -16,16 +15,11 @@ public class Bag {
 
     public Bag(String name,int space) {
         this.name = name;
-        this.maxBagSpace = space;
         this.inventoryBag = new ArrayList<Item>();
     }
 
     public String getName() {
         return name;
-    }
-
-    public int getMaxBagSpace() {
-        return maxBagSpace;
     }
 
     public ArrayList<Item> getInventoryBag() {

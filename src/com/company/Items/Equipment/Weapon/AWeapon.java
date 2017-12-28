@@ -7,11 +7,11 @@ import com.company.Util.dice;
 
 import com.company.RaceType.Stats.AttributeEnum.AttributeModify;
 
-import com.company.Items.Equipment.Weapon.Weapon_Enum.Hand_Req;
-import com.company.Items.Equipment.Weapon.Weapon_Enum.Attack_Type;
-import com.company.Items.Equipment.Weapon.Weapon_Enum.Weapon_Type;
-import com.company.Items.Equipment.Weapon.Weapon_Enum.Properties;
-import com.company.Items.Equipment.Weapon.Weapon_Enum.Weapon_Category;
+import com.company.Items.Equipment.Weapon.Weapon_EnumContainer.Hand_Req;
+import com.company.Items.Equipment.Weapon.Weapon_EnumContainer.Attack_Type;
+import com.company.Items.Equipment.Weapon.Weapon_EnumContainer.Weapon_Type;
+import com.company.Items.Equipment.Weapon.Weapon_EnumContainer.Properties;
+import com.company.Items.Equipment.Weapon.Weapon_EnumContainer.Weapon_Category;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import java.util.List;
  * Created by ble on 12/22/2017.
  */
 
-public abstract class Abstract_Weapon extends Item implements Weapon {
+public abstract class AWeapon extends Item implements IWeapon {
 
     protected int damage;
     protected boolean equipped;
@@ -30,7 +30,7 @@ public abstract class Abstract_Weapon extends Item implements Weapon {
     protected Hand_Req handReq;
 
 
-    public Abstract_Weapon(int weight, int cost, int damage, String name) {
+    public AWeapon(int weight, int cost, int damage, String name) {
         super(name,weight,cost, false, true);
         this.damage = damage;
         this.equipped = false;
@@ -59,7 +59,7 @@ public abstract class Abstract_Weapon extends Item implements Weapon {
                 }
                 break;
             case VERSATILE:
-                return dice.roll(Properties.VERSATILE.modify);
+                return dice.roll(8);
 
         }
         return attack();

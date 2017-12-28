@@ -1,17 +1,17 @@
 package com.company.Items.Equipment.Weapon.Simple.SimpleMeleeWeapon;
 
-import com.company.Items.Equipment.Weapon.Simple.Abstract_SimpleWeapon;
-import com.company.Items.Equipment.Weapon.Weapon_Enum.Properties;
-import com.company.Items.Equipment.Weapon.Weapon_Enum.Hand_Req;
-import com.company.Items.Equipment.Weapon.Weapon_Enum.Attack_Type;
-import com.company.Items.Equipment.Weapon.Weapon_Enum.Weapon_Type;
+import com.company.Items.Equipment.Weapon.Simple.ASimpleWeapon;
+import com.company.Items.Equipment.Weapon.Weapon_EnumContainer.Properties;
+import com.company.Items.Equipment.Weapon.Weapon_EnumContainer.Hand_Req;
+import com.company.Items.Equipment.Weapon.Weapon_EnumContainer.Attack_Type;
+import com.company.Items.Equipment.Weapon.Weapon_EnumContainer.Weapon_Type;
 
 
 /**
  * Created by ble on 12/22/2017.
  */
 
-public class Club extends Abstract_SimpleWeapon {
+public class Club extends ASimpleWeapon {
 
     public Club(int weight, int cost, int damage, String name) {
         super(weight, cost, damage, name);

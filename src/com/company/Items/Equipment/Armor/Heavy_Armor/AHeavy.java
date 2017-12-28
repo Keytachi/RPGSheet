@@ -1,11 +1,11 @@
 package com.company.Items.Equipment.Armor.Heavy_Armor;
 
-import com.company.Items.Equipment.Armor.Abstract_Armor;
+import com.company.Items.Equipment.Armor.AArmor;
 import com.company.Character.PlayerCharacter;
 import com.company.RaceType.Stats.AttributeEnum.Attribute;
 
-public abstract class HeavyArmor extends Abstract_Armor {
-    public HeavyArmor(String name, int cost, int weight, int armor) {
+public abstract class AHeavy extends AArmor {
+    public AHeavy(String name, int cost, int weight, int armor) {
         super(armor, cost, weight, name);
     }
 

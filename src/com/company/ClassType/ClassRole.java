@@ -23,6 +23,22 @@ public abstract class ClassRole{
         this.proficiency = set_Proficiency();
     }
 
+    public Set<Class> getArmorProficiencyList() {
+        return armorProficiencyList;
+    }
+
+    public void setArmorProficiencyList(Set<Class> armorProficiencyList) {
+        this.armorProficiencyList = armorProficiencyList;
+    }
+
+    public Set<Class> getWeaponProficiencyList() {
+        return weaponProficiencyList;
+    }
+
+    public void setWeaponProficiencyList(Set<Class> weaponProficiencyList) {
+        this.weaponProficiencyList = weaponProficiencyList;
+    }
+
     public int get_ArmorProficiency(Map gearEquipment, EnumContainer.GearSlot gearSlot) {
         for(Class armor_Type: armorProficiencyList) {
             if(Util.gearisInstance(gearEquipment.get(gearSlot),armor_Type)){

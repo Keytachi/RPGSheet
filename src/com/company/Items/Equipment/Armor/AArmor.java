@@ -7,12 +7,12 @@ import com.company.Character.PlayerCharacter;
  * Created by ble on 12/22/2017.
  */
 
-public class Abstract_Armor extends Item implements Armor {
+public abstract class AArmor extends Item implements Armor {
 
     protected int armor;
     protected boolean equipped;
 
-    public Abstract_Armor(int armor, int cost, int weight, String name) {
+    public AArmor(int armor, int cost, int weight, String name) {
         super(name,weight,cost,false, true);
         this.armor = armor;
     }

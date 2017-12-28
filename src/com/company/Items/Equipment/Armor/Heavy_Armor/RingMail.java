@@ -2,7 +2,7 @@ package com.company.Items.Equipment.Armor.Heavy_Armor;
 
 import com.company.Character.PlayerCharacter;
 
-public class RingMail extends HeavyArmor{
+public class RingMail extends AHeavy {
     public RingMail(String name, int cost, int weight, int armor) {
         super(name, cost, weight, armor);
     }

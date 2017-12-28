@@ -1,6 +1,6 @@
 package com.company.Items.Equipment.Armor.Light_Armor;
 
-public class Leather extends LightArmor {
+public class Leather extends ALight {
 
     public Leather(String name, int cost, int weight, int armor) {
         super(name, cost, weight, armor);
