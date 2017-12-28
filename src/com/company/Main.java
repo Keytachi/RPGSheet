@@ -6,6 +6,7 @@ import com.company.IO.PlayerCharacterIO;
 import com.company.ClassType.Barbarian;
 import com.company.Items.Equipment.Armor.Heavy_Armor.ChainMail;
 import com.company.Items.Equipment.Armor.Shield;
+import com.company.Items.Equipment.Weapon.Simple.SimpleMeleeWeapon.Club;
 import com.company.RaceType.Human;
 import com.company.Util.EnumContainer;
 
@@ -17,9 +18,9 @@ public class Main {
 
         System.out.println(brandon.get_Armor().getFinal_Armor());
 
-        System.out.println(EnumContainer.GearSlot.RHAND.equals(EnumContainer.GearSlot.RHAND));
         //brandon.equip(new ChainMail());
-        brandon.equip(new Shield(), EnumContainer.GearSlot.RHAND);
+        brandon.equip(new Shield());
+        brandon.equip(new Club());
         PlayerCharacterIO.displayGear(brandon);
         /**System.out.println(brandon.get_Armor().getFinal_Armor());
 
@@ -35,5 +36,4 @@ public class Main {
         tester.displayStats();
         **/
     }
-
 }

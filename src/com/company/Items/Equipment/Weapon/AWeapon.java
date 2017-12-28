@@ -13,6 +13,7 @@ import com.company.Items.Equipment.Weapon.Weapon_EnumContainer.Weapon_Type;
 import com.company.Items.Equipment.Weapon.Weapon_EnumContainer.Properties;
 import com.company.Items.Equipment.Weapon.Weapon_EnumContainer.Weapon_Category;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,6 +35,7 @@ public abstract class AWeapon extends Item implements IWeapon {
         super(name,weight,cost, false, true);
         this.damage = damage;
         this.equipped = false;
+        this.specialty = new ArrayList<>();
     }
 
     @Override
