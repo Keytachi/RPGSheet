@@ -63,10 +63,8 @@ public class EquipmentSystem {
 
     public void equip(IWeapon weapon, GearSlot hand, PlayerCharacter character)throws NotCorrectSlotException {
 
-        if(!hand.equals(GearSlot.LHAND)) {
-            if(!hand.equals(GearSlot.RHAND)){
+        if(!EnumContainer.weapon_Slot.contains(hand)){
                 throw new NotCorrectSlotException(weapon,hand);
-            }
         }
         switch (weapon.getHandReq()){
             /**
@@ -118,12 +116,17 @@ public class EquipmentSystem {
              */
             default:
                 for(GearSlot hand : EnumContainer.weapon_Slot){
-                    for(Class weapon_Proficiency : character.get_Role().getWeaponProficiencyList()){
-                        if(!(Util.gearisInstance(hand,weapon_Proficiency))){
-                            if(!(weaponEquipment.get(hand) instanceof Shield)) {
-                                remove_Gear(weaponEquipment, hand, character);
-                                weaponEquipment.put(hand, equipment);
-                                break;
+                    switch(weaponEquipment.get(hand).getHandReq()){
+                        case TWOHAND:
+                            remove_Gear(weaponEquipment,hand,character);
+                        default:
+                            for(Class weapon_Proficiency : character.get_Role().getWeaponProficiencyList()){
+                                if(!(Util.gearisInstance(hand,weapon_Proficiency))){
+                                    if(!(weaponEquipment.get(hand) instanceof Shield)) {
+                                        remove_Gear(weaponEquipment, hand, character);
+                                        weaponEquipment.put(hand, equipment);
+                                        break;
+                    }
                             }
                         }
                         break;
@@ -136,9 +139,6 @@ public class EquipmentSystem {
         }
     }
 
-    /**
-     *
-     */
     private void equip2H(IWeapon equipment, PlayerCharacter character){
         for(GearSlot hands : EnumContainer.weapon_Slot){
             remove_Gear(weaponEquipment, hands, character);

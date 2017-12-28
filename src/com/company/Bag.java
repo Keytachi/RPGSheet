@@ -26,12 +26,6 @@ public class Bag {
         return inventoryBag;
     }
 
-    public void displayItemsinBag(){
-        for(Item items: inventoryBag){
-            System.out.println(items);
-        }
-    }
-
     public void setMaxBagWeight(int maxBagWeight){
         this.maxBagWeight = maxBagWeight;
     }
