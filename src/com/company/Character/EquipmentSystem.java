@@ -150,6 +150,7 @@ public class EquipmentSystem {
         character.get_InventoryBag().storeItem((Item)character.getGear_Equipment().weaponEquipment.get(GearSlot.LHAND));
     }
 
+    
     public void remove_Gear(Map equipmentSlot, GearSlot location, PlayerCharacter character){
         if(equipmentSlot.get(location) instanceof Armor) {
             if (!(equipmentSlot.get(location) instanceof Naked)) {
