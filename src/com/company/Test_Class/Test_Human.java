@@ -8,7 +8,7 @@ import com.company.Util.dice;
  */
 
 public class Test_Human extends Test_Race {
-    public Test_Human(int str_value, int dex_value, int cons_value, int int_value, int wis_value, int char_value) {
+    /**public Test_Human(int str_value, int dex_value, int cons_value, int int_value, int wis_value, int char_value) {
         super(str_value, dex_value, cons_value, int_value, wis_value, char_value);
         displayStats();
         specialty();
@@ -27,5 +27,5 @@ public class Test_Human extends Test_Race {
             modifyStats.get(i).calculateFinalModifier(baseStats.get(i));
         }
 
-    }
+    }*/
 }

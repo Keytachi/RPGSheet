@@ -9,7 +9,7 @@ import com.company.Util.dice;
 
 public class Test_HighElf extends Test_Elf {
 
-    public Test_HighElf(int str_value, int dex_value, int cons_value, int int_value, int wis_value, int char_value){
+    /**public Test_HighElf(int str_value, int dex_value, int cons_value, int int_value, int wis_value, int char_value){
         super(str_value, dex_value, cons_value, int_value, wis_value, char_value);
         displayStats();
         specialty();
@@ -26,5 +26,5 @@ public class Test_HighElf extends Test_Elf {
         baseStats.get(3).setBaseStats(1);
         baseStats.get(3).calculateFinalStats();
         modifyStats.get(3).calculateFinalModifier(baseStats.get(3));
-    }
+    }*/
 }

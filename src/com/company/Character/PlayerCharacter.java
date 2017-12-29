@@ -75,9 +75,9 @@ public class PlayerCharacter {
     public void updatePlayer(){
         inventoryBag.setMaxBagWeight(getMax_BagWeight() * 15);
         updateArmor();
-        if(role instanceof Barbarian){
+        /**if(role instanceof Barbarian){
             ((Barbarian)role).unArmored_Defense(this);
-        }
+        }*/
     }
 
     private void updateArmor(){

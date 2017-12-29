@@ -1,5 +1,7 @@
 package com.company.RaceType.Stats;
 
+import com.company.Spell.Effect;
+
 import java.util.ArrayList;
 
 /**
@@ -8,7 +10,7 @@ import java.util.ArrayList;
 
 public class BaseStats {
 
-    public ArrayList<BonusStats> tempStats;
+    public ArrayList<Effect> tempStats;
 
     private int baseStats;
     private String name;
@@ -28,8 +30,8 @@ public class BaseStats {
         calculateFinalStats();
     }
 
-    public int getBaseStats() {
-        return baseStats;
+    public ArrayList<Effect> getTempStats(){
+        return this.tempStats;
     }
 
     public void setBaseStats(int baseStats) {
@@ -40,25 +42,22 @@ public class BaseStats {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getFinalStats() {
-        return finalStats;
+        return calculateFinalStats();
     }
 
-    public void addAdditiveBonus(BonusStats bonusStats){
+    public void addAdditiveBonus(Effect bonusStats){
         tempStats.add(bonusStats);
     }
 
-    public void removeAdditiveBonus(BonusStats bonusStats){
+    public void removeAdditiveBonus(Effect bonusStats){
         tempStats.remove(bonusStats);
     }
 
-    public int calculateFinalStats(){
+    private int calculateFinalStats(){
         this.finalStats = baseStats;
-        this.tempStats.forEach(x -> this.finalStats += x.getBonusStats());
+        this.tempStats.forEach(x -> this.finalStats += x.getStatsRate());
         return this.finalStats;
     }
 }

@@ -34,7 +34,7 @@ public class Barbarian extends ClassRole {
     }
 
 
-    public void unArmored_Defense(PlayerCharacter person) {
+    /**public void unArmored_Defense(PlayerCharacter person) {
         if(Util.gearisInstance(person.getGear_Equipment().getArmorEquipment().get(EnumContainer.GearSlot.ARMOR),
                 Naked.class)){
             person.get_Armor().getFinal_Armor();
@@ -44,7 +44,7 @@ public class Barbarian extends ClassRole {
             person.get_Armor().removeBonusArmor(person.get_Race().getModifierStats(AttributeModify.Con_Modifier).getFinalModifier());
         }
         person.get_Armor().calculateFinalArmor();
-    }
+    }*/
 
     @Override
     public int get_ArmorProficiency(Map gearEquipment, EnumContainer.GearSlot gearSlot) {

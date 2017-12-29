@@ -1,5 +1,7 @@
 package com.company.Character;
 
+import com.company.Spell.Effect;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,48 +11,56 @@ import java.util.List;
 
 public class Health {
 
-    private List<Integer> tempHealth;
+    private List<Effect> tempHealthIncrease;
+    private List<Effect> tempHealing;
 
     private int current_Health;
     private int maximum_Health;
+    private int final_Current_Health;
     private int final_Maximum_Health;
 
     public Health(int maximum_Health){
         this.maximum_Health = maximum_Health;
         this.current_Health = this.maximum_Health;
-        tempHealth = new ArrayList<>();
+        tempHealthIncrease = new ArrayList<>();
     }
 
-    public void addAdditiveHealth(int health){
-        tempHealth.add(health);
+    public void addTempHealth(List<Effect> tempList, Effect effect){
+        tempList.add(effect);
     }
 
-    public void removeAdditiveHealth(int health){
-        tempHealth.remove(new Integer(tempHealth.remove(health)));
-    }
+    public void removeTempHealth(List<Effect> tempList, Effect effect){ tempList.remove(effect); }
 
-    public int getCurrent_Health() {
-        return current_Health;
-    }
-
-    public void setCurrent_Health(int current_Health) {
-        this.current_Health += current_Health;
-        if(this.current_Health > this.final_Maximum_Health){
-            this.current_Health = this.final_Maximum_Health;
+    public void setFinal_Current_Health() {
+        if(calculateFinalCurrent_Health() > getFinal_Maximum_Health()){
+            this.final_Current_Health = this.final_Maximum_Health;
+        }else{
+            calculateFinalCurrent_Health();
         }
     }
 
-    public int getMaximum_Health() {
-        return maximum_Health;
+    public void setFinal_Maximum_Health(){
+        calculateFinalMaximum_Health();
     }
 
+    public int getFinal_Current_Health() { return this.final_Current_Health; }
+    public int getFinal_Maximum_Health() { return this.final_Maximum_Health; }
+
+    public void setCurrent_Health(){ this.current_Health = maximum_Health; }
     public void setMaximum_Health(int maximum_Health) {
         this.maximum_Health += maximum_Health;
     }
 
-    public int calculateMaximum_Health(){
+
+    private int calculateFinalCurrent_Health(){
+        this.final_Current_Health = current_Health;
+        tempHealing.forEach(x-> this.final_Current_Health += x.getStatsRate());
+        return this.final_Current_Health;
+    }
+
+    private int calculateFinalMaximum_Health(){
         this.final_Maximum_Health = maximum_Health;
-        tempHealth.forEach(x -> this.final_Maximum_Health += x.intValue());
+        tempHealthIncrease.forEach(x -> this.final_Maximum_Health += x.getStatsRate());
         return final_Maximum_Health;
     }
 }

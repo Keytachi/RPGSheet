@@ -13,6 +13,7 @@ import java.util.List;
 
 public class Test_Race {
 
+    /**
     protected List<BaseStats> baseStats = new ArrayList<>();
     protected List<ModifierStats> modifyStats = new ArrayList<>();
 
@@ -54,5 +55,5 @@ public class Test_Race {
         baseStats.forEach(x -> System.out.println(x.getName() + " : " + x.calculateFinalStats()));
         modifyStats.forEach(x -> System.out.println(x.getName() + " : " + x.getFinalModifier()));
         System.out.println(" ");
-    }
+    }*/
 }

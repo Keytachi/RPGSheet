@@ -22,7 +22,7 @@ public class Human extends Race {
     public void specialty(){
         for(Attribute attribute : attributeMap.keySet()){
             attributeMap.get(attribute).setBaseStats(1);
-            attributeMap.get(attribute).calculateFinalStats();
+            attributeMap.get(attribute).getFinalStats();
         }
     }
 }

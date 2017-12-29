@@ -3,6 +3,8 @@ package com.company.Character;
 import com.company.Items.Equipment.Armor.Armor;
 import com.company.Items.Equipment.Armor.Shield;
 import com.company.RaceType.Stats.BonusStats;
+import com.company.Spell.ASpell;
+import com.company.Spell.Effect;
 import com.company.Util.EnumContainer;
 import com.company.Util.Util;
 
@@ -14,7 +16,7 @@ import java.util.List;
  */
 
 public class CharacterArmor {
-    private List<Integer> tempArmor;
+    private List<Effect> tempArmor;
 
     private int armor;
     private int final_Armor;
@@ -58,15 +60,15 @@ public class CharacterArmor {
 
     public int calculateFinalArmor(){
         final_Armor = armor;
-        tempArmor.forEach(x -> this.final_Armor += x.intValue());
+        tempArmor.forEach(x -> this.final_Armor += x.getStatsRate());
         return final_Armor;
     }
 
-    public void addBonusArmor(int bonusArmors){
+    public void addBonusArmor(Effect bonusArmors){
         tempArmor.add(bonusArmors);
     }
 
-    public void removeBonusArmor(int bonusArmors){
-        tempArmor.remove(new Integer(bonusArmors));
+    public void removeBonusArmor(Effect bonusArmors){
+        tempArmor.remove(bonusArmors);
     }
 }
