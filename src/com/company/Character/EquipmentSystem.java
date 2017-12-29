@@ -75,7 +75,12 @@ public class EquipmentSystem {
                 equip2H(weapon, character);
                 break;
             default:
-                remove_Gear(weaponEquipment,hand,character);
+                if(weaponEquipment.get(GearSlot.LHAND).getHandReq().equals(Weapon_EnumContainer.Hand_Req.TWOHAND)){
+                    remove_Gear(weaponEquipment,GearSlot.RHAND,character);
+                    remove_2H();
+                }else {
+                    remove_Gear(weaponEquipment, hand, character);
+                }
                 weaponEquipment.put(hand, weapon);
 
         }
@@ -87,6 +92,13 @@ public class EquipmentSystem {
     }
 
     private void equip1H(IWeapon equipment, PlayerCharacter character){
+        /**
+         * Removing atleast from one hand to store into inventory and then un-equip from both hands.
+         */
+        if(weaponEquipment.get(GearSlot.LHAND).getHandReq().equals(Weapon_EnumContainer.Hand_Req.TWOHAND)){
+            remove_Gear(weaponEquipment,GearSlot.RHAND,character);
+            remove_2H();
+        }
         switch(equipment.getWeaponType()){
 
             /**
@@ -116,20 +128,14 @@ public class EquipmentSystem {
              */
             default:
                 for(GearSlot hand : EnumContainer.weapon_Slot){
-                    switch(weaponEquipment.get(hand).getHandReq()){
-                        case TWOHAND:
-                            remove_Gear(weaponEquipment,hand,character);
-                        default:
-                            for(Class weapon_Proficiency : character.get_Role().getWeaponProficiencyList()){
-                                if(!(Util.gearisInstance(hand,weapon_Proficiency))){
-                                    if(!(weaponEquipment.get(hand) instanceof Shield)) {
-                                        remove_Gear(weaponEquipment, hand, character);
-                                        weaponEquipment.put(hand, equipment);
-                                        break;
-                    }
+                    for(Class weapon_Proficiency : character.get_Role().getWeaponProficiencyList()) {
+                        if (!(Util.gearisInstance(hand, weapon_Proficiency))) {
+                            if (!(weaponEquipment.get(hand) instanceof Shield)) {
+                                remove_Gear(weaponEquipment, hand, character);
+                                weaponEquipment.put(hand, equipment);
+
                             }
-                        }
-                        break;
+                        }break;
                     }
                     if(weaponEquipment.get(hand) instanceof Unarm){
                         weaponEquipment.put(hand,equipment);
@@ -140,17 +146,21 @@ public class EquipmentSystem {
     }
 
     private void equip2H(IWeapon equipment, PlayerCharacter character){
+        if(weaponEquipment.get(GearSlot.LHAND).getHandReq().equals(Weapon_EnumContainer.Hand_Req.TWOHAND)){
+            remove_Gear(weaponEquipment,GearSlot.RHAND,character);
+            remove_2H();
+        }
         for(GearSlot hands : EnumContainer.weapon_Slot){
             remove_Gear(weaponEquipment, hands, character);
             weaponEquipment.put(hands, equipment);
         }
     }
 
-    public void remove_2H(PlayerCharacter character){
-        character.get_InventoryBag().storeItem((Item)character.getGear_Equipment().weaponEquipment.get(GearSlot.LHAND));
+    public void remove_2H(){
+        EnumContainer.weapon_Slot.forEach(x -> weaponEquipment.put(x,new Unarm()));
     }
 
-    
+
     public void remove_Gear(Map equipmentSlot, GearSlot location, PlayerCharacter character){
         if(equipmentSlot.get(location) instanceof Armor) {
             if (!(equipmentSlot.get(location) instanceof Naked)) {

@@ -26,6 +26,10 @@ public class Bag {
         return inventoryBag;
     }
 
+    public Item getInventory(int item){
+        return inventoryBag.get(item);
+    }
+
     public void setMaxBagWeight(int maxBagWeight){
         this.maxBagWeight = maxBagWeight;
     }

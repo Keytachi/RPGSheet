@@ -21,11 +21,25 @@ public class Main {
         brandon.equip(new ChainMail());
         brandon.equip(new Shield());
         brandon.equip(new Club());
+        PlayerCharacterIO.displayGear(brandon);
+        PlayerCharacterIO.displayInventory(brandon);
+
         brandon.equip(new GreatClub());
         PlayerCharacterIO.displayGear(brandon);
         PlayerCharacterIO.displayInventory(brandon);
 
-        brandon.equip((IEquipment)brandon.get_InventoryBag().getInventoryBag().get(0));
+        brandon.equip((IEquipment)brandon.get_InventoryBag().getInventory(0));
+        brandon.get_InventoryBag().removeItem(brandon.get_InventoryBag().getInventory(0));
+        PlayerCharacterIO.displayGear(brandon);
+        PlayerCharacterIO.displayInventory(brandon);
+
+        brandon.equip((IEquipment)brandon.get_InventoryBag().getInventory(0));
+        brandon.get_InventoryBag().removeItem(brandon.get_InventoryBag().getInventory(0));
+        PlayerCharacterIO.displayGear(brandon);
+        PlayerCharacterIO.displayInventory(brandon);
+
+        brandon.equip((IEquipment)brandon.get_InventoryBag().getInventory(0));
+        brandon.get_InventoryBag().removeItem(brandon.get_InventoryBag().getInventory(0));
         PlayerCharacterIO.displayGear(brandon);
         PlayerCharacterIO.displayInventory(brandon);
         /**System.out.println(brandon.get_Armor().getFinal_Armor());
