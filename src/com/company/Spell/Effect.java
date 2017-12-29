@@ -41,6 +41,6 @@ public abstract class Effect implements IBuff{
 
     @Override
     public void effect(PlayerCharacter host) {
-        
+
     }
 }
