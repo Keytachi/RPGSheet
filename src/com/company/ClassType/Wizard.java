@@ -1,6 +1,5 @@
 package com.company.ClassType;
 
-import com.company.Spell.SpellBook;
 import com.company.Util.EnumContainer;
 import com.company.Util.dice;
 

@@ -1,4 +1,6 @@
-package com.company.Spell;
+package com.company.ClassType;
+
+import com.company.Spell.ASpell;
 
 import java.util.ArrayList;
 import java.util.HashMap;
