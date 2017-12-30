@@ -16,6 +16,6 @@ public class ChainMail extends AHeavy {
     @Override
     public void get_Requirement(PlayerCharacter person){
         if(person.get_Race().getBaseStats(Attribute.Strength).getFinalValue() < 13)
-            person.getWalking_Speed().get("Walking Speed").increaseBaseValue(person.getWalking_Speed().get("Walking Speed").getFinalValue() - 10);
+            person.getWalking_Speed().increaseBaseValue(person.getWalking_Speed().getFinalValue() - 10);
     }
 }

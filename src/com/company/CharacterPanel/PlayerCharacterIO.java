@@ -1,4 +1,4 @@
-package com.company.IO;
+package com.company.CharacterPanel;
 
 import com.company.Character.PlayerCharacter;
 import com.company.Items.Equipment.Item;

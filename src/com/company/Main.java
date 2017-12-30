@@ -2,7 +2,7 @@ package com.company;
 
 
 import com.company.Character.PlayerCharacter;
-import com.company.IO.PlayerCharacterIO;
+import com.company.CharacterPanel.PlayerCharacterIO;
 import com.company.ClassType.Barbarian;
 import com.company.Items.Equipment.Armor.Heavy_Armor.ChainMail;
 import com.company.Items.Equipment.Armor.Shield;
@@ -15,7 +15,6 @@ import com.company.Spell.ASpell;
 import com.company.Spell.Buff;
 import com.company.Spell.Effect;
 import com.company.Spell.SpellBook;
-import com.company.Util.EnumContainer;
 
 public class Main {
 
@@ -49,7 +48,7 @@ public class Main {
         PlayerCharacterIO.displayInventory(brandon);
 
         PlayerCharacterIO.displayCharacterStats(brandon);
-        System.out.println(brandon.getWalking_Speed().get("Walking Speed").getFinalValue());
+        System.out.println(brandon.getWalking_Speed().getFinalValue());
         ASpell fireball = new ASpell(1,"Fireball",1,6,SpellBook.TypeofBook.Cantrip);
         fireball.addEffect(new Buff(2, "Burn",Effect.Effects_Type.Buff,-2, AttributeEnum.Attribute.Dexterity,2, Effect.Target_Type.Attribute));
         fireball.attack(brandon);
@@ -60,7 +59,7 @@ public class Main {
 
 
         PlayerCharacterIO.displayCharacterStats(brandon);
-        System.out.println(brandon.getWalking_Speed().get("Walking Speed").getFinalValue());
+        System.out.println(brandon.getWalking_Speed().getFinalValue());
         System.out.println(brandon.getName() + " is affect by this spell");
         /**System.out.println(brandon.get_Armor().getFinal_Armor());
 

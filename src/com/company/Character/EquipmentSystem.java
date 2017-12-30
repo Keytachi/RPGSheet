@@ -133,7 +133,7 @@ public class EquipmentSystem {
                             if (!(weaponEquipment.get(hand) instanceof Shield)) {
                                 remove_Gear(weaponEquipment, hand, character);
                                 weaponEquipment.put(hand, equipment);
-
+                                break;
                             }
                         }break;
                     }

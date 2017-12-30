@@ -22,7 +22,7 @@ public class PlayerCharacter {
     private CharacterInformation maximum_health;
     private CharacterInformation current_Health;
     private Armor armor;
-    private HashMap<String, CharacterInformation> walking_Speed;
+    private CharacterInformation walking_Speed;
 
     private String name;
 
@@ -34,11 +34,7 @@ public class PlayerCharacter {
         this.gear_Equipment = new EquipmentSystem();
         this.inventoryBag = inventoryBag;
         this.armor = new Armor();
-        this.walking_Speed = new HashMap<String, CharacterInformation>(){
-            {
-                put("Walking Speed", new CharacterInformation(30));
-            }
-        };
+        this.walking_Speed = new CharacterInformation(30);
         setHealth();
         updatePlayer();
     }
@@ -59,7 +55,7 @@ public class PlayerCharacter {
         return gear_Equipment;
     }
     public Armor getArmor(){ return armor;}
-    public HashMap<String,CharacterInformation> getWalking_Speed(){
+    public CharacterInformation getWalking_Speed(){
         return walking_Speed;
     }
 

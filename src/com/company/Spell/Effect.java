@@ -90,7 +90,7 @@ public class Effect implements IBuff{
                 target.getArmor().addTempBuff(this);
                 break;
             case Walk:
-                target.getWalking_Speed().get("Walking Speed").addTempBuff(this);
+                target.getWalking_Speed().addTempBuff(this);
                 break;
             case Attribute:
                 target.get_Race().getAttributeMap().get(this.getTarget_Attribute()).addTempBuff(this);
