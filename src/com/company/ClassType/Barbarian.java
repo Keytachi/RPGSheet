@@ -6,7 +6,10 @@ import com.company.Items.Equipment.Armor.Shield;
 import com.company.Character.PlayerCharacter;
 import com.company.Items.Equipment.Weapon.Martial.AMartialWeapon;
 import com.company.Items.Equipment.Weapon.Simple.ASimpleWeapon;
+import com.company.RaceType.Stats.AttributeEnum;
 import com.company.RaceType.Stats.AttributeEnum.AttributeModify;
+import com.company.RaceType.Stats.ModifierStats;
+import com.company.Spell.Effect;
 import com.company.Util.EnumContainer;
 import com.company.Util.Util;
 import com.company.Util.dice;
@@ -34,17 +37,18 @@ public class Barbarian extends ClassRole {
     }
 
 
-    /**public void unArmored_Defense(PlayerCharacter person) {
+    public void unArmored_Defense(PlayerCharacter person) {
         if(Util.gearisInstance(person.getGear_Equipment().getArmorEquipment().get(EnumContainer.GearSlot.ARMOR),
                 Naked.class)){
-            person.get_Armor().getFinal_Armor();
-            person.get_Armor().addBonusArmor(person.get_Race().getModifierStats(AttributeModify.Con_Modifier).getFinalModifier());
+            person.getArmor().addTempBuff(new Effect(3, "Unarmored Defense", Effect.Effects_Type.Buff,
+                    Util.getValue(person.get_Race().getModifyMap(), AttributeModify.Con_Modifier),
+                    Effect.Target_Type.Armor));
         }
         else{
-            person.get_Armor().removeBonusArmor(person.get_Race().getModifierStats(AttributeModify.Con_Modifier).getFinalModifier());
+            person.getArmor().removeTempBuff("Unarmored Defense");
         }
-        person.get_Armor().calculateFinalArmor();
-    }*/
+        person.getArmor().getFinalValue();
+    }
 
     @Override
     public int get_ArmorProficiency(Map gearEquipment, EnumContainer.GearSlot gearSlot) {

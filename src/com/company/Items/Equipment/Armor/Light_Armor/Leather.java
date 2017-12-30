@@ -7,6 +7,6 @@ public class Leather extends ALight {
     }
 
     public Leather(){
-        this("Leather Armor", 10, 10, 1);
+        this("Leather IArmor", 10, 10, 1);
     }
 }

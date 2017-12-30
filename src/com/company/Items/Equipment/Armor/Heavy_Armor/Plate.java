@@ -7,6 +7,6 @@ public class Plate extends AHeavy {
     }
 
     public Plate(){
-        this("Plate Armor", 1500,65,8);
+        this("Plate IArmor", 1500,65,8);
     }
 }

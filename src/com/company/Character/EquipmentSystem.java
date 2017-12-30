@@ -1,6 +1,6 @@
 package com.company.Character;
 
-import com.company.Items.Equipment.Armor.Armor;
+import com.company.Items.Equipment.Armor.IArmor;
 import com.company.Items.Equipment.Armor.Naked;
 import com.company.Items.Equipment.Armor.Shield;
 import com.company.Items.Equipment.IEquipment;
@@ -56,8 +56,8 @@ public class EquipmentSystem {
         }
     }
 
-    public void equip(Armor armor, PlayerCharacter character){
-        equipArmor(armor,character);
+    public void equip(IArmor IArmor, PlayerCharacter character){
+        equipArmor(IArmor,character);
     }
 
 
@@ -86,7 +86,7 @@ public class EquipmentSystem {
         }
     }
 
-    private void equipArmor(Armor equipment, PlayerCharacter character){
+    private void equipArmor(IArmor equipment, PlayerCharacter character){
         remove_Gear(armorEquipment, GearSlot.ARMOR, character);
         armorEquipment.put(GearSlot.ARMOR,equipment);
     }
@@ -133,7 +133,7 @@ public class EquipmentSystem {
                             if (!(weaponEquipment.get(hand) instanceof Shield)) {
                                 remove_Gear(weaponEquipment, hand, character);
                                 weaponEquipment.put(hand, equipment);
-
+                                break;
                             }
                         }break;
                     }
@@ -162,7 +162,7 @@ public class EquipmentSystem {
 
 
     public void remove_Gear(Map equipmentSlot, GearSlot location, PlayerCharacter character){
-        if(equipmentSlot.get(location) instanceof Armor) {
+        if(equipmentSlot.get(location) instanceof IArmor) {
             if (!(equipmentSlot.get(location) instanceof Naked)) {
                 character.get_InventoryBag().storeItem((Item) equipmentSlot.get(location));
             }

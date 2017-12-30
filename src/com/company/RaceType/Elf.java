@@ -10,7 +10,7 @@ public class Elf extends Race {
 
     @Override
     public void specialty(){
-        this.attributeMap.get(AttributeEnum.Attribute.Dexterity).setBaseStats(2);
-        this.attributeMap.get(AttributeEnum.Attribute.Dexterity).getFinalStats();
+        this.attributeMap.get(AttributeEnum.Attribute.Dexterity).increaseBaseValue(2);
+        this.attributeMap.get(AttributeEnum.Attribute.Dexterity).getFinalValue();
     }
 }

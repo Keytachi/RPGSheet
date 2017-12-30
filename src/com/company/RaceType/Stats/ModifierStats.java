@@ -1,20 +1,16 @@
 package com.company.RaceType.Stats;
 
+import com.company.CharacterPanel.CharacterInformation;
+
 /**
  * Created by ble on 12/26/2017.
  */
 
 public class ModifierStats {
 
-    private String name;
     private int finalModifier;
 
-    public ModifierStats(String name, BaseStats baseStats) {
-        this.name = name;
-        calculateFinalModifier(baseStats);
-    }
-
-    public ModifierStats(BaseStats baseStats){
+    public ModifierStats(CharacterInformation baseStats){
         calculateFinalModifier(baseStats);
     }
 
@@ -23,11 +19,7 @@ public class ModifierStats {
         return finalModifier;
     }
 
-    public String getName(){
-        return name;
-    }
-
-    public void calculateFinalModifier(BaseStats baseStats){
-        this.finalModifier = (baseStats.getFinalStats()-10)/2;
+    public void calculateFinalModifier(CharacterInformation baseStats){
+        this.finalModifier = (baseStats.getFinalValue()-10)/2;
     }
 }

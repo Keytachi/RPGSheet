@@ -7,6 +7,6 @@ public class Hide extends AMedium {
     }
 
     public Hide(){
-        this("Hide Armor", 10, 12, 2);
+        this("Hide IArmor", 10, 12, 2);
     }
 }

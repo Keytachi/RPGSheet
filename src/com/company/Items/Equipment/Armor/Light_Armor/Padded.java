@@ -7,6 +7,6 @@ public class Padded extends ALight {
     }
 
     public Padded(){
-        this("Padded Armor", 5, 8,1);
+        this("Padded IArmor", 5, 8,1);
     }
 }

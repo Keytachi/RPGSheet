@@ -1,6 +1,7 @@
 package com.company.Spell;
 
 import com.company.Character.PlayerCharacter;
+import com.company.CharacterPanel.CharacterInformation;
 import com.company.RaceType.Stats.AttributeEnum;
 
 public class Effect implements IBuff{
@@ -37,17 +38,29 @@ public class Effect implements IBuff{
     private int duration;
     AttributeEnum.Attribute target_Attribute;
 
-    public Effect(int id, String name,Effects_Type effect_type, int statsEffect,int duration,Target_Type target_type){
+    public Effect(int id, String name,Effects_Type effect_type, int statsRate,int duration,Target_Type target_type){
         this.id = id;
         this.name = name;
         this.effect_type = effect_type;
-        this.statsRate = statsEffect;
+        this.statsRate = statsRate;
         this.duration = duration;
         this.target_type = target_type;
     }
 
+    public Effect(int id, String name,Effects_Type effect_type, int statsRate,Target_Type target_type) {
+        this.target_type = target_type;
+        this.name = name;
+        this.id = id;
+        this.statsRate = statsRate;
+        this.effect_type = effect_type;
+    }
+
     public AttributeEnum.Attribute getTarget_Attribute(){
         return target_Attribute;
+    }
+
+    public String getName(){
+        return name;
     }
 
     @Override
@@ -74,13 +87,13 @@ public class Effect implements IBuff{
     public void effect(PlayerCharacter target) {
         switch(target_type){
             case Armor:
-                target.get_Armor().addBonusArmor(this);
+                target.getArmor().addTempBuff(this);
                 break;
             case Walk:
-                target.get_Race().setWalking_Speed(target.get_Race().getWalking_Speed() - statsRate);
+                target.getWalking_Speed().addTempBuff(this);
                 break;
             case Attribute:
-                target.get_Race().getAttributeMap().get(this.getTarget_Attribute()).addAdditiveBonus(this);
+                target.get_Race().getAttributeMap().get(this.getTarget_Attribute()).addTempBuff(this);
                 break;
 
         }
