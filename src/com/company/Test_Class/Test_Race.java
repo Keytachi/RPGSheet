@@ -1,12 +1,5 @@
 package com.company.Test_Class;
 
-import com.company.RaceType.Stats.BaseStats;
-import com.company.RaceType.Stats.ModifierStats;
-import com.company.Util.dice;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by ble on 12/26/2017.
  */

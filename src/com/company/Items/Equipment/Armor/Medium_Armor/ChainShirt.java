@@ -6,6 +6,6 @@ public class ChainShirt extends AMedium {
     }
 
     public ChainShirt(){
-        this("Chain Armor", 50, 20, 3);
+        this("Chain IArmor", 50, 20, 3);
     }
 }

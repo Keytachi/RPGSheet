@@ -22,7 +22,7 @@ public class High_Elf extends Elf {
     @Override
     public void specialty(){
         super.specialty();
-        this.attributeMap.get(AttributeEnum.Attribute.Intelligence).setBaseStats(1);
-        this.attributeMap.get(AttributeEnum.Attribute.Intelligence).getFinalStats();
+        this.attributeMap.get(AttributeEnum.Attribute.Intelligence).increaseBaseValue(1);
+        this.attributeMap.get(AttributeEnum.Attribute.Intelligence).getFinalValue();
     }
 }

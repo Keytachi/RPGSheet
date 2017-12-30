@@ -7,7 +7,7 @@ import com.company.Character.PlayerCharacter;
  * Created by ble on 12/22/2017.
  */
 
-public abstract class AArmor extends Item implements Armor {
+public abstract class AArmor extends Item implements IArmor {
 
     protected int armor;
     protected boolean equipped;

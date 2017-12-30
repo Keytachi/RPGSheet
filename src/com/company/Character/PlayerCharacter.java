@@ -1,13 +1,17 @@
 package com.company.Character;
 
 import com.company.Bag;
+import com.company.CharacterPanel.Armor;
+import com.company.CharacterPanel.CharacterInformation;
 import com.company.ClassType.*;
-import com.company.Items.Equipment.Armor.Armor;
+import com.company.Items.Equipment.Armor.IArmor;
 import com.company.Items.Equipment.*;
 import com.company.Items.Equipment.Weapon.IWeapon;
 import com.company.RaceType.Race;
 import com.company.RaceType.Stats.AttributeEnum.Attribute;
 import com.company.Util.EnumContainer;
+
+import java.util.HashMap;
 
 public class PlayerCharacter {
 
@@ -15,8 +19,10 @@ public class PlayerCharacter {
     private ClassRole role;
     private Bag inventoryBag;
     private EquipmentSystem gear_Equipment;
-    private Health health;
-    private CharacterArmor armor;
+    private CharacterInformation maximum_health;
+    private CharacterInformation current_Health;
+    private Armor armor;
+    private HashMap<String, CharacterInformation> walking_Speed;
 
     private String name;
 
@@ -27,7 +33,12 @@ public class PlayerCharacter {
         this.role = role;
         this.gear_Equipment = new EquipmentSystem();
         this.inventoryBag = inventoryBag;
-        this.armor = new CharacterArmor();
+        this.armor = new Armor();
+        this.walking_Speed = new HashMap<String, CharacterInformation>(){
+            {
+                put("Walking Speed", new CharacterInformation(30));
+            }
+        };
         setHealth();
         updatePlayer();
     }
@@ -47,11 +58,19 @@ public class PlayerCharacter {
     public EquipmentSystem getGear_Equipment() {
         return gear_Equipment;
     }
-    public Health get_Health(){
-        return this.health;
+    public Armor getArmor(){ return armor;}
+    public HashMap<String,CharacterInformation> getWalking_Speed(){
+        return walking_Speed;
     }
-    public CharacterArmor get_Armor(){
-        return this.armor;
+
+
+
+    public CharacterInformation getCurrent_Health() {
+        return current_Health;
+    }
+
+    public CharacterInformation getMaximum_health() {
+        return maximum_health;
     }
 
     /**
@@ -60,28 +79,30 @@ public class PlayerCharacter {
      */
     private void setHealth(){
         if (role instanceof Barbarian){
-            this.health = new Health(12 + race.getBaseStats(Attribute.Constitution).getFinalStats());
+            this.maximum_health = new CharacterInformation(12 + race.getBaseStats(Attribute.Constitution).getFinalValue());
+            this.current_Health = new CharacterInformation(maximum_health.getFinalValue());
         }
         else if (role instanceof Wizard){
-            this.health = new Health(8 + race.getBaseStats(Attribute.Constitution).getFinalStats());
+            this.maximum_health = new CharacterInformation(8 + race.getBaseStats(Attribute.Constitution).getFinalValue());
+            this.current_Health = new CharacterInformation(maximum_health.getFinalValue());
         }
     }
 
     public int getMax_BagWeight(){
-        return race.getBaseStats(Attribute.Strength).getFinalStats() * 15;
+        return race.getBaseStats(Attribute.Strength).getFinalValue() * 15;
     }
 
 
     public void updatePlayer(){
         inventoryBag.setMaxBagWeight(getMax_BagWeight() * 15);
         updateArmor();
-        /**if(role instanceof Barbarian){
+        if(role instanceof Barbarian){
             ((Barbarian)role).unArmored_Defense(this);
-        }*/
+        }
     }
 
     private void updateArmor(){
-        armor.updateArmor(this);
+        armor.update(this);
     }
 
     public void equip(IWeapon equipment, EnumContainer.GearSlot slot){
@@ -95,8 +116,8 @@ public class PlayerCharacter {
         if(equipment instanceof IWeapon){
             gear_Equipment.equip((IWeapon)equipment, this);
         }
-        else if(equipment instanceof Armor){
-            gear_Equipment.equip((Armor)equipment, this);
+        else if(equipment instanceof IArmor){
+            gear_Equipment.equip((IArmor)equipment, this);
         }
         updatePlayer();
     }

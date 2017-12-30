@@ -16,6 +16,9 @@ public class Buff extends Effect {
         this.target_Attribute = target_Attribute;
     }
 
+    public Buff(int id, String name, Effects_Type effects_type, int statsRate, Target_Type target_type){
+        super(id,name,effects_type,statsRate,target_type);
+    }
 
 
 }

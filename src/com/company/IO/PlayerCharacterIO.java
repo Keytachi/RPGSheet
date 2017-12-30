@@ -16,7 +16,7 @@ public class PlayerCharacterIO {
     public static void displayCharacterStats(PlayerCharacter host){
         header(host.getName() + "'s Stats");
         for(AttributeEnum.Attribute attribute : host.get_Race().getAttributeMap().keySet()){
-            System.out.println(attribute +  " : " + host.get_Race().getBaseStats(attribute).getFinalStats());
+            System.out.println(attribute +  " : " + host.get_Race().getBaseStats(attribute).getFinalValue());
         }
         System.out.println("");
     }

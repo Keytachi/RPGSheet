@@ -15,6 +15,7 @@ public class ChainMail extends AHeavy {
     //Strength get_Requirement for this armor is 13 instead of the 15.
     @Override
     public void get_Requirement(PlayerCharacter person){
-        if(person.get_Race().getBaseStats(Attribute.Strength).getFinalStats() < 13) person.get_Race().setWalking_Speed(person.get_Race().getWalking_Speed()-10);
+        if(person.get_Race().getBaseStats(Attribute.Strength).getFinalValue() < 13)
+            person.getWalking_Speed().get("Walking Speed").increaseBaseValue(person.getWalking_Speed().get("Walking Speed").getFinalValue() - 10);
     }
 }
