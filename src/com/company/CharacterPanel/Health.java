@@ -1,9 +1,5 @@
 package com.company.CharacterPanel;
 
-/**
- * Created by ble on 12/30/2017.
- */
-
 public class Health extends Stats {
     public Health(int maximum_Health){
         super(maximum_Health);
