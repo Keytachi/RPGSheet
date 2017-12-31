@@ -10,8 +10,8 @@ public abstract class AMedium extends AArmor {
     }
 
     @Override
-    public int get_Armor(PlayerCharacter person){
-        if(person.get_Race().getModifierStats(AttributeModify.Dex_Modifier).getFinalModifier() > 2) return armor +2;
-        return armor + person.get_Race().getModifierStats(AttributeModify.Dex_Modifier).getFinalModifier();
+    public int getArmor(int dexModifier){
+        if(dexModifier > 2) return armor +2;
+        return armor + dexModifier;
     }
 }

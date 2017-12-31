@@ -20,9 +20,9 @@ public class Human extends Race {
 
     @Override
     public void specialty(){
-        for(Attribute attribute : attributeMap.keySet()){
-            attributeMap.get(attribute).increaseBaseValue(1);
-            attributeMap.get(attribute).getFinalValue();
+        for(Attribute attribute : attributeStats.keySet()){
+            attributeStats.get(attribute).increaseBaseValue(1);
+            attributeStats.get(attribute).getFinalValue();
         }
     }
 }

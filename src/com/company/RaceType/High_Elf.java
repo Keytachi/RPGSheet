@@ -1,7 +1,5 @@
 package com.company.RaceType;
 
-import com.company.ClassType.ClassRole;
-import com.company.RaceType.Elf;
 import com.company.RaceType.Stats.AttributeEnum;
 import com.company.Util.dice;
 
@@ -22,7 +20,7 @@ public class High_Elf extends Elf {
     @Override
     public void specialty(){
         super.specialty();
-        this.attributeMap.get(AttributeEnum.Attribute.Intelligence).increaseBaseValue(1);
-        this.attributeMap.get(AttributeEnum.Attribute.Intelligence).getFinalValue();
+        attributeStats.get(AttributeEnum.Attribute.Intelligence).increaseBaseValue(1);
+        attributeStats.get(AttributeEnum.Attribute.Intelligence).getFinalValue();
     }
 }

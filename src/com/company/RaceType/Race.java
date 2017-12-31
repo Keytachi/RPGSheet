@@ -1,61 +1,61 @@
 package com.company.RaceType;
 
-import com.company.CharacterPanel.CharacterInformation;
+import com.company.CharacterPanel.Stats;
+import com.company.RaceType.Stats.AttributeEnum;
 import com.company.RaceType.Stats.AttributeEnum.Attribute;
 import com.company.RaceType.Stats.AttributeEnum.AttributeModify;
 import com.company.RaceType.Stats.ModifierStats;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public abstract class Race {
 
 
-    HashMap<Attribute,CharacterInformation> attributeMap;
-    HashMap<AttributeModify,ModifierStats> modifyMap;
+    HashMap<Attribute,Stats> attributeStats;
+    HashMap<AttributeModify,ModifierStats> modifyStats;
 
 
 
     public Race(int str, int dex, int con, int inte, int wis, int chari){
-        this.attributeMap = new HashMap<Attribute,CharacterInformation>(){
+        this.attributeStats = new HashMap<Attribute,Stats>(){
             {
-                put(Attribute.Strength, new CharacterInformation(str));
-                put(Attribute.Dexterity, new CharacterInformation(dex));
-                put(Attribute.Constitution, new CharacterInformation(con));
-                put(Attribute.Intelligence, new CharacterInformation(inte));
-                put(Attribute.Wisdom, new CharacterInformation(wis));
-                put(Attribute.Charisma, new CharacterInformation(chari));
+                put(Attribute.Strength, new Stats(str));
+                put(Attribute.Dexterity, new Stats(dex));
+                put(Attribute.Constitution, new Stats(con));
+                put(Attribute.Intelligence, new Stats(inte));
+                put(Attribute.Wisdom, new Stats(wis));
+                put(Attribute.Charisma, new Stats(chari));
             }
         };
 
-        this.modifyMap = new HashMap<AttributeModify,ModifierStats>(){
+        this.modifyStats = new HashMap<AttributeModify,ModifierStats>(){
             {
-                put(AttributeModify.Str_Modifier, new ModifierStats(attributeMap.get(Attribute.Strength)));
-                put(AttributeModify.Dex_Modifier, new ModifierStats(attributeMap.get(Attribute.Dexterity)));
-                put(AttributeModify.Con_Modifier, new ModifierStats(attributeMap.get(Attribute.Constitution)));
-                put(AttributeModify.Int_Modifier, new ModifierStats(attributeMap.get(Attribute.Intelligence)));
-                put(AttributeModify.Wis_Modifier, new ModifierStats(attributeMap.get(Attribute.Wisdom)));
-                put(AttributeModify.Cha_Modifier, new ModifierStats(attributeMap.get(Attribute.Charisma)));
+                put(AttributeModify.Str_Modifier, new ModifierStats(attributeStats.get(Attribute.Strength)));
+                put(AttributeModify.Dex_Modifier, new ModifierStats(attributeStats.get(Attribute.Dexterity)));
+                put(AttributeModify.Con_Modifier, new ModifierStats(attributeStats.get(Attribute.Constitution)));
+                put(AttributeModify.Int_Modifier, new ModifierStats(attributeStats.get(Attribute.Intelligence)));
+                put(AttributeModify.Wis_Modifier, new ModifierStats(attributeStats.get(Attribute.Wisdom)));
+                put(AttributeModify.Cha_Modifier, new ModifierStats(attributeStats.get(Attribute.Charisma)));
             }
         };
     }
 
-    public HashMap<Attribute, CharacterInformation> getAttributeMap() {
-        return attributeMap;
+    public HashMap<Attribute, Stats> getAttributeStats() {
+        return attributeStats;
     }
-    public HashMap<AttributeModify, ModifierStats> getModifyMap() {
-        return modifyMap;
+    public HashMap<AttributeModify, ModifierStats> getModifyStats() {
+        return modifyStats;
     }
 
 
     /**
      * Use this for only when looking for the specific stats.
      */
-    public CharacterInformation getBaseStats(Attribute attribute){
-        return this.attributeMap.get(attribute);
+    public int getAttributeStatsValue(Attribute attribute){
+        return this.attributeStats.get(attribute).getFinalValue();
     }
-    public ModifierStats getModifierStats(AttributeModify modifier){
-        return this.modifyMap.get(modifier);
+    public int getModifyStatsValue(AttributeModify modifier){
+        return this.modifyStats.get(modifier).getFinalModifier();
     }
 
     public abstract void specialty();

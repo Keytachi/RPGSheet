@@ -18,7 +18,7 @@ public abstract class AArmor extends Item implements IArmor {
     }
 
     @Override
-    public int get_Armor(PlayerCharacter person){
+    public int getArmor(int dexModifier){
         return armor;
     }
 
@@ -33,5 +33,6 @@ public abstract class AArmor extends Item implements IArmor {
     }
 
     public void get_Requirement(PlayerCharacter person){
+
     }
 }

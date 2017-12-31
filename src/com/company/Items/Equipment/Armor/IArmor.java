@@ -5,6 +5,6 @@ import com.company.Character.PlayerCharacter;
 
 public interface IArmor extends IEquipment {
 
-    int get_Armor(PlayerCharacter person);
+    int getArmor(int dexModifier);
 
 }

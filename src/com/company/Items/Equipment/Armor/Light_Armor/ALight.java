@@ -11,7 +11,7 @@ public abstract class ALight extends AArmor {
     }
 
     @Override
-    public int get_Armor(PlayerCharacter person){
-        return person.get_Race().getModifierStats(AttributeModify.Dex_Modifier).getFinalModifier() + armor;
+    public int getArmor(int dexModifier){
+        return dexModifier + armor;
     }
 }

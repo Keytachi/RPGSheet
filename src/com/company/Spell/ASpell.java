@@ -49,9 +49,7 @@ public class ASpell {
 
     public int attack(PlayerCharacter target){
         if(!effectsList.isEmpty()) {
-            for (Effect type : effectsList) {
-                type.effect(target);
-            }
+            effectsList.forEach(x -> x.effect(target));
         }
         return dice.roll(damage);
     }

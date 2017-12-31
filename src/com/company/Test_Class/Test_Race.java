@@ -33,7 +33,7 @@ public class Test_Race {
     }
 
 
-    public List<BaseStats> getBaseStats() {
+    public List<BaseStats> getAttributeStatsValue() {
         return baseStats;
     }
 

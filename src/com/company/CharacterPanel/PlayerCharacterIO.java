@@ -15,33 +15,27 @@ public class PlayerCharacterIO {
 
     public static void displayCharacterStats(PlayerCharacter host){
         header(host.getName() + "'s Stats");
-        for(AttributeEnum.Attribute attribute : host.get_Race().getAttributeMap().keySet()){
-            System.out.println(attribute +  " : " + host.get_Race().getBaseStats(attribute).getFinalValue());
-        }
+        host.get_Race().getAttributeStats().keySet().forEach(x -> System.out.println( x + " : " +
+        host.get_Race().getAttributeStatsValue(x)));
         System.out.println("");
     }
 
     public static void displayCharacterModifier(PlayerCharacter host){
         header(host.getName() + "'s Modifier");
-        for(AttributeEnum.AttributeModify modify : host.get_Race().getModifyMap().keySet()){
-            System.out.println(modify + " : " + host.get_Race().getModifierStats(modify).getFinalModifier());
-        }
+        host.get_Race().getModifyStats().keySet().forEach(x -> System.out.println( x + " : " +
+        host.get_Race().getModifyStatsValue(x)));
         System.out.println("");
     }
 
     public static void displayGear(PlayerCharacter host){
         header(host.getName() + "'s Equipment");
-        for (EnumContainer.GearSlot hands : EnumContainer.weapon_Slot){
-            System.out.println(hands + " : " + host.getGear_Equipment().getWeapon(hands));
-        }
-        System.out.println(EnumContainer.GearSlot.ARMOR + " : " + host.getGear_Equipment().getArmor(EnumContainer.GearSlot.ARMOR));
+        EnumContainer.weapon_Slot.forEach(x -> System.out.println(x + " : " + host.get_GearEquipment().getWeapon(x)));
+        System.out.println(EnumContainer.GearSlot.ARMOR + " : " + host.get_GearEquipment().getArmor(EnumContainer.GearSlot.ARMOR));
         System.out.println("");
     }
 
     public static void displayInventory(PlayerCharacter host){
         header(host.getName() + "'s Inventory");
-        for(Item items: host.get_InventoryBag().getInventoryBag()){
-            System.out.println(items);
-        }
+        host.get_InventoryBag().getInventoryBag().forEach(x -> System.out.println(x));
     }
 }

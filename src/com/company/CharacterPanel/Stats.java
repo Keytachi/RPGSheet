@@ -4,13 +4,13 @@ import com.company.Spell.Effect;
 
 import java.util.HashMap;
 
-public class CharacterInformation {
+public class Stats {
 
     protected HashMap<String, Effect> tempBuff;
     protected int baseValue;
     protected int finalValue;
 
-    public CharacterInformation(int baseValue){
+    public Stats(int baseValue){
         tempBuff = new HashMap<>();
         this.baseValue = baseValue;
         update();
@@ -37,11 +37,11 @@ public class CharacterInformation {
 
     public void removeTempBuff(String effectName){
         if(tempBuff.keySet().contains(effectName)) {
-            tempBuff.remove(tempBuff.remove(effectName));
+            tempBuff.remove(effectName);
         }
     }
 
-    private int calculateFinalValue(){
+    protected int calculateFinalValue(){
         finalValue = baseValue;
         tempBuff.keySet().forEach(x-> finalValue += tempBuff.get(x).getStatsRate());
         return finalValue;

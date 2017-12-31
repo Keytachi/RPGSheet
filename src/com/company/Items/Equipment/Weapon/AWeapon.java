@@ -52,11 +52,11 @@ public abstract class AWeapon extends Item implements IWeapon {
         for(Properties special : specialty)
         switch(special){
             case FINESSES:
-                return dice.roll(damage) + host.get_Race().getModifierStats(AttributeModify.Dex_Modifier).getFinalModifier();
+                return dice.roll(damage) + host.get_Race().getModifyStatsValue(AttributeModify.Dex_Modifier);
             case LIGHT:
                 for(EnumContainer.GearSlot hand : EnumContainer.weapon_Slot) {
-                    if ((host.getGear_Equipment().getWeaponEquipment().get(hand).getProperties().equals(Properties.LIGHT))){
-                        host.getGear_Equipment().getWeaponEquipment().get(hand).attack();
+                    if ((host.get_GearEquipment().getWeaponEquipment().get(hand).getProperties().equals(Properties.LIGHT))){
+                        host.get_GearEquipment().getWeaponEquipment().get(hand).attack();
                     }
                 }
                 break;

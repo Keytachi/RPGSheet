@@ -1,7 +1,6 @@
 package com.company.Spell;
 
 import com.company.Character.PlayerCharacter;
-import com.company.CharacterPanel.CharacterInformation;
 import com.company.RaceType.Stats.AttributeEnum;
 
 public class Effect implements IBuff{
@@ -87,13 +86,13 @@ public class Effect implements IBuff{
     public void effect(PlayerCharacter target) {
         switch(target_type){
             case Armor:
-                target.getArmor().addTempBuff(this);
+                target.get_Armor().addTempBuff(this);
                 break;
             case Walk:
-                target.getWalking_Speed().addTempBuff(this);
+                target.get_Movement().addTempBuff(this);
                 break;
             case Attribute:
-                target.get_Race().getAttributeMap().get(this.getTarget_Attribute()).addTempBuff(this);
+                target.get_Race().getAttributeStats().get(this.getTarget_Attribute()).addTempBuff(this);
                 break;
 
         }

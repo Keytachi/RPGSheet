@@ -11,12 +11,12 @@ public abstract class AHeavy extends AArmor {
 
     @Override
     public void get_Requirement(PlayerCharacter person){
-        if(person.get_Race().getBaseStats(Attribute.Strength).getFinalValue() < 15) {
-            person.getWalking_Speed().increaseBaseValue(person.getWalking_Speed().getFinalValue() - 10);
+        if(person.get_Race().getAttributeStatsValue(Attribute.Strength) < 15) {
+            person.get_Movement().increaseBaseValue(person.get_Movement().getFinalValue() - 10);
         }
     }
     @Override
-    public int get_Armor(PlayerCharacter person){
+    public int getArmor(int dexModifier){
         return armor;
     }
 }

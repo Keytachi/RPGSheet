@@ -19,11 +19,11 @@ public class EquipmentSystem {
 
     //TODO: Check to see if the Two-Handed Weapon is be place twice in a bag!
 
-    private Map<EnumContainer.GearSlot,IEquipment> armorEquipment;
+    private Map<EnumContainer.GearSlot,IArmor> armorEquipment;
     private Map<EnumContainer.GearSlot,IWeapon> weaponEquipment;
 
     public EquipmentSystem(){
-        this.armorEquipment = new HashMap<EnumContainer.GearSlot,IEquipment>(){
+        this.armorEquipment = new HashMap<EnumContainer.GearSlot,IArmor>(){
             {
                 put(GearSlot.ARMOR, new Naked());
             }};
@@ -35,12 +35,12 @@ public class EquipmentSystem {
         };
     }
 
-    public Map<GearSlot,IEquipment> getArmorEquipment(){
+    public Map<GearSlot,IArmor> getArmorEquipment(){
         return this.armorEquipment;
     }
     public Map<GearSlot,IWeapon> getWeaponEquipment() {return this.weaponEquipment;}
 
-    public IEquipment getArmor(GearSlot gearSlot){
+    public IArmor getArmor(GearSlot gearSlot){
         return this.armorEquipment.get(gearSlot);
     }
     public IWeapon getWeapon(GearSlot gearSlot){return this.weaponEquipment.get(gearSlot);}
@@ -127,15 +127,16 @@ public class EquipmentSystem {
              * **NOT INTENDED TO USE TOO OFTEN!**
              */
             default:
+                outerloop:
                 for(GearSlot hand : EnumContainer.weapon_Slot){
-                    for(Class weapon_Proficiency : character.get_Role().getWeaponProficiencyList()) {
+                    for(Class weapon_Proficiency : character.get_CRole().getWeaponProficiencyList()) {
                         if (!(Util.gearisInstance(hand, weapon_Proficiency))) {
                             if (!(weaponEquipment.get(hand) instanceof Shield)) {
                                 remove_Gear(weaponEquipment, hand, character);
                                 weaponEquipment.put(hand, equipment);
-                                break;
+                                break outerloop;
                             }
-                        }break;
+                        }
                     }
                     if(weaponEquipment.get(hand) instanceof Unarm){
                         weaponEquipment.put(hand,equipment);
