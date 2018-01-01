@@ -22,7 +22,10 @@ public class dice {
     }
 
     public static int roll(int numSide){
-        return (int)(Math.random()*numSide+1);
+        int roll = (int)(Math.random()*numSide+1);
+        System.out.println(roll);
+
+        return roll;
     }
 
     public static int rollStats(int numSided, int numDice){

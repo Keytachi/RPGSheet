@@ -3,7 +3,7 @@ package com.company.Spell;
 import com.company.Character.PlayerCharacter;
 import com.company.RaceType.Stats.AttributeEnum;
 
-public class Effect implements IBuff{
+public abstract class Effect implements IBuff{
 
     public enum Effects_Type{
         Heal_OT("Heal Over Time"),
@@ -54,6 +54,13 @@ public class Effect implements IBuff{
         this.effect_type = effect_type;
     }
 
+    public Effect(int id, String name, Effects_Type effect_type, int statsRate){
+        this.id = id;
+        this.name = name;
+        this.effect_type = effect_type;
+        this.statsRate = statsRate;
+    }
+
     public AttributeEnum.Attribute getTarget_Attribute(){
         return target_Attribute;
     }
@@ -80,6 +87,20 @@ public class Effect implements IBuff{
     @Override
     public Effects_Type getEffect_type() {
         return effect_type;
+    }
+
+    @Override
+    public void afterEffect(PlayerCharacter target){
+        switch(effect_type){
+            case Damage_OT:
+            case Heal_OT:
+                target.get_CurrentHealth().addTempBuff(this);
+                break;
+            case Buff:
+            case Debuff:
+                effect(target);
+                break;
+        }
     }
 
     @Override

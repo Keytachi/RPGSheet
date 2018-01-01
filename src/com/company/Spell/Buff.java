@@ -20,5 +20,9 @@ public class Buff extends Effect {
         super(id,name,effects_type,statsRate,target_type);
     }
 
+    public Buff(int id, String name, Effects_Type effect_type, int statsRate){
+        super(id,name,effect_type,statsRate);
+    }
+
 
 }

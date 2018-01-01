@@ -10,6 +10,10 @@ import com.company.Items.Equipment.IEquipment;
 import com.company.Items.Equipment.Weapon.Simple.SimpleMeleeWeapon.Club;
 import com.company.Items.Equipment.Weapon.Simple.SimpleTwoHand.GreatClub;
 import com.company.RaceType.Human;
+import com.company.Spell.ASpell;
+import com.company.Spell.Buff;
+import com.company.Spell.Effect;
+import com.company.Spell.SpellBook;
 
 public class Main {
 
@@ -18,49 +22,17 @@ public class Main {
                 new Barbarian(),new Bag("Bag",32));
 
 
+        PlayerCharacterIO.displayHealth(brandon);
         brandon.equip(new ChainMail());
         brandon.equip(new Shield());
-        brandon.equip(new Club());
-        PlayerCharacterIO.displayGear(brandon);
-        PlayerCharacterIO.displayInventory(brandon);
-        brandon.equip(new GreatClub());
-        PlayerCharacterIO.displayGear(brandon);
-        PlayerCharacterIO.displayInventory(brandon);
 
-        brandon.equip((IEquipment)brandon.get_InventoryBag().getInventory(0));
-        brandon.get_InventoryBag().removeItem(brandon.get_InventoryBag().getInventory(0));
-        PlayerCharacterIO.displayGear(brandon);
-        PlayerCharacterIO.displayInventory(brandon);
+        System.out.println(brandon.get_Armor().getFinalValue());
 
-        brandon.equip((IEquipment)brandon.get_InventoryBag().getInventory(0));
-        brandon.get_InventoryBag().removeItem(brandon.get_InventoryBag().getInventory(0));
-        PlayerCharacterIO.displayGear(brandon);
-        PlayerCharacterIO.displayInventory(brandon);
+        ASpell fireball = new ASpell(1,"Fireball",1,-6, SpellBook.TypeofBook.Level1);
+        fireball.addEffect(new Buff(1001,"Burn", Effect.Effects_Type.Damage_OT,-2));
+        fireball.attack(brandon);
 
-        brandon.equip((IEquipment)brandon.get_InventoryBag().getInventory(0));
-        brandon.get_InventoryBag().removeItem(brandon.get_InventoryBag().getInventory(0));
-        PlayerCharacterIO.displayGear(brandon);
-        PlayerCharacterIO.displayInventory(brandon);
+        PlayerCharacterIO.displayHealth(brandon);
 
-        PlayerCharacterIO.displayCharacterStats(brandon);
-        System.out.println(brandon.get_Movement().getFinalValue());
-
-
-        PlayerCharacterIO.displayCharacterStats(brandon);
-        System.out.println(brandon.get_Movement().getFinalValue());
-        System.out.println(brandon.getName() + " is affect by this spell");
-        /**System.out.println(brandon.getArmor().getFinal_Armor());
-
-        PlayerCharacterIO.displayCharacterStats(brandon);
-        PlayerCharacterIO.displayCharacterModifier(brandon);
-
-
-        /**Race tester = new Race(17,18,16,19,16,19);
-        Test_Race tester2 = new Test_HighElf(17,18,16,19,16,19);
-        //tester.displayStats();
-        tester2.displayStats();
-
-        tester.displayStats();
-        **/
     }
 }

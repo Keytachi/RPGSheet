@@ -7,6 +7,7 @@ import com.company.Character.PlayerCharacter;
 import com.company.Items.Equipment.Weapon.Martial.AMartialWeapon;
 import com.company.Items.Equipment.Weapon.Simple.ASimpleWeapon;
 import com.company.RaceType.Stats.AttributeEnum.AttributeModify;
+import com.company.Spell.Buff;
 import com.company.Spell.Effect;
 import com.company.Util.EnumContainer;
 import com.company.Util.Util;
@@ -38,8 +39,8 @@ public class Barbarian extends ClassRole {
     public void unArmored_Defense(PlayerCharacter person) {
         if(Util.gearisInstance(person.get_GearEquipment().getArmor(EnumContainer.GearSlot.ARMOR),
                 Naked.class)){
-            person.get_Armor().addTempBuff(new Effect(3, "Unarmored Defense", Effect.Effects_Type.Buff,
-                    person.get_Race().getModifyStatsValue(AttributeModify.Con_Modifier),
+            person.get_Armor().addTempBuff(new Buff(3, "Unarmored Defense", Effect.Effects_Type.Buff,
+                    person.getModifyStatsValue(AttributeModify.Con_Modifier),
                     Effect.Target_Type.Armor));
         }
         else{

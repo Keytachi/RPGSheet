@@ -1,6 +1,7 @@
 package com.company.CharacterPanel;
 
 public class Health extends Stats {
+
     public Health(int maximum_Health){
         super(maximum_Health);
     }
@@ -15,7 +16,6 @@ public class Health extends Stats {
     @Override
     protected int calculateFinalValue(){
         setHealth(super.calculateFinalValue());
-        return getFinalValue();
-
+        return this.finalValue;
     }
 }

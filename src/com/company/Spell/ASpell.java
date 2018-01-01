@@ -43,14 +43,10 @@ public class ASpell {
         return level_req;
     }
 
-    public int getDamage() {
-        return damage;
-    }
-
-    public int attack(PlayerCharacter target){
+    public void attack(PlayerCharacter target){
+        target.get_CurrentHealth().addHealth(dice.roll(damage));
         if(!effectsList.isEmpty()) {
-            effectsList.forEach(x -> x.effect(target));
+            effectsList.forEach(spell -> spell.afterEffect(target));
         }
-        return dice.roll(damage);
     }
 }

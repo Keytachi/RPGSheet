@@ -22,7 +22,8 @@ public class PlayerCharacter {
     private Armor armor;
     private Stats walking_Speed;
 
-    private Health health;
+    private Stats maximum_Health;
+    private Health current_Health;
     private String name;
 
 
@@ -57,8 +58,9 @@ public class PlayerCharacter {
     public Stats get_Movement(){
         return walking_Speed;
     }
-    public Health get_Health(){
-        return health;
+    public Stats get_MaximumHealth(){ return maximum_Health; }
+    public Health get_CurrentHealth(){
+        return current_Health;
     }
 
     /**
@@ -67,15 +69,17 @@ public class PlayerCharacter {
      */
     private void set_Health(){
         if (cRole instanceof Barbarian){
-            this.health = new Health(12 + race.getAttributeStatsValue(Attribute.Constitution));
+            this.maximum_Health = new Stats(12 + race.getAttributeStatsValue(Attribute.Constitution));
+            this.current_Health = new Health(maximum_Health.getFinalValue());
         }
         else if (cRole instanceof Wizard){
-            this.health = new Health(8 + race.getAttributeStatsValue(Attribute.Constitution));
+            this.maximum_Health = new Stats(8 + race.getAttributeStatsValue(Attribute.Constitution));
+            this.current_Health = new Health(maximum_Health.getFinalValue());
         }
     }
 
     public int getMax_BagWeight(){
-        return race.getAttributeStatsValue(Attribute.Strength) * 15;
+        return getAttributeStatsValue(Attribute.Strength) * 15;
     }
 
 
@@ -90,8 +94,10 @@ public class PlayerCharacter {
     private void updateArmor(){
         armor.update(this);
     }
-    public int getArmorValue(GearSlot gearSlot){
-        return get_GearEquipment().getArmor(gearSlot).getArmor(this.race.getModifyStatsValue(AttributeModify.Dex_Modifier));
+
+    public int getArmorValue(IArmor armor){
+        return armor.getArmor(this.getModifyStatsValue(AttributeModify.Dex_Modifier));
+
     }
 
     public void equip(IWeapon equipment, GearSlot slot){
@@ -109,6 +115,14 @@ public class PlayerCharacter {
             gear_Equipment.equip((IArmor)equipment, this);
         }
         updatePlayer();
+    }
+
+    public int getModifyStatsValue(AttributeModify attribute){
+        return race.getModifyStatsValue(attribute);
+    }
+
+    public int getAttributeStatsValue(Attribute attribute){
+        return race.getAttributeStatsValue(attribute);
     }
 
     public String getName(){

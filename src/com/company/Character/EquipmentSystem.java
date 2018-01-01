@@ -151,14 +151,20 @@ public class EquipmentSystem {
             remove_Gear(weaponEquipment,GearSlot.RHAND,character);
             remove_2H();
         }
-        for(GearSlot hands : EnumContainer.weapon_Slot){
+
+        EnumContainer.weapon_Slot.forEach(hand -> {
+            remove_Gear(weaponEquipment, hand, character);
+            weaponEquipment.put(hand,equipment);
+        });
+
+        /**for(GearSlot hands : EnumContainer.weapon_Slot){
             remove_Gear(weaponEquipment, hands, character);
             weaponEquipment.put(hands, equipment);
-        }
+        }*/
     }
 
     public void remove_2H(){
-        EnumContainer.weapon_Slot.forEach(x -> weaponEquipment.put(x,new Unarm()));
+        EnumContainer.weapon_Slot.forEach(hand -> weaponEquipment.put(hand,new Unarm()));
     }
 
 

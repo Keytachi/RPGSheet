@@ -8,5 +8,6 @@ public interface IBuff {
     int getDuration();
     Effect.Effects_Type getEffect_type();
     Effect.Target_Type getTarget_type();
-    void effect(PlayerCharacter host);
+    void afterEffect(PlayerCharacter target);
+    void effect(PlayerCharacter target);
 }
