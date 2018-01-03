@@ -49,4 +49,11 @@ public class PlayerCharacterIO {
         System.out.println("Level " + host.get_Level().get_Level() + " : " +
                 host.get_Level().get_CurrentEXP() + "/" + host.get_Level().get_EXPReq());
     }
+
+    public static void displayHeightWeight(PlayerCharacter host){
+        header(host.getName() + "'s Height/Weight");
+        System.out.println("Height: " + host.get_Race().getHeight().get_BaseHeight() +
+        " inches.");
+        System.out.println("Weight: " + host.get_Race().getHeight().get_BaseWeight() + " lbs.");
+    }
 }

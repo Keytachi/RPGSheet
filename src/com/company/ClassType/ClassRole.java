@@ -1,6 +1,11 @@
 package com.company.ClassType;
 
 import com.company.Character.LevelSystem;
+import com.company.Character.PlayerCharacter;
+import com.company.Items.Equipment.Armor.Naked;
+import com.company.RaceType.Stats.AttributeEnum;
+import com.company.Spell.Buff;
+import com.company.Spell.Effect;
 import com.company.Util.EnumContainer;
 import com.company.Util.Util;
 import com.company.Util.dice;
@@ -74,7 +79,22 @@ public abstract class ClassRole{
         }
     }
 
-    public void update(){
+    private void unArmored_Defense(PlayerCharacter person) {
+        if(Util.gearisInstance(person.get_GearEquipment().getArmor(EnumContainer.GearSlot.ARMOR),
+                Naked.class)){
+            person.get_Armor().addTempBuff(new Buff(3, "Unarmored Defense", Effect.Effects_Type.Buff,
+                    person.getModifyStatsValue(AttributeEnum.AttributeModify.Con_Modifier),
+                    Effect.Target_Type.Armor));
+        }
+        else{
+            person.get_Armor().removeTempBuff("Unarmored Defense");
+        }
+    }
+
+    public void update(PlayerCharacter host){
         set_Proficiency();
+        //TODO: Get all the class that can benefit from UnArmored Defense.
+        if(host.get_CRole() instanceof Barbarian || host.get_CRole() instanceof Barbarian)
+        unArmored_Defense(host);
     }
 }

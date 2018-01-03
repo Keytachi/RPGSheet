@@ -37,6 +37,7 @@ public class PlayerCharacter {
         this.armor = new Armor();
         this.walking_Speed = new Stats(30);
         this.level = new LevelSystem();
+        inventoryBag.setMaxBagWeight(getMax_BagWeight() * 15);
         set_Health();
         updatePlayer();
     }
@@ -75,11 +76,11 @@ public class PlayerCharacter {
      */
     private void set_Health(){
         if (cRole instanceof Barbarian){
-            this.maximum_Health = new Stats(12 + race.getAttributeStatsValue(Attribute.Constitution));
+            this.maximum_Health = new Stats(12 + race.getModifyStatsValue(AttributeModify.Con_Modifier));
             this.current_Health = new Health(maximum_Health.getFinalValue());
         }
         else if (cRole instanceof Wizard){
-            this.maximum_Health = new Stats(8 + race.getAttributeStatsValue(Attribute.Constitution));
+            this.maximum_Health = new Stats(8 + race.getModifyStatsValue(AttributeModify.Con_Modifier));
             this.current_Health = new Health(maximum_Health.getFinalValue());
         }
     }
@@ -89,18 +90,18 @@ public class PlayerCharacter {
     }
 
 
-    public void updatePlayer(){
-        inventoryBag.setMaxBagWeight(getMax_BagWeight() * 15);
-        updateArmor();
-        maximum_Health.increaseBaseValue(cRole.roll_HitDie() + getModifyStatsValue(AttributeModify.Con_Modifier));
-        current_Health.setHealth(maximum_Health.getBaseValue());
-        if(cRole instanceof Barbarian){
-            ((Barbarian) cRole).unArmored_Defense(this);
-        }
+    public void updatePlayer() {
+        armor.update(this);
+        cRole.update(this);
     }
 
-    private void updateArmor(){
-        armor.update(this);
+    public void levelUp(){
+        updateHealth();
+    }
+
+    private void updateHealth(){
+        maximum_Health.increaseBaseValue(cRole.roll_HitDie() + getModifyStatsValue(AttributeModify.Con_Modifier));
+        current_Health.setHealth(maximum_Health.getBaseValue());
     }
 
     public int getArmorValue(IArmor armor){

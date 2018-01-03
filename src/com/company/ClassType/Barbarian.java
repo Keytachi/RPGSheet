@@ -31,19 +31,6 @@ public class Barbarian extends ClassRole {
        return "Barbarian";
     }
 
-
-    public void unArmored_Defense(PlayerCharacter person) {
-        if(Util.gearisInstance(person.get_GearEquipment().getArmor(EnumContainer.GearSlot.ARMOR),
-                Naked.class)){
-            person.get_Armor().addTempBuff(new Buff(3, "Unarmored Defense", Effect.Effects_Type.Buff,
-                    person.getModifyStatsValue(AttributeModify.Con_Modifier),
-                    Effect.Target_Type.Armor));
-        }
-        else{
-            person.get_Armor().removeTempBuff("Unarmored Defense");
-        }
-    }
-
     @Override
     public int get_ArmorProficiency(Map gearEquipment, EnumContainer.GearSlot gearSlot) {
         for (Class armor_Type : armorProficiencyList) {

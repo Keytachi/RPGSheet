@@ -6,18 +6,20 @@ import com.company.Util.dice;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ASpell {
+public class Spell {
 
     protected int id;
     protected String name;
     protected int level_req;
     protected int damage;
+    protected int range;
+    protected int duration;
 
     protected List<Effect> effectsList;
     protected SpellBook.TypeofBook book_Level;
 
 
-    public ASpell(int id, String name, int level_req, int damage, SpellBook.TypeofBook book_Level) {
+    public Spell(int id, String name, int level_req, int damage, SpellBook.TypeofBook book_Level) {
         this.id = id;
         this.name = name;
         this.level_req = level_req;

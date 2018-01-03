@@ -14,7 +14,7 @@ public class LevelSystem {
 
     /**
      * This is intended to be use for when starting a level one character.
-     * Otherwise use to other function with overload to set the character to a specific level.
+     * Otherwise use to other function with specific value to set the character to a specific level.
      */
     public LevelSystem(){
         this(1,0);
@@ -42,10 +42,10 @@ public class LevelSystem {
         }
     }
 
-    public void set_CurrentEXP(int expValue){
+    public void set_CurrentEXP(int expValue,PlayerCharacter host){
         this.current_Exp += expValue;
         if(current_Exp >= exp_Req){
-            levelUp();
+            levelUp(host);
         }
     }
 
@@ -53,9 +53,11 @@ public class LevelSystem {
         this.level += levelValue;
     }
 
-    private void levelUp(){
+    private void levelUp(PlayerCharacter host){
         set_Level(1);
+        System.out.println("Player has leveled up to " + get_Level());
         get_EXPRequirement();
+        host.levelUp();
     }
 
     public int get_Level(){

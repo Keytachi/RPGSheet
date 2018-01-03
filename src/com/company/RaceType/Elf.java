@@ -1,11 +1,12 @@
 package com.company.RaceType;
 
+import com.company.RaceType.Misc.Height;
 import com.company.RaceType.Stats.AttributeEnum;
 
 public class Elf extends Race {
 
-    public Elf(int str, int dex, int con, int inte, int wis, int chari){
-        super(str,dex,con,inte,wis,chari);
+    public Elf(int str, int dex, int con, int inte, int wis, int chari, Height height){
+        super(str,dex,con,inte,wis,chari,height);
     }
 
     @Override

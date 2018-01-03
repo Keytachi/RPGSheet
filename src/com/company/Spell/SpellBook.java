@@ -18,10 +18,10 @@ public class SpellBook {
         Level5
     }
 
-    private HashMap<TypeofBook,ArrayList<ASpell>> spellBook;
+    private HashMap<TypeofBook,ArrayList<Spell>> spellBook;
 
     public SpellBook(){
-        this.spellBook = new HashMap<TypeofBook, ArrayList<ASpell>>(){{
+        this.spellBook = new HashMap<TypeofBook, ArrayList<Spell>>(){{
             put(TypeofBook.Cantrip,new ArrayList<>());
             put(TypeofBook.Level1, new ArrayList<>());
             put(TypeofBook.Level2, new ArrayList<>());
@@ -31,7 +31,7 @@ public class SpellBook {
         }};
     }
 
-    public void addSpelltoBook(TypeofBook bookSection, ASpell spell){
+    public void addSpelltoBook(TypeofBook bookSection, Spell spell){
         spellBook.get(bookSection).add(spell);
     }
 }

@@ -1,6 +1,7 @@
 package com.company.RaceType;
 
 import com.company.CharacterPanel.Stats;
+import com.company.RaceType.Misc.Height;
 import com.company.RaceType.Stats.AttributeEnum;
 import com.company.RaceType.Stats.AttributeEnum.Attribute;
 import com.company.RaceType.Stats.AttributeEnum.AttributeModify;
@@ -13,10 +14,11 @@ public abstract class Race {
 
     HashMap<Attribute,Stats> attributeStats;
     HashMap<AttributeModify,ModifierStats> modifyStats;
+    protected Height height;
 
 
 
-    public Race(int str, int dex, int con, int inte, int wis, int chari){
+    public Race(int str, int dex, int con, int inte, int wis, int chari, Height height){
         this.attributeStats = new HashMap<Attribute,Stats>(){
             {
                 put(Attribute.Strength, new Stats(str));
@@ -38,6 +40,8 @@ public abstract class Race {
                 put(AttributeModify.Cha_Modifier, new ModifierStats(attributeStats.get(Attribute.Charisma)));
             }
         };
+
+        this.height = height;
     }
 
     public HashMap<Attribute, Stats> getAttributeStats() {
@@ -46,7 +50,9 @@ public abstract class Race {
     public HashMap<AttributeModify, ModifierStats> getModifyStats() {
         return modifyStats;
     }
-
+    public Height getHeight(){
+        return height;
+    }
 
     /**
      * Use this for only when looking for the specific stats.
