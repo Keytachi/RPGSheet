@@ -19,12 +19,8 @@ import java.util.Map;
 
 public class Barbarian extends ClassRole {
 
-    private int rage;
-
     public Barbarian() {
         super(new dice(12));
-        this.rage = setRage();
-
         this.armorProficiencyList = new HashSet<>(Arrays.asList(AMedium.class,ALight.class,Shield.class));
         this.weaponProficiencyList = new HashSet<>(Arrays.asList(AMartialWeapon.class, ASimpleWeapon.class));
 
@@ -46,7 +42,6 @@ public class Barbarian extends ClassRole {
         else{
             person.get_Armor().removeTempBuff("Unarmored Defense");
         }
-        person.get_Armor().getFinalValue();
     }
 
     @Override
@@ -60,24 +55,6 @@ public class Barbarian extends ClassRole {
             if (Util.gearisInstance(gearEquipment.get(weaponSlot), Shield.class)) {
                 return this.proficiency;
             }
-        }
-        return 0;
-    }
-
-
-    public int setRage() {
-        if (level >= 1 && level <= 2){
-            return 2;
-        }else if (level >= 3 && level <= 5){
-            return 3;
-        }else if (level >= 6 && level <= 11){
-            return 4;
-        }else if (level >= 12 && level <= 16){
-            return 5;
-        }else if (level >= 17  && level <= 19){
-            return 6;
-        }else if (level == 20){
-            return 100;
         }
         return 0;
     }

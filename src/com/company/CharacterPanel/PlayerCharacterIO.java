@@ -43,4 +43,10 @@ public class PlayerCharacterIO {
         header(host.getName() + "'s Health");
         System.out.println(host.get_CurrentHealth().getFinalValue() + " / " + host.get_MaximumHealth().getFinalValue());
     }
+
+    public static void displayEXP(PlayerCharacter host){
+        header(host.getName() + "'s Current Exp");
+        System.out.println("Level " + host.get_Level().get_Level() + " : " +
+                host.get_Level().get_CurrentEXP() + "/" + host.get_Level().get_EXPReq());
+    }
 }

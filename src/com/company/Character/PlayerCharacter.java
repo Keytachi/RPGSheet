@@ -21,6 +21,7 @@ public class PlayerCharacter {
     private EquipmentSystem gear_Equipment;
     private Armor armor;
     private Stats walking_Speed;
+    private LevelSystem level;
 
     private Stats maximum_Health;
     private Health current_Health;
@@ -35,6 +36,7 @@ public class PlayerCharacter {
         this.inventoryBag = inventoryBag;
         this.armor = new Armor();
         this.walking_Speed = new Stats(30);
+        this.level = new LevelSystem();
         set_Health();
         updatePlayer();
     }
@@ -62,6 +64,10 @@ public class PlayerCharacter {
     public Health get_CurrentHealth(){
         return current_Health;
     }
+    public LevelSystem get_Level(){ return level; }
+    public String getName(){
+        return this.name;
+    }
 
     /**
      * Work on this when creating more classes.
@@ -86,6 +92,8 @@ public class PlayerCharacter {
     public void updatePlayer(){
         inventoryBag.setMaxBagWeight(getMax_BagWeight() * 15);
         updateArmor();
+        maximum_Health.increaseBaseValue(cRole.roll_HitDie() + getModifyStatsValue(AttributeModify.Con_Modifier));
+        current_Health.setHealth(maximum_Health.getBaseValue());
         if(cRole instanceof Barbarian){
             ((Barbarian) cRole).unArmored_Defense(this);
         }
@@ -125,7 +133,5 @@ public class PlayerCharacter {
         return race.getAttributeStatsValue(attribute);
     }
 
-    public String getName(){
-        return this.name;
-    }
+
 }

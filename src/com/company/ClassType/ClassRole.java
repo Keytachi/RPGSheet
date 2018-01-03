@@ -1,5 +1,6 @@
 package com.company.ClassType;
 
+import com.company.Character.LevelSystem;
 import com.company.Util.EnumContainer;
 import com.company.Util.Util;
 import com.company.Util.dice;
@@ -15,12 +16,12 @@ public abstract class ClassRole{
 
     protected dice hitDie;
     protected int proficiency;
-    protected int level;
+    protected LevelSystem level;
 
     public ClassRole(dice hitDie){
         this.hitDie = hitDie;
-        this.level = 1;
-        this.proficiency = set_Proficiency();
+        this.level = new LevelSystem();
+        this.proficiency = 2;
     }
 
     public Set<Class> getArmorProficiencyList() {
@@ -59,28 +60,21 @@ public abstract class ClassRole{
         return 0;
     }
 
-    //TODO: Create a function that when per level, will increase the health pool of the character.
+    public LevelSystem get_Level() {
+        return level;
+    }
 
-    /**TODO: Rethink about this usage.
-     *  Either use this as is or use a Map<Integer,Integer> and compare the key to the level to get the
-     *  proficiency.
-     */
-    public int set_Proficiency(){
-        if(level >= 1 || level <= 4){
-            return 2;
+    public int roll_HitDie(){
+        return hitDie.roll();
+    }
+
+    private void set_Proficiency() {
+        if ((level.get_Level() % 4) == 0) {
+            this.proficiency += 1;
         }
-        else if (level >= 5 || level <= 8){
-            return 3;
-        }
-        else if(level >= 9 || level <= 12){
-            return 4;
-        }
-        else if(level >= 13 || level <= 16){
-            return 5;
-        }
-        else if (level >= 17 || level <= 20){
-            return 6;
-        }
-        return 0;
+    }
+
+    public void update(){
+        set_Proficiency();
     }
 }

@@ -33,6 +33,12 @@ public class Main {
         fireball.attack(brandon);
 
         PlayerCharacterIO.displayHealth(brandon);
+        PlayerCharacterIO.displayEXP(brandon);
+
+        brandon.get_Level().set_CurrentEXP(500);
+
+        brandon.get_Level().set_CurrentEXP(400);
+        PlayerCharacterIO.displayEXP(brandon);
 
     }
 }
