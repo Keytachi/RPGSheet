@@ -7,21 +7,41 @@ package com.company.Items.Equipment.Weapon;
 public class Weapon_EnumContainer {
 
     public enum Weapon_Category{
-        SIMPLE,
-        MARTIAL
+        SIMPLE("Simple"),
+        MARTIAL("Martial");
+
+        String name;
+        Weapon_Category(String name){
+            this.name = name;
+        }
+
+        @Override
+        public String toString(){
+            return name;
+        }
     }
 
     public enum Weapon_Type{
-        SWORD,
-        KNIFE,
-        AXE,
-        MACE,
-        HAMMER,
-        STAFF,
-        FIST,
-        BOW,
-        CROSSBOW,
-        SHIELD
+        SWORD("Sword"),
+        KNIFE("Knife"),
+        AXE("Axe"),
+        MACE("Mace"),
+        HAMMER("Hammer"),
+        STAFF("Staff"),
+        FIST("Fist"),
+        BOW("Bow"),
+        CROSSBOW("Crossbow"),
+        SHIELD("Shield");
+
+        String name;
+        Weapon_Type(String name){
+            this.name = name;
+        }
+
+        @Override
+        public String toString(){
+            return name;
+        }
     }
 
     public enum Properties{
@@ -42,14 +62,35 @@ public class Weapon_EnumContainer {
     }
 
     public enum Hand_Req{
-        ONEHAND,
-        TWOHAND
+        ONEHAND("One-Hand"),
+        TWOHAND("Two-Hand");
+
+        String name;
+        Hand_Req(String name){
+            this.name = name;
+        }
+
+        @Override
+        public String toString(){
+            return name;
+        }
     }
 
     public enum Attack_Type{
-        SLASHING,
-        BLUDGEONING,
-        PIERCING
+        SLASHING("Slashing"),
+        BLUDGEONING("Bludgeoning"),
+        PIERCING("Piercing");
+
+        String name;
+
+        Attack_Type(String name){
+            this.name = name;
+        }
+
+        @Override
+        public String toString(){
+            return name;
+        }
     }
 
     public enum Amunition_Type {
