@@ -15,6 +15,9 @@ import com.company.Spell.Buff;
 import com.company.Spell.Effect;
 import com.company.Spell.SpellBook;
 
+import javax.swing.*;
+import java.net.Socket;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -39,6 +42,23 @@ public class Main {
 
         brandon.get_Level().set_CurrentEXP(400);
         PlayerCharacterIO.displayEXP(brandon);
+
+
+        Game game = new Game();
+        SocketClient client = new SocketClient(game, "localhost", 8001);
+        client.connectToServer();
+        client.sendMessage("wut");
+
+        JFrame frame = new JFrame("RPGSheet");
+        Window gameWindow = new Window();
+        frame.add(gameWindow);
+        frame.setSize(300,300);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gameWindow.startDrawLoop();
+
+    }
+    public void handleMessageFromServer(String msg){
 
     }
 }
